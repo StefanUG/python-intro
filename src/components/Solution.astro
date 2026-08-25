@@ -1,0 +1,29 @@
+---
+// Hidden until the user types the cheat code "iddqd" anywhere on the page.
+---
+
+<div class="solution-block not-content">
+  <div class="solution-header">
+    <span class="solution-label">🔓 Løsning</span>
+  </div>
+  <div class="solution-body">
+    <slot />
+  </div>
+</div>
+
+<script>
+  // One listener per page regardless of how many Solution blocks are present
+  if (!(window as any)._solutionInit) {
+    (window as any)._solutionInit = true
+    let buf = ''
+    document.addEventListener('keydown', e => {
+      if (e.key.length !== 1) return
+      buf = (buf + e.key.toLowerCase()).slice(-5)
+      if (buf === 'iddqd') {
+        buf = ''
+        document.body.classList.toggle('solutions-visible')
+        document.dispatchEvent(new Event('solutions-changed'))
+      }
+    })
+  }
+</script>

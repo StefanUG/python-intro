@@ -1,10 +1,14 @@
 ---
 title: "Leg med farver"
+sidebar:
+  order: 2
 ---
 
 Fortsæt [opgave 9 i Hour of Code med Elsa and Anna](https://studio.code.org/s/frozen/lessons/1/levels/9)
 
-> Lad os gentage det 90 gange! Hvor mange gange går 90 op i 360? Tip: Det er et virkeligt lille tal.
+:::tip[Opgave]
+Lad os gentage det 90 gange! Hvor mange gange går 90 op i 360? Tip: Det er et virkeligt lille tal.
+:::
 
 Der er mange nye ting. Lad os kigge på hvad vi har brug for.
 
@@ -75,6 +79,31 @@ right(???)
 
 done()
 ```
+
+
+<Solution>
+
+For at lave 90 ligeligt fordelte streger i en cirkel med 360 grader, skal man dreje 4 grader hver gang.
+
+```python.run
+from turtle import *
+import random
+
+speed(0)
+
+farver = ["blue", "cyan", "red", "orange", "green", "sky blue", "light blue", "turquoise", "cyan", "slate blue", "purple1", "magenta", "aquamarine"]
+
+bgcolor("dark blue")
+
+for i in range(90):
+  color(random.choice(farver))
+  forward(100)
+  back(100)
+  right(4)
+
+done()
+```
+</Solution>
 
 Andre fine farver:
 

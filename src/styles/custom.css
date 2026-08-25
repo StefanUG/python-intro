@@ -1,3 +1,34 @@
+/* ── Solution block ────────────────────────────────────────── */
+.solution-block {
+  display: none;
+}
+
+body.solutions-visible .solution-block {
+  display: block;
+  border: 2px solid #a6e3a1;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  margin: 1.5rem 0;
+}
+
+.solution-header {
+  background: #a6e3a1;
+  padding: 0.35rem 0.85rem;
+}
+
+.solution-label {
+  color: #1e1e2e;
+  font-size: 0.8em;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.solution-body {
+  padding: 0.75rem 1rem;
+}
+
+/* ── PythonRun ──────────────────────────────────────────────── */
 .python-run {
   border: 2px solid var(--sl-color-accent);
   border-radius: 0.5rem;

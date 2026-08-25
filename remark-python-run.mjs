@@ -1,6 +1,24 @@
 import { visit } from 'unist-util-visit'
 
-/** Transforms ```python.run code fences into <PythonRun code="..."> MDX elements. */
+function makeImport(name, path) {
+  return {
+    type: 'mdxjsEsm',
+    value: `import ${name} from '${path}'`,
+    data: {
+      estree: {
+        type: 'Program',
+        body: [{
+          type: 'ImportDeclaration',
+          specifiers: [{ type: 'ImportDefaultSpecifier', local: { type: 'Identifier', name } }],
+          source: { type: 'Literal', value: path, raw: `'${path}'` },
+        }],
+        sourceType: 'module',
+      },
+    },
+  }
+}
+
+/** Transforms ```python.run fences into <PythonRun> and globally injects Solution. */
 export default function remarkPythonRun() {
   return (tree) => {
     const toReplace = []
@@ -10,8 +28,6 @@ export default function remarkPythonRun() {
         toReplace.push({ node, index, parent })
       }
     })
-
-    if (toReplace.length === 0) return
 
     // Replace bottom-up so indices stay valid
     for (const { node, index, parent } of toReplace.reverse()) {
@@ -24,32 +40,10 @@ export default function remarkPythonRun() {
       })
     }
 
-    // Inject import once at the top of the file
-    tree.children.unshift({
-      type: 'mdxjsEsm',
-      value: "import PythonRun from '@components/PythonRun.astro'",
-      data: {
-        estree: {
-          type: 'Program',
-          body: [
-            {
-              type: 'ImportDeclaration',
-              specifiers: [
-                {
-                  type: 'ImportDefaultSpecifier',
-                  local: { type: 'Identifier', name: 'PythonRun' },
-                },
-              ],
-              source: {
-                type: 'Literal',
-                value: '@components/PythonRun.astro',
-                raw: "'@components/PythonRun.astro'",
-              },
-            },
-          ],
-          sourceType: 'module',
-        },
-      },
-    })
+    // Always inject Solution; only inject PythonRun when blocks were found
+    if (toReplace.length > 0) {
+      tree.children.unshift(makeImport('PythonRun', '@components/PythonRun.astro'))
+    }
+    tree.children.unshift(makeImport('Solution', '@components/Solution.astro'))
   }
 }

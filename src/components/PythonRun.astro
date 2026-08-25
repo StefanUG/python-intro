@@ -73,6 +73,9 @@ const { code } = Astro.props
       parent: editorDiv,
     })
 
+    // If this editor was inside a hidden Solution block, refresh layout when revealed
+    document.addEventListener('solutions-changed', () => view.requestMeasure())
+
     const handle = block.querySelector<HTMLElement>('.python-run-resize-handle')!
 
     handle.addEventListener('mousedown', e => { e.preventDefault(); startResize(e.clientY) })
