@@ -1,0 +1,14 @@
+# dependencies
+node_modules/
+
+# build output
+dist/
+
+# Astro generated types
+.astro/
+
+# macOS
+.DS_Store
+
+# Obsolete source materials
+trinket-course/

@@ -1,0 +1,51 @@
+---
+title: "Snefnug af cirkler"
+---
+
+Fortsæt [opgave 15 i Hour of Code med Elsa and Anna](https://studio.code.org/s/frozen/lessons/1/levels/15)
+
+> Lad os nu lave 20 overlappende cirkler mens vi drejer 18 grader mellem hver cirkel.
+
+
+## Opgave 15 i Python
+
+```python.run
+from turtle import *
+
+def hopfrem(trin):
+    penup()
+    forward(trin)
+    pendown()
+
+# gentag 10 gange
+circle(50)
+hopfrem(???)
+right(???)
+
+done()
+```
+
+### Hints
+
+Husk hvordan en løkke ser ud
+
+```python
+for i in range(???):
+```
+
+Husk indrykning!
+
+Og husk du kan bruge Tab og Shift-Tab for at indrykke og rykke ud.
+
+
+### Ekstra opgave
+
+Flyt turtle opad, før vi starter, så er der mere plads.
+Det kan vi gøre med `sety(y)` hvor `y` er et tal.
+
+```python
+penup()
+sety(200)
+pendown()
+```
+

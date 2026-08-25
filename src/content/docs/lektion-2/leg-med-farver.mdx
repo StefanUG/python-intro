@@ -1,0 +1,89 @@
+---
+title: "Leg med farver"
+---
+
+Fortsæt [opgave 9 i Hour of Code med Elsa and Anna](https://studio.code.org/s/frozen/lessons/1/levels/9)
+
+> Lad os gentage det 90 gange! Hvor mange gange går 90 op i 360? Tip: Det er et virkeligt lille tal.
+
+Der er mange nye ting. Lad os kigge på hvad vi har brug for.
+
+## Introduktion til color
+
+Turtke komponenten har flere funktioner end dem vi indtil nu har ser. Her er en `color` funktion.
+
+```python
+color("blue")
+```
+
+Man kan give den det engelske navn på en farve. F.eks. "blue", "green", "yellow", "orange", "pink" osv.
+
+## Tilfældig farve
+
+I Hour of Code brugte vi en tilfældig farve til hver streg i snefnugget. Lad os se hvordan vi kan det i Python.
+
+### Lister
+
+Vi skal bruge en liste med de farver vi gerne vil vælge imellem. Det kan man lave i python på denne måde:
+
+```python
+farver = ["blue", "cyan", "red", "orange", "green"]
+```
+
+Tænk ikke for meget over hvordan det ser ud lige nu. Vi kommer tilbage til lister på et senere tidspunkt.
+
+### Random
+
+For at få Python til at vælge noget tilfældigt, skal vi bruge en ny komponent. Den hedder `random` og skal også importeres før den kan benyttes.
+
+Imports skal altid stå i toppen
+
+```python
+import random
+```
+
+Random har en funktion som hedder `choice` (valg), som vælger noget tilfældigt fra en liste. 
+
+Den kan benyttes sådan her:
+
+```python
+random.choice(farver)
+```
+
+Dette vælger kun en tilfældig farve fra listen. Vi skal huske at sende det til vores `color` funktion.
+
+```python
+color(random.choice(farver))
+```
+
+## Opgave 9 i Python
+
+Nu sætter vi det hele sammen
+
+```python.run
+from turtle import *
+import random
+
+farver = ["blue", "cyan", "red", "orange", "green"]
+
+# gentag 90 gange
+color(random.choice(farver))
+forward(100)
+back(100)
+right(???)
+
+
+done()
+```
+
+Andre fine farver:
+
+```python
+farver = ["sky blue", "light blue", "turquoise", "cyan", "slate blue", "purple1", "magenta", "aquamarine"]
+```
+
+Få det til at gå hurtigere
+
+```python
+speed(0)
+```

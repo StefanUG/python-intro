@@ -1,0 +1,15 @@
+---
+// Renders a python.run code block as a styled exercise panel.
+// Replace the pre/code section with a Skulpt runner when adding interactivity.
+interface Props {
+  code: string
+}
+const { code } = Astro.props
+---
+
+<div class="python-run not-content">
+  <div class="python-run-header">
+    <span class="python-run-label">▶ Opgave</span>
+  </div>
+  <pre class="python-run-pre"><code>{code}</code></pre>
+</div>
