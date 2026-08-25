@@ -1,15 +1,167 @@
 ---
-// Renders a python.run code block as a styled exercise panel.
-// Replace the pre/code section with a Skulpt runner when adding interactivity.
+// Renders a python.run block with CodeMirror editor + Skulpt execution.
+// Skulpt is loaded globally via head config in astro.config.mjs.
 interface Props {
   code: string
 }
 const { code } = Astro.props
 ---
 
-<div class="python-run not-content">
+<div class="python-run not-content" data-python-run data-original={code}>
   <div class="python-run-header">
     <span class="python-run-label">▶ Opgave</span>
+    <button class="python-run-btn" data-action="run">Kør kode</button>
+    <button class="python-run-btn" data-action="reset">Nulstil</button>
+    <button class="python-run-btn python-run-fs-btn" data-action="fullscreen" title="Fuld skærm">⛶</button>
   </div>
-  <pre class="python-run-pre"><code>{code}</code></pre>
+  <div class="python-run-editor" data-role="editor"></div>
+  <div class="python-run-resize-handle" aria-hidden="true"></div>
+  <div class="python-run-turtle" data-role="turtle"></div>
+  <pre class="python-run-stdout" data-role="stdout" hidden></pre>
 </div>
+
+<script>
+  import { basicSetup, EditorView } from 'codemirror'
+  import { EditorState } from '@codemirror/state'
+  import { keymap } from '@codemirror/view'
+  import { indentWithTab } from '@codemirror/commands'
+  import { python } from '@codemirror/lang-python'
+  import { oneDark } from '@codemirror/theme-one-dark'
+
+  // djb2 hash – produces a stable short key from the original source code
+  function hash(s: string): string {
+    let h = 5381
+    for (let i = 0; i < s.length; i++) h = (((h << 5) + h) ^ s.charCodeAt(i)) >>> 0
+    return h.toString(36)
+  }
+
+  function debounce(fn: () => void, ms: number) {
+    let t: ReturnType<typeof setTimeout>
+    return () => { clearTimeout(t); t = setTimeout(fn, ms) }
+  }
+
+  // Wrap localStorage so private-browsing / storage-full errors don't crash the page
+  const ls = {
+    get: (k: string) => { try { return localStorage.getItem(k) } catch { return null } },
+    set: (k: string, v: string) => { try { localStorage.setItem(k, v) } catch {} },
+    del: (k: string) => { try { localStorage.removeItem(k) } catch {} },
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-python-run]').forEach(block => {
+    if (block.dataset.init) return
+    block.dataset.init = '1'
+
+    const originalCode = block.dataset.original ?? ''
+    const storageKey = `python-run-${hash(originalCode)}`
+    const editorDiv = block.querySelector<HTMLElement>('[data-role="editor"]')!
+    const turtleDiv = block.querySelector<HTMLElement>('[data-role="turtle"]')!
+    const stdout = block.querySelector<HTMLElement>('[data-role="stdout"]')!
+
+    const save = debounce(() => ls.set(storageKey, view.state.doc.toString()), 500)
+
+    const view = new EditorView({
+      state: EditorState.create({
+        doc: ls.get(storageKey) ?? originalCode,
+        extensions: [
+          basicSetup,
+          python(),
+          oneDark,
+          keymap.of([indentWithTab]),
+          EditorView.updateListener.of(u => { if (u.docChanged) save() }),
+        ],
+      }),
+      parent: editorDiv,
+    })
+
+    const handle = block.querySelector<HTMLElement>('.python-run-resize-handle')!
+
+    handle.addEventListener('mousedown', e => { e.preventDefault(); startResize(e.clientY) })
+    handle.addEventListener('touchstart', e => { e.preventDefault(); startResize(e.touches[0].clientY) }, { passive: false })
+
+    function startResize(startY: number) {
+      const scroller = editorDiv.querySelector<HTMLElement>('.cm-scroller')!
+      const startHeight = scroller.offsetHeight
+      document.body.style.cursor = 'ns-resize'
+
+      const onMove = (clientY: number) => {
+        const h = Math.max(60, startHeight + (clientY - startY))
+        scroller.style.maxHeight = h + 'px'
+        scroller.style.height = h + 'px'
+        view.requestMeasure()
+      }
+
+      const cleanup = () => {
+        document.body.style.cursor = ''
+        document.removeEventListener('mousemove', onMouseMove)
+        document.removeEventListener('mouseup', cleanup)
+        document.removeEventListener('touchmove', onTouchMove)
+        document.removeEventListener('touchend', cleanup)
+      }
+      const onMouseMove = (e: MouseEvent) => onMove(e.clientY)
+      const onTouchMove = (e: TouchEvent) => onMove(e.touches[0].clientY)
+
+      document.addEventListener('mousemove', onMouseMove)
+      document.addEventListener('mouseup', cleanup)
+      document.addEventListener('touchmove', onTouchMove, { passive: false })
+      document.addEventListener('touchend', cleanup)
+    }
+
+    const fsBtn = block.querySelector<HTMLElement>('[data-action="fullscreen"]')!
+
+    fsBtn.addEventListener('click', () => {
+      if (!document.fullscreenElement) {
+        block.requestFullscreen()
+      } else {
+        document.exitFullscreen()
+      }
+    })
+
+    // Escape is handled automatically by the browser; sync button label on any change
+    block.addEventListener('fullscreenchange', () => {
+      const isFs = document.fullscreenElement === block
+      fsBtn.textContent = isFs ? '\u2715' : '\u26f6'
+      fsBtn.title = isFs ? 'Luk fuld sk\u00e6rm (Esc)' : 'Fuld sk\u00e6rm'
+      if (isFs) {
+        const scroller = editorDiv.querySelector<HTMLElement>('.cm-scroller')
+        if (scroller) { scroller.style.height = ''; scroller.style.maxHeight = '' }
+      }
+      view.requestMeasure()
+    })
+
+    block.querySelector('[data-action="run"]')!.addEventListener('click', () => {
+      const Sk = (window as any).Sk
+      if (!Sk) return alert('Skulpt er ikke indlæst endnu – prøv igen om et øjeblik.')
+
+      turtleDiv.innerHTML = ''
+      stdout.textContent = ''
+      stdout.hidden = true
+
+      Sk.configure({
+        output: (text: string) => { stdout.textContent += text; stdout.hidden = false },
+        read: (x: string) => {
+          if (Sk.builtinFiles?.files[x] == null) throw `File not found: '${x}'`
+          return Sk.builtinFiles.files[x]
+        },
+      })
+      Sk.TurtleGraphics = { target: turtleDiv, width: 400, height: 400 }
+
+      Sk.misceval.asyncToPromise(() =>
+        Sk.importMainWithBody('<stdin>', false, view.state.doc.toString(), true)
+      ).catch((err: any) => {
+        const span = document.createElement('span')
+        span.className = 'python-run-error-text'
+        span.textContent = String(err)
+        stdout.appendChild(span)
+        stdout.hidden = false
+      })
+    })
+
+    block.querySelector('[data-action="reset"]')!.addEventListener('click', () => {
+      ls.del(storageKey)
+      view.dispatch({ changes: { from: 0, to: view.state.doc.length, insert: originalCode } })
+      turtleDiv.innerHTML = ''
+      stdout.textContent = ''
+      stdout.hidden = true
+    })
+  })
+</script>

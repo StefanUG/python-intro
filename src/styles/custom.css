@@ -8,6 +8,9 @@
 .python-run-header {
   background: var(--sl-color-accent);
   padding: 0.35rem 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .python-run-label {
@@ -16,22 +19,119 @@
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
+  flex: 1;
 }
 
-.python-run-pre {
+.python-run-btn {
+  background: rgba(255, 255, 255, 0.2);
+  color: var(--sl-color-white);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 0.25rem;
+  padding: 0.2rem 0.7rem;
+  font-size: 0.8em;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.python-run-btn:hover {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.python-run-editor {
+  border-top: 1px solid var(--sl-color-gray-5, #313244);
+}
+
+/* CodeMirror overrides: match font and min-height; theme handles colours */
+.python-run-editor .cm-editor {
+  font-size: 0.875em;
+}
+
+.python-run-editor .cm-scroller {
+  max-height: 14em;
+  overflow: auto !important;
+  font-family: var(--sl-font-mono, ui-monospace, monospace) !important;
+}
+
+.python-run-editor .cm-editor.cm-focused {
+  outline: none;
+}
+
+/* Native fullscreen via requestFullscreen() — browser handles viewport positioning */
+.python-run:fullscreen {
+  display: flex;
+  flex-direction: column;
+}
+
+.python-run:fullscreen .python-run-editor {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.python-run:fullscreen .python-run-editor .cm-editor {
+  height: 100%;
+}
+
+.python-run:fullscreen .python-run-editor .cm-scroller {
+  max-height: none !important;
+  height: 100%;
+  overflow: auto !important;
+}
+
+.python-run-resize-handle {
+  height: 7px;
+  background: var(--sl-color-gray-5, #313244);
+  cursor: ns-resize;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.python-run-resize-handle::after {
+  content: '⋯';
+  color: var(--sl-color-gray-3, #6c7086);
+  font-size: 0.75em;
+  letter-spacing: 2px;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.python-run-resize-handle:hover {
+  background: var(--sl-color-accent-high, var(--sl-color-accent));
+}
+
+.python-run:fullscreen .python-run-resize-handle {
+  display: none;
+}
+
+.python-run-error-text {
+  color: #f38ba8;
+  display: block;
+}
+
+.python-run-fs-btn {
+  margin-left: auto;
+  font-size: 1em;
+}
+
+.python-run-turtle {
+  line-height: 0;
+}
+
+.python-run-turtle canvas {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  border: 1px solid var(--sl-color-gray-4, #45475a);
+}
+
+.python-run-stdout {
   background: var(--sl-color-gray-6, #1e1e2e);
   color: var(--sl-color-gray-1, #cdd6f4);
   font-family: var(--sl-font-mono, ui-monospace, monospace);
   font-size: 0.875em;
-  line-height: 1.6;
+  padding: 0.75rem 1.25rem;
   margin: 0;
-  padding: 1rem 1.25rem;
-  overflow-x: auto;
-  tab-size: 2;
-}
-
-.python-run-pre code {
-  background: transparent;
-  padding: 0;
-  white-space: pre;
+  border-top: 1px solid var(--sl-color-gray-5, #313244);
+  white-space: pre-wrap;
 }

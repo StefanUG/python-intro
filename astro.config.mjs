@@ -13,6 +13,11 @@ export default defineConfig({
       locales: {
         root: { label: 'Dansk', lang: 'da' },
       },
+      // Skulpt loaded globally so every PythonRun instance can call window.Sk
+      head: [
+        { tag: 'script', attrs: { src: 'https://skulpt.org/js/skulpt.min.js', defer: true } },
+        { tag: 'script', attrs: { src: 'https://skulpt.org/js/skulpt-stdlib.js', defer: true } },
+      ],
       sidebar: [
         {
           label: 'Lektion 1',
