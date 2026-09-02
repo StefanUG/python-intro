@@ -40,11 +40,28 @@ right(90)
 done()
 ```
 
-HINT:
+:::tip[Hint]
 
 ```python
 for i in range(???):
-    forward(100)
-    back(100)
-    right(90)
+  forward(100)
+  back(100)
+  right(90)
 ```
+:::
+
+<Solution>
+
+Ved at lave et kryds med 4 linjer kan man få et plustegn.
+
+```python.run
+from turtle import *
+
+for i in range(4):
+  forward(100)
+  back(100)
+  right(90)
+
+done()
+```
+</Solution>

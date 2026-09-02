@@ -31,7 +31,7 @@ Her gentages det under denne "blok" 5 gange.
 
 ## Indrykning
 
-For at benytte den som en blok med noget indeni, ligesom gentag blokken i Hour of Code:
+For at benytte den som en blok med noget *indeni*, ligesom gentag blokken i Hour of Code:
 
 <img src={import.meta.env.BASE_URL + "images/elsastep4.png"} alt="elsastep4.png" />
 
@@ -41,14 +41,19 @@ Dette er det samme kode i Python:
 
 ```python
 for i in range(???):
-    forward(100)
-    right(90)
+  forward(100)
+  right(90)
 ```
 
 ### Genvejstaster
 
+:::tip[Genvejstaster]
+For nemmere at indrykke og rykke ud, kan du bruge Tab og Shift+Tab.
+
 1. Marker noget tekst med Shift og piletasterne
 2. tryk Tab, eller Shift+Tab for at rykke teksten ind eller ud.
+:::
+
 
 ## Prøv selv gentagelser
 
@@ -63,3 +68,19 @@ for i in range(???):
 
 done()
 ```
+
+
+<Solution>
+
+Ved at gentage 4 gange kan man få den til at lave en firkant.
+
+```python.run
+from turtle import *
+
+for i in range(4):
+  forward(100)
+  right(90)
+
+done()
+```
+</Solution>

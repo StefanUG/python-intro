@@ -4,7 +4,7 @@ sidebar:
   order: 1
 ---
 
-Gå til: [Hour of Code med Elsa](https://hourofcode.com/frzn)
+Gå til: [Hour of Code med Elsa](https://studio.code.org/s/frozen/lessons/1/levels/1)
 
 <iframe
   src="https://www.youtube-nocookie.com/embed/H1-paxNG4kw"
@@ -15,6 +15,10 @@ Gå til: [Hour of Code med Elsa](https://hourofcode.com/frzn)
 ></iframe>
 
 Se videoen og lav level 1, 2, og 3
+
+:::caution[Kom tilbage]
+Kom tilbage og lave koden her efter level 3
+:::
 
 ## Intro til Turtle
 
@@ -36,8 +40,8 @@ right(90)
 ```
 
 Til sidst skal vi kalde en funktion for at holde vinduet åbnet. Det er ikke så 
-vigtigt i Trinket, da tegningen forbliver, selv når programmet er færdigt.
-Men hvis du kører det i Thonny, så skal du huske denne del til sidst.
+vigtigt i browseren her, da tegningen forbliver, selv når programmet er færdigt.
+Men hvis du kører det lokalt på din computer, så skal du huske denne del til sidst.
 
 ```python
 done()
@@ -45,7 +49,7 @@ done()
 
 
 Du vil nogle gange se kommentarer i koden. De starter med en `#` og fortæller 
-Python at linien ikke er kode og derfor skal ignoreres.
+Python at linien ikke er rigtig kode og derfor skal ignoreres.
 
 ```python
 # Dette er en kommentar, som python er ligeglad med.
@@ -69,3 +73,32 @@ right(90)
 
 done()
 ```
+
+:::tip[Genvejstaster]
+Det smarte ved kode som tekst er at man nemt kan kopiere kode og sætte det ind igen. Det findes der genvejstaster til.
+
+1. Marker noget tekst med Shift og piletasterne
+2. kopier med Ctrl+C (Cmd+C på Mac)
+3. flyt markøren til et andet sted, enten med piletasterne eller med musen
+4. indsæt med Ctrl+V (Cmd+V på Mac)
+:::
+
+<Solution>
+
+Gentag koden for at lave en firkant. Du skal bruge `forward` og `right` 4 gange.
+
+```python.run
+from turtle import *
+
+forward(100)
+right(90)
+forward(100)
+right(90)
+forward(100)
+right(90)
+forward(100)
+right(90)
+
+done()
+```
+</Solution>
