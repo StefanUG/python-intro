@@ -1,0 +1,72 @@
+---
+title: "12. To variabler"
+sidebar:
+  order: 12
+---
+
+Lav [Opgave 12](https://studio.code.org/s/course4/lessons/6/levels/12) i Kunstner: Variabler.
+
+:::tip[Opgave]
+Let's set the sides variable to 5. The more sides we add to this algorithm, the bigger this whole pattern gets!
+
+Notice that there is another variable called length. We can now use that variable wherever we have a move forward block.
+
+Set the length variable to 75 for this shape.
+:::
+
+## Kunstner: Variabler Opgave 12
+
+
+```python.run
+from turtle import *
+
+# Dette gør så den starter længere nede
+penup()
+goto(-50,0)
+pendown()
+
+
+sides = ??
+length = ???
+
+for i in range( sides ):
+  for j in range( sides ):
+    forward( ? )
+    left( 360 / sides )
+  forward( ? )
+  right( 360 / sides )
+
+done()
+```
+
+:::tip[Hint]
+
+Opgaven giver begge tal: `sides = 5` og `length = 75`. Erstat hvert spørgsmålstegn ved en fremad-bevægelse med `length`.
+:::
+
+<Solution>
+
+Sæt sides til 5 og length til 75, og brug length begge steder.
+
+```python.run
+from turtle import *
+
+penup()
+goto(-50, 0)
+pendown()
+
+sides = 5
+length = 75
+
+for i in range(sides):
+    for j in range(sides):
+        forward(length)
+        left(360 / sides)
+    forward(length)
+    right(360 / sides)
+
+done()
+```
+
+</Solution>
+

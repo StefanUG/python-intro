@@ -1,0 +1,68 @@
+---
+title: "8. Snefnug med streger"
+sidebar:
+  order: 6
+---
+
+Fortsæt med [opgave 8 i Hour of Code with Elsa and Anna](https://studio.code.org/s/frozen/lessons/1/levels/8)
+
+:::tip[Opgave]
+Prøv nu at gentage det 10 gange. Hvor mange grader skal du dreje mellem hver linje?
+:::
+
+Lav et snefnug med 10 gentagelser.
+Hvor mange grader, når der er 360 grader i en hel cirkel
+
+## Opgave 8 i Python
+
+
+Husk hvordan en løkke ser ud
+
+```python
+for i in range(???):
+```
+
+Husk indrykning!
+
+Og husk du kan bruge Tab og Shift-Tab for at indrykke og rykke ud.
+
+Gør det selv færdigt
+
+```python.run
+from turtle import *
+
+for i in range(???):
+  forward(100)
+  back(100)
+  right(???)
+
+done()
+```
+
+<Solution>
+
+For at lave 10 ligeligt fordelte streger i en cirkel med 360 grader, skal man dreje 36 grader hver gang.
+
+```python.run
+from turtle import *
+
+for i in range(10):
+  forward(100)
+  back(100)
+  right(36)
+
+done()
+```
+</Solution>
+
+:::tip[Hint]
+
+Hvad giver 360 grader delt med 10?
+
+```python
+for i in range(10):
+    forward(100)
+    back(100)
+    right(???)
+```
+:::

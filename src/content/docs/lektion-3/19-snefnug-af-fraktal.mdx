@@ -1,0 +1,82 @@
+---
+title: "19. Snefnug af fraktal"
+sidebar:
+  order: 3
+---
+
+Fortsæt [opgave 19 i Hour of Code med Elsa and Anna](https://studio.code.org/s/frozen/lessons/1/levels/19)
+
+:::tip[Opgave]
+Lad os nu gentage det 8 gange for at lave et smukt snefnug!
+:::
+
+## Opgave 19 i Python
+
+```python.run
+from turtle import *
+
+def hopfrem(trin):
+    penup()
+    forward(trin)
+    pendown()
+
+def opret_snefnuggren():
+    hopfrem(90)
+    left(45)
+    for d in range(3):
+        for g in range(3):
+            forward(30)
+            back(30)
+            right(45)
+        left(90)
+        back(30)
+        left(45)
+    right(45)
+
+# når programmet kører
+for i in range(8):
+    opret_snefnuggren()
+    right(???)
+
+done()
+```
+
+:::tip[Hint]
+
+Fordel 360 grader på 8 grene. Regn `360 / 8` ud for at finde, hvor meget du skal dreje.
+:::
+
+<Solution>
+
+Otte gentagelser betyder 45 grader mellem hver gren.
+
+```python.run
+from turtle import *
+
+def hopfrem(trin):
+    penup()
+    forward(trin)
+    pendown()
+
+def opret_snefnuggren():
+    hopfrem(90)
+    left(45)
+    for d in range(3):
+        for g in range(3):
+            forward(30)
+            back(30)
+            right(45)
+        left(90)
+        back(30)
+        left(45)
+    right(45)
+
+for i in range(8):
+    opret_snefnuggren()
+    right(45)
+
+done()
+```
+
+</Solution>
+

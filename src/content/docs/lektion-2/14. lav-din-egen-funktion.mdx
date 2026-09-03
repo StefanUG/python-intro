@@ -1,0 +1,114 @@
+---
+title: "14. Lav din egen funktion"
+sidebar:
+  order: 7
+---
+
+Fortsæt [opgave 14 i Hour of Code med Elsa and Anna](https://studio.code.org/s/frozen/lessons/1/levels/14)
+
+Se videon om funktioner
+
+<iframe
+  src="https://www.youtube-nocookie.com/embed/gm3GPfUq0Wg"
+  title="YouTube video"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen
+  style="width: 100%; aspect-ratio: 16/9; border: none;"
+></iframe>
+
+:::caution[Bemærk]
+I Hour of Code har de nu deres egen funktion til en cirkel. Men det har vi jo allerede. 
+
+Til gengæld har de en blok til at hoppe med. Det har vi ikke i Turtle. Lad os lave vores egen.
+:::
+
+## Lav en funktion
+
+I Python kan man nemt lave funktioner, som er en genbrugelig samling af sine egne liner kode. Det gør man med `def` nøgleordet. F.eks. sådan her for at lave en `hopfrem` funktion. Det må ikke være mellemrum, så derfor det sammensatte ord.
+
+```python
+def hopfrem(trin):
+    forward(trin)
+```
+
+Der hvor der står `trin`, forventer vi en "parameter". Ligesom hvis du får besked på noget, så er det ekstra information om den besked. F.eks. gå fremad med 100 skridt: `forward(100)`. Så kan vi bruge det samme navn til at sende videre til vores forward funktion: `forward(trin)`
+
+Derudover skal man ligesom med sine løkker huske at indrykke det som funktionen skal gøre.
+
+## Pen up og pen down
+
+Problemet med forward `forward` er at den tegner en streg.
+
+Indtil nu har vi brugt turtle til at tegne med.
+Vi har holdt tussen nede hele tiden.
+For at hoppe, så skal vi løfte tussen, og sætte den ned igen.
+Det gør man med `penup()` og `pendown()`
+
+## Hop funktion
+
+Så når de ting sættes sammen, har vi en hop funktion som ser således ud:
+
+```python
+def hopfrem(trin):
+    penup()
+    forward(trin)
+    pendown()
+```
+
+## Opgave 14 i Python
+
+:::tip[Opgave]
+Brug `circle` funktionen og vores egen `hopfrem` funktion til at lave 10 overlappende cirkler. Glem ikke at hoppe frem mellem hver.
+:::
+
+```python.run
+from turtle import *
+
+def hopfrem(trin):
+    penup()
+    forward(trin)
+    pendown()
+
+# gentag 10 gange
+circle(50)
+hopfrem(???)
+
+done()
+
+```
+
+<Solution>
+
+Vi laver 10 cirkler og hopper lidt frem mellem dem.
+
+```python.run
+from turtle import *
+
+def hopfrem(trin):
+    penup()
+    forward(trin)
+    pendown()
+
+for i in range(10):
+    circle(50)
+    hopfrem(25)
+    right(18)
+
+done()
+```
+
+</Solution>
+
+:::tip[Hint]
+
+Husk hvordan en løkke ser ud
+
+```python
+for i in range(???):
+```
+
+Husk indrykning!
+
+Og husk du kan bruge Tab og Shift-Tab for at indrykke og rykke ud.
+:::
+

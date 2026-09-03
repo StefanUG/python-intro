@@ -1,0 +1,60 @@
+---
+title: "3. Flere trekanter"
+sidebar:
+  order: 3
+---
+
+Lav [Opgave 3](https://studio.code.org/s/course4/lessons/6/levels/3) i Kunstner: Variabler.
+
+:::tip[Opgave]
+Drag a number block to the set length block and to the repeat _ times block to draw a set of 50 pixel triangles.
+:::
+
+## Kunstner: Variabler Opgave 3
+
+Tegn en trekant
+
+```python.run
+from turtle import *
+import random
+
+goto(-150, 0)
+
+length = ???
+
+for j in range(??):
+  for i in range(3):
+    forward(length)
+    left(120)
+  forward(length)
+
+done()
+```
+
+:::tip[Hint]
+
+Den ydre løkke bestemmer antallet af trekanter, og den indre løkke tegner én trekant. Brug 50 som længde.
+:::
+
+<Solution>
+
+Her er et sæt trekanter med længde 50.
+
+```python.run
+from turtle import *
+
+goto(-150, 0)
+
+length = 50
+
+for j in range(3):
+    for i in range(3):
+        forward(length)
+        left(120)
+    forward(length)
+
+done()
+```
+
+</Solution>
+

@@ -2,6 +2,7 @@ import { defineConfig } from 'astro/config'
 import starlight from '@astrojs/starlight'
 import { unified } from '@astrojs/markdown-remark'
 import remarkPythonRun from './remark-python-run.mjs'
+import rehypeExternalLinks from './rehype-external-links.mjs'
 
 export default defineConfig({
   site: 'https://StefanUG.github.io',
@@ -28,6 +29,9 @@ export default defineConfig({
     }),
   ],
   markdown: {
-    processor: unified({ remarkPlugins: [remarkPythonRun] }),
+    processor: unified({
+      remarkPlugins: [remarkPythonRun],
+      rehypePlugins: [rehypeExternalLinks],
+    }),
   },
 })

@@ -1,0 +1,49 @@
+---
+title: "1. Tegn en Trekant"
+sidebar:
+  order: 1
+---
+
+Lav den [første opgave](https://studio.code.org/courses/coursef-2017/units/1/lessons/16/levels/1) i Kunstner Variabler.
+
+:::tip[Opgave]
+Let's draw an equilateral triangle.
+It has to be exactly 100 pixels long on each side.
+:::
+
+## Kunstner: Variabler Opgave 1
+
+Tegn en trekant
+
+```python.run
+from turtle import *
+import random
+
+for i in range(3):
+  forward(100)
+  left(90)
+
+done()
+```
+
+:::tip[Hint]
+
+En trekant har 3 sider. Når du drejer hele vejen rundt, skal du dele 360 grader med 3.
+:::
+
+<Solution>
+
+En ligesidet trekant tegnes med 3 sider og 120 graders drejning.
+
+```python.run
+from turtle import *
+
+for i in range(3):
+    forward(100)
+    left(120)
+
+done()
+```
+
+</Solution>
+

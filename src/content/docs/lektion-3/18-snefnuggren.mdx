@@ -1,0 +1,102 @@
+---
+title: "18. Snefnuggren"
+sidebar:
+  order: 2
+---
+
+Fortsæt [opgave 18 i Hour of Code med Elsa and Anna](https://studio.code.org/s/frozen/lessons/1/levels/18)
+
+:::tip[Opgave]
+Prøv at bruge blokken, "Lav en snefnug-gren", for at lave 3 grene, der nu begynder at ligne et snefnug.
+:::
+
+## Opret snefnuggren funktion
+
+I så en ny fuktion eller blok i Hour of Code, som laver en snefnuggren.
+
+Her er en funktion i Python, som gør det samme.
+
+```python
+def opret_snefnuggren():
+    hopfrem(90)
+    left(45)
+    for dybde in range(3):
+        for grene in range(3):
+            forward(30)
+            back(30)
+            right(45)
+        left(90)
+        back(30)
+        left(45)
+    right(45)
+```
+
+## Opgave 18 i Python
+
+```python.run
+from turtle import *
+
+def hopfrem(trin):
+    penup()
+    forward(trin)
+    pendown()
+
+def opret_snefnuggren():
+    hopfrem(90)
+    left(45)
+    for d in range(3):
+        for g in range(3):
+            forward(30)
+            back(30)
+            right(45)
+        left(90)
+        back(30)
+        left(45)
+    right(45)
+
+
+# når programmet kører:
+
+
+done()
+```
+
+:::tip[Hint]
+
+Kald `opret_snefnuggren()` inde i en løkke. Tre grene skal fordeles rundt i en cirkel, så drej `360 / 3` grader mellem dem.
+:::
+
+<Solution>
+
+Tre grene med 120 grader mellem hver begynder at ligne et snefnug.
+
+```python.run
+from turtle import *
+
+def hopfrem(trin):
+    penup()
+    forward(trin)
+    pendown()
+
+def opret_snefnuggren():
+    hopfrem(90)
+    left(45)
+    for d in range(3):
+        for g in range(3):
+            forward(30)
+            back(30)
+            right(45)
+        left(90)
+        back(30)
+        left(45)
+    right(45)
+
+for i in range(3):
+    opret_snefnuggren()
+    right(120)
+
+done()
+```
+
+</Solution>
+

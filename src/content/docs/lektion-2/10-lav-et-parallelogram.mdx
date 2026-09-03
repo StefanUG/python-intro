@@ -1,0 +1,58 @@
+---
+title: "10. Lav et parallelogram"
+sidebar:
+  order: 3
+---
+
+Fortsæt [opgave 10 i Hour of Code med Elsa and Anna](https://studio.code.org/s/frozen/lessons/1/levels/10)
+
+:::tip[Opgave]
+Brug en gentagelse omkring disse blokke til at oprette et parallelogram. Det er ligesom et rektangel, men har forskellige vinkler. Denne ene har 60 grader og 120 graders vinkler i stedet for alle 90 graders vinkler.
+:::
+
+## Opgave 10 i Python
+
+Husk en løkke til at gentage 2 gange
+
+```python.run
+from turtle import *
+
+forward(100)
+right(??)
+forward(100)
+right(??)
+
+done()
+
+```
+
+<Solution>
+
+Parallelogrammet laves med to sider og to vinkler: 60 og 120 grader.
+
+```python.run
+from turtle import *
+
+for i in range(2):
+    forward(100)
+    right(60)
+    forward(100)
+    right(120)
+
+done()
+```
+
+</Solution>
+
+:::tip[Hint]
+
+Husk hvordan en løkke ser ud
+
+```python
+for i in range(???):
+```
+
+Husk indrykning!
+
+Og husk du kan bruge Tab og Shift-Tab for at indrykke og rykke ud.
+:::

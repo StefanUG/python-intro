@@ -1,0 +1,54 @@
+---
+title: "17. Blomster-snefnug"
+sidebar:
+  order: 10
+---
+
+Fortsæt [opgave 17 i Hour of Code med Elsa and Anna](https://studio.code.org/s/frozen/lessons/1/levels/17)
+
+:::tip[Opgave]
+Indviklede mønstre kan være laves af meget enkle former. Kan du lave et mønster ved at gentagne 5 cirkler af størrelsen 5 og 5 cirkler af størrelsen 10?
+:::
+
+## Opgave 17 i Python
+
+```python.run
+from turtle import *
+
+# Gentag 5 gange    
+circle(???)
+circle(???)
+right(???)
+
+done()
+```
+
+<Solution>
+
+Vi gentager 5 gange og drejer 72 grader for at fordele kronbladene jævnt.
+
+```python.run
+from turtle import *
+
+for i in range(5):
+    circle(5)
+    circle(10)
+    right(72)
+
+done()
+```
+
+</Solution>
+
+:::tip[Hint]
+
+Husk hvordan en løkke ser ud
+
+```python
+for i in range(???):
+```
+
+Husk indrykning!
+
+Og husk du kan bruge Tab og Shift-Tab for at indrykke og rykke ud.
+:::

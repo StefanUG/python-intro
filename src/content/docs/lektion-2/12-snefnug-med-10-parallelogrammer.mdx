@@ -1,0 +1,60 @@
+---
+title: "12. Snefnug med 10 parallelogrammer"
+sidebar:
+  order: 5
+---
+
+Fortsæt [opgave 12 i Hour of Code med Elsa and Anna](https://studio.code.org/s/frozen/lessons/1/levels/12)
+
+:::tip[Opgave]
+Lad os nu lave et nyt snefnug ved at bruge gentag blokken til at gentage et parallelogram 10 gange og dreje 36 grader til højre mellem hver.
+:::
+
+## Opgave 12 i Python
+
+```python.run
+from turtle import *
+
+# Gentag 10 gange
+for i in range(2):
+    forward(100)
+    right(60)
+    forward(100)
+    right(120)
+right(???)
+
+done()
+```
+
+<Solution>
+
+For 10 gentagelser i en hel cirkel skal vi dreje 36 grader hver gang.
+
+```python.run
+from turtle import *
+
+for i in range(10):
+    for j in range(2):
+        forward(100)
+        right(60)
+        forward(100)
+        right(120)
+    right(36)
+
+done()
+```
+
+</Solution>
+
+:::tip[Hint]
+
+Husk hvordan en løkke ser ud
+
+```python
+for i in range(???):
+```
+
+Husk indrykning!
+
+Og husk du kan bruge Tab og Shift-Tab for at indrykke og rykke ud.
+:::

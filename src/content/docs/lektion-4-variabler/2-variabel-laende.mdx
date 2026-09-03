@@ -1,0 +1,62 @@
+---
+title: "2. Variabel Lænde"
+sidebar:
+  order: 2
+---
+
+Se videoen 
+
+<iframe
+  src="https://www.youtube-nocookie.com/embed/_MkLbhIuvAM"
+  title="age variable"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen
+  style="width: 100%; aspect-ratio: 16/9; border: none;"
+></iframe>
+
+Lav [Opgave 2](https://studio.code.org/s/course4/lessons/6/levels/2) i Kunstner: Variabler.
+
+:::tip[Opgave]
+Instead of using move forward by 150, the move block is now referencing a variable called length. Can you set length to 150 to draw this new triangle?
+:::
+
+## Kunstner: Variabler Opgave 1
+
+Tegn en trekant
+
+```python.run
+from turtle import *
+import random
+
+length = ???
+
+for i in range(3):
+  forward(length)
+  left(120)
+
+done()
+```
+
+:::tip[Hint]
+
+Opgaven siger, at hver side skal være 150 pixels. Gem tallet i `length`, og brug derefter `forward(length)`.
+:::
+
+<Solution>
+
+Sæt length til 150 og brug variablen i forward().
+
+```python.run
+from turtle import *
+
+length = 150
+
+for i in range(3):
+    forward(length)
+    left(120)
+
+done()
+```
+
+</Solution>
+
