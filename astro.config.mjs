@@ -6,7 +6,7 @@ import rehypeExternalLinks from './rehype-external-links.mjs'
 
 export default defineConfig({
   site: 'https://StefanUG.github.io',
-  base: '/python-intro',
+  base: '/python-intro/',
   integrations: [
     starlight({
       title: 'Intro til Python',
