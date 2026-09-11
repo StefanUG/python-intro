@@ -61,6 +61,8 @@ def hopfrem(trin):
 Brug `circle` funktionen og vores egen `hopfrem` funktion til at lave 10 overlappende cirkler. Glem ikke at hoppe frem mellem hver.
 :::
 
+<img src={import.meta.env.BASE_URL + "images/elsa/14-egen-funktion.png"} alt="14-egen-funktion.png" class="elsa-screenshot" />
+
 ```python.run
 from turtle import *
 
@@ -85,14 +87,13 @@ Vi laver 10 cirkler og hopper lidt frem mellem dem.
 from turtle import *
 
 def hopfrem(trin):
-    penup()
-    forward(trin)
-    pendown()
+  penup()
+  forward(trin)
+  pendown()
 
 for i in range(10):
-    circle(50)
-    hopfrem(25)
-    right(18)
+  circle(50)
+  hopfrem(10)
 
 done()
 ```

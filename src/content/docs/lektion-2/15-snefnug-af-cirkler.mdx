@@ -12,13 +12,15 @@ Lad os nu lave 20 overlappende cirkler mens vi drejer 18 grader mellem hver cirk
 
 ## Opgave 15 i Python
 
+<img src={import.meta.env.BASE_URL + "images/elsa/15-snefnug-af-cirkler.png"} alt="15-snefnug-af-cirkler.png" class="elsa-screenshot" />
+
 ```python.run
 from turtle import *
 
 def hopfrem(trin):
-    penup()
-    forward(trin)
-    pendown()
+  penup()
+  forward(trin)
+  pendown()
 
 # gentag 10 gange
 circle(50)
@@ -35,13 +37,15 @@ done()
 ```python.run
 from turtle import *
 
-penup()
-sety(200)
-pendown()
+def hopfrem(trin):
+  penup()
+  forward(trin)
+  pendown()
 
 for i in range(20):
-    circle(50)
-    right(18)
+  circle(50)
+  hopfrem(10)
+  right(18)
 
 done()
 ```
