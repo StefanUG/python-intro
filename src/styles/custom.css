@@ -1,10 +1,10 @@
-/* ── Elsa screenshot ────────────────────────────────────────── */
-.elsa-screenshot {
+/* ── Solution image ─────────────────────────────────────────── */
+.solution-image {
   display: block;
   border: 2px solid var(--sl-color-gray-4, #45475a);
   border-radius: 0.5rem;
-  margin: 1.5rem 0;
-  max-width: 100%;
+  margin: 1.5rem auto;
+  max-width: min(100%, 400px);
 }
 
 /* ── Solution block ────────────────────────────────────────── */
