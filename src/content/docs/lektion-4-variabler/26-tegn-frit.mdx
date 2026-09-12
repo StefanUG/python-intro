@@ -1,0 +1,106 @@
+---
+title: "26. Tegn frit"
+sidebar:
+  order: 26
+---
+
+:::tip[Opgave]
+**Free Play:** Check it out! Now your algorithm is nested within one more loop. Experiment with changing the values of your two variables to draw cool patterns.
+
+For even more effect, try playing with color! Use random colors inside loops to see how it changes your design.
+:::
+
+## Tegn frit
+
+Tegn f.eks. dette mønster med tilfældige farver:
+
+<img src={import.meta.env.BASE_URL + "images/artist-variables/26-tegn-frit.png"} alt="26. Tegn frit" class="solution-image" />
+
+Eller find selv på andre former.
+
+```python.run
+from turtle import *
+import random
+
+speed(0)
+
+color_names = ["green", "blue", "orange", "red", "purple"]
+
+def random_color(): return random.choice(color_names)
+
+penup()
+goto(-20,20)
+pendown()
+
+
+sides = 8
+length = 200 / sides
+
+for i in range(sides):
+  for j in range(sides):
+    for k in range(sides):
+      forward(length)
+      right(360/sides)
+    forward(length)
+    left(360/sides)
+  forward(length)
+  right(360/sides)
+
+
+done()
+```
+
+<Solution>
+
+Eksempel på fri leg med farver og tre indlejrede løkker:
+
+```python.run
+from turtle import *
+import random
+
+speed(0)
+shape("turtle")
+
+color_names = ["green", "blue", "orange", "red", "purple"]
+
+def random_color():
+    return random.choice(color_names)
+
+penup()
+goto(-20, 20)
+pendown()
+
+sides = 8
+length = 200 / sides
+
+for i in range(sides):
+    color(random_color())
+    for j in range(sides):
+        for k in range(sides):
+            forward(length)
+            right(360 / sides)
+        forward(length)
+        left(360 / sides)
+    forward(length)
+    right(360 / sides)
+
+done()
+```
+
+</Solution>
+
+:::tip[Hint]
+
+```python
+
+# skift farve
+color(random_color())
+
+# Turtle :)
+shape("turtle")
+
+# Hastighed
+speed(0)
+
+```
+:::

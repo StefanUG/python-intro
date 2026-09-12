@@ -1,0 +1,72 @@
+---
+title: "21. Femkant igen"
+sidebar:
+  order: 21
+---
+
+:::tip[Opgave]
+Now, recreate the algorithm from the last level and create a pentagon with sides of length 150.
+:::
+
+## Husk hvordan man dividerer
+
+    360 / sides
+
+## Løs Opgaven
+
+<img src={import.meta.env.BASE_URL + "images/artist-variables/21-femkant-igen.png"} alt="21. Femkant igen" class="solution-image" />
+
+```python.run
+from turtle import *
+
+# Dette gør så den starter længere nede
+penup()
+goto(-100,-150)
+pendown()
+
+
+sides = ???
+
+for i in range( ? ):
+  
+
+done()
+```
+
+:::tip[Hint]
+
+Sæt `sides` til 5. Inde i løkken skal du gå 150 pixels frem og dreje `360 / sides` grader.
+:::
+
+<Solution>
+
+Skift sides til 5 for en femkant med sidelængde 150.
+
+```python.run
+from turtle import *
+
+penup()
+goto(-100, -150)
+pendown()
+
+sides = 5
+
+for i in range(sides):
+    forward(150)
+    left(360 / sides)
+
+done()
+```
+
+</Solution>
+
+:::tip[Hint]
+
+```python
+
+forward()
+left()
+
+
+```
+:::

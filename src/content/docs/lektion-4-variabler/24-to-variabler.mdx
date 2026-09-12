@@ -1,0 +1,69 @@
+---
+title: "24. To variabler"
+sidebar:
+  order: 24
+---
+
+:::tip[Opgave]
+Let's set the sides variable to 5. The more sides we add to this algorithm, the bigger this whole pattern gets!
+
+Notice that there is another variable called length. We can now use that variable wherever we have a move forward block.
+
+Set the length variable to 75 for this shape.
+:::
+
+## Løs Opgaven
+
+<img src={import.meta.env.BASE_URL + "images/artist-variables/24-to-variabler.png"} alt="24. To variabler" class="solution-image" />
+  
+```python.run
+from turtle import *
+
+penup()
+goto(-40, 50)
+pendown()
+
+
+sides = ??
+length = ???
+
+for i in range( sides ):
+  for j in range( sides ):
+    forward( ? )
+    left( 360 / sides )
+  forward( ? )
+  right( 360 / sides )
+
+done()
+```
+
+:::tip[Hint]
+Opgaven giver begge tal: `sides = 5` og `length = 75`. 
+:::
+
+<Solution>
+
+Sæt sides til 5 og length til 75, og brug length begge steder.
+
+```python.run
+from turtle import *
+
+penup()
+goto(-40, 50)
+pendown()
+
+sides = 5
+length = 75
+
+for i in range(sides):
+    for j in range(sides):
+        forward(length)
+        left(360 / sides)
+    forward(length)
+    right(360 / sides)
+
+done()
+```
+
+</Solution>
+

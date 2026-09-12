@@ -1,0 +1,66 @@
+---
+title: "23. Kasser"
+sidebar:
+  order: 23
+---
+
+:::tip[Opgave]
+Here’s some more complicated code using the same concepts from the last puzzle - what should you set the `sides` variable to in order to draw this picture made of squares?
+:::
+
+## Løs Opgaven
+
+
+<img src={import.meta.env.BASE_URL + "images/artist-variables/23-kasser.png"} alt="23. Kasser" class="solution-image" />
+  
+
+```python.run
+from turtle import *
+
+penup()
+goto(-50, 50)
+pendown()
+
+
+sides = 3
+
+for shape in range( sides ):
+  for side in range( sides ):
+    forward( 100 )
+    left( 360 / sides )
+  forward( 100 )
+  right( 360 / sides )
+
+done()
+```
+
+:::tip[Hint]
+Den indre løkke tegner én firkant. Sæt derfor `sides` til 4, så begge løkker gentager fire gange.
+:::
+
+<Solution>
+
+For kasser i opgave 23 skal sides sættes til 4.
+
+```python.run
+from turtle import *
+speed(0)
+color("grey")
+penup()
+goto(-50, 50)
+pendown()
+
+sides = 4
+
+for shape in range(sides):
+    for side in range(sides):
+        forward(100)
+        left(360 / sides)
+    forward(100)
+    right(360 / sides)
+
+done()
+```
+
+</Solution>
+

@@ -1,0 +1,64 @@
+---
+title: "22. Fri tegning"
+sidebar:
+  order: 22
+---
+
+:::tip[Opgave]
+Free Play: Experiment with the number of sides this shape has. Can you change the algorithm so that the overall size of the shape stays the same, no matter how many sides it has?
+:::
+
+## Løs Opgaven
+
+
+```python.run
+from turtle import *
+
+# Dette gør så den starter længere nede
+penup()
+goto(-100,-150)
+pendown()
+
+
+sides = 4
+
+for i in range( sides ):
+  forward( 100 )
+  left( 360 / sides )
+
+done()
+```
+
+:::tip[Hint]
+Prøv forskellige tal for `sides`. Hvis mønstret skal have samme samlede størrelse, skal `length` blive mindre, når `sides` bliver større.
+
+Prøv f.eks.
+:::
+
+```python
+length = 300 / sides
+```
+
+<Solution>
+
+Eksempel hvor størrelsen automatisk justeres efter antallet af sider.
+
+```python.run
+from turtle import *
+
+penup()
+goto(-100, -150)
+pendown()
+
+sides = 8
+length = 300 / sides
+
+for i in range(sides):
+    forward(length)
+    left(360 / sides)
+
+done()
+```
+
+</Solution>
+

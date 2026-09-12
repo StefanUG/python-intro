@@ -1,0 +1,71 @@
+---
+title: "19. Mange-kant"
+sidebar:
+  order: 19
+---
+
+:::tip[Opgave]
+Here’s some code that can draw any regular polygon.
+
+There’s a new variable called sides that is set to 4.
+
+Can you use the sides variable (along with the math block) to turn the right amount regardless of how many sides are in the polygon?
+:::
+
+:::tip[Husk]
+
+Husk hvordan man dividerer
+
+    360 / sides
+:::
+
+
+## Løs Opgaven
+
+<img src={import.meta.env.BASE_URL + "images/artist-variables/19-mange-kant.png"} alt="19. Mange-kant" class="solution-image" />
+
+```python.run
+from turtle import *
+
+# Dette gør så den starter længere nede
+penup()
+goto(-150,-150)
+pendown()
+
+
+sides = ???
+
+for i in range( sides ):
+  forward( 150 )
+  left( 360 / ? )
+
+done()
+```
+
+:::tip[Hint]
+
+Prøv først med en firkant: `sides = 4`. Brug derefter variablen både i `range(sides)` og i formlen `360 / sides`.
+:::
+
+<Solution>
+
+Med sides = 4 får du en firkant, og formlen virker for alle regulære polygoner.
+
+```python.run
+from turtle import *
+
+penup()
+goto(-150, -150)
+pendown()
+
+sides = 4
+
+for i in range(sides):
+    forward(150)
+    left(360 / sides)
+
+done()
+```
+
+</Solution>
+

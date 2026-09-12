@@ -1,0 +1,130 @@
+---
+title: "27. Tegn efter, eller frit"
+sidebar:
+  order: 27
+---
+
+:::tip[Opgave]
+**Free-Play Inspiration:** You've now learned everything you need to know to make a pattern like this! If this picture inspires you, try to make something similar. Otherwise, create something all your own.
+:::
+
+## Tegn frit
+
+Hvis dette mønster inspirerer dig, kan du prøve at lave noget lignende. Ellers kan du skabe noget helt dit eget.
+
+<img src={import.meta.env.BASE_URL + "images/artist-variables/27-inspiration-med-firkanter.png"} alt="Inspiration med firkanter" class="solution-image" />
+
+Dette er et andet eksempel på et mønster med 36 femkanter.
+
+<img src={import.meta.env.BASE_URL + "images/artist-variables/27-eksempel-36-femkanter.png"} alt="Eksempel med 36 femkanter" class="solution-image" />
+
+
+```python.run
+from turtle import *
+import random
+
+speed(0)
+
+color_names = ["green", "blue", "orange", "red", "purple"]
+
+def random_color(): return random.choice(color_names)
+
+
+
+done()
+```
+
+<Solution>
+
+Løsningsforslag:
+
+```python.run
+from turtle import *
+import random
+
+color_names = ["green", "blue", "orange", "red", "purple"]
+
+def random_color(): return random.choice(color_names)
+
+length = 50
+
+def skipdown():
+  right(180)
+  penup()
+  forward(length/2)
+  left(90)
+  pendown()
+
+for rows in range(3):
+  for square in range(3):
+    for side in range(5):
+      forward(length)
+      left(90)
+    skipdown()
+  penup()
+  left(180)
+  forward(length * 3.5)
+  right(90)
+  forward(length / 2)
+  right(90)
+  pendown()
+
+
+done()
+```
+
+</Solution>
+
+
+<Solution>
+
+Et eksempel-inspireret mønster med farver og mange gentagelser:
+
+```python.run
+from turtle import *
+import random
+
+speed(0)
+shape("turtle")
+
+color_names = ["green", "blue", "orange", "red", "purple"]
+
+def random_color():
+    return random.choice(color_names)
+
+penup()
+goto(0, 0)
+pendown()
+
+for i in range(36):
+    color(random_color())
+    for j in range(5):
+        forward(120)
+        right(72)
+    right(10)
+
+done()
+```
+
+</Solution>
+
+:::tip[Hint]
+
+```python
+
+# loop
+for i in range( ? ):
+
+# skift farve
+color(random_color())
+
+# Turtle :)
+shape("turtle")
+
+# Hastighed
+speed(0)
+
+```
+:::
+
+
