@@ -21,12 +21,79 @@ const { code } = Astro.props
 </div>
 
 <script>
-  import { basicSetup, EditorView } from 'codemirror'
+  import { EditorView, lineNumbers, highlightActiveLineGutter, highlightSpecialChars, drawSelection, dropCursor, rectangularSelection, crosshairCursor, highlightActiveLine, keymap } from '@codemirror/view'
   import { EditorState } from '@codemirror/state'
-  import { keymap } from '@codemirror/view'
-  import { indentWithTab } from '@codemirror/commands'
-  import { python } from '@codemirror/lang-python'
+  import { foldGutter, indentOnInput, syntaxHighlighting, defaultHighlightStyle, bracketMatching, foldKeymap } from '@codemirror/language'
+  import { history, defaultKeymap, historyKeymap, indentWithTab } from '@codemirror/commands'
+  import { highlightSelectionMatches, searchKeymap } from '@codemirror/search'
+  import { closeBrackets, closeBracketsKeymap, autocompletion, completionKeymap, completeFromList, snippetCompletion, ifNotIn } from '@codemirror/autocomplete'
+  import { python, localCompletionSource } from '@codemirror/lang-python'
   import { oneDark } from '@codemirror/theme-one-dark'
+
+  // Turtle-module functions used throughout the lessons – suggested alongside
+  // the student's own variables/functions since `turtle` isn't statically analyzed.
+  const dontCompleteIn = ['String', 'FormatString', 'Comment', 'PropertyName']
+  const turtleCompletionSource = ifNotIn(dontCompleteIn, completeFromList([
+    snippetCompletion('forward(${distance})', { label: 'forward', type: 'function', detail: '(distance)' }),
+    // snippetCompletion('fd(${distance})', { label: 'fd', type: 'function', detail: '(distance)' }),
+    snippetCompletion('backward(${distance})', { label: 'backward', type: 'function', detail: '(distance)' }),
+    // snippetCompletion('bk(${distance})', { label: 'bk', type: 'function', detail: '(distance)' }),
+    snippetCompletion('right(${angle})', { label: 'right', type: 'function', detail: '(angle)' }),
+    // snippetCompletion('rt(${angle})', { label: 'rt', type: 'function', detail: '(angle)' }),
+    snippetCompletion('left(${angle})', { label: 'left', type: 'function', detail: '(angle)' }),
+    // snippetCompletion('lt(${angle})', { label: 'lt', type: 'function', detail: '(angle)' }),
+    snippetCompletion('goto(${x}, ${y})', { label: 'goto', type: 'function', detail: '(x, y)' }),
+    // snippetCompletion('setheading(${angle})', { label: 'setheading', type: 'function', detail: '(angle)' }),
+    snippetCompletion('circle(${radius})', { label: 'circle', type: 'function', detail: '(radius)' }),
+    // snippetCompletion('dot(${size})', { label: 'dot', type: 'function', detail: '(size)' }),
+    snippetCompletion('speed(${speed})', { label: 'speed', type: 'function', detail: '(speed)' }),
+    { label: 'penup', type: 'function', apply: 'penup()' },
+    { label: 'pendown', type: 'function', apply: 'pendown()' },
+    //snippetCompletion('pensize(${width})', { label: 'pensize', type: 'function', detail: '(width)' }),
+    //snippetCompletion('pencolor(${color})', { label: 'pencolor', type: 'function', detail: '(color)' }),
+    //snippetCompletion('fillcolor(${color})', { label: 'fillcolor', type: 'function', detail: '(color)' }),
+    snippetCompletion('color(${color})', { label: 'color', type: 'function', detail: '(color)' }),
+    //{ label: 'begin_fill', type: 'function', apply: 'begin_fill()' },
+    //{ label: 'end_fill', type: 'function', apply: 'end_fill()' },
+    //{ label: 'clear', type: 'function', apply: 'clear()' },
+    //{ label: 'reset', type: 'function', apply: 'reset()' },
+    { label: 'hideturtle', type: 'function', apply: 'hideturtle()' },
+    { label: 'showturtle', type: 'function', apply: 'showturtle()' },
+    snippetCompletion('write(${text})', { label: 'write', type: 'function', detail: '(text)' }),
+    snippetCompletion('bgcolor(${color})', { label: 'bgcolor', type: 'function', detail: '(color)' }),
+    //snippetCompletion('screensize(${width}, ${height})', { label: 'screensize', type: 'function', detail: '(width, height)' }),
+  ]))
+
+  // Same as codemirror's basicSetup, but autocompletion is restricted to locally
+  // defined variables/functions and turtle-module functions – no other Python
+  // keyword/builtin suggestions.
+  const editorSetup = [
+    lineNumbers(),
+    highlightActiveLineGutter(),
+    highlightSpecialChars(),
+    history(),
+    foldGutter(),
+    drawSelection(),
+    dropCursor(),
+    EditorState.allowMultipleSelections.of(true),
+    indentOnInput(),
+    syntaxHighlighting(defaultHighlightStyle, { fallback: true }),
+    bracketMatching(),
+    closeBrackets(),
+    rectangularSelection(),
+    crosshairCursor(),
+    highlightActiveLine(),
+    highlightSelectionMatches(),
+    autocompletion({ override: [localCompletionSource, turtleCompletionSource] }),
+    keymap.of([
+      ...closeBracketsKeymap,
+      ...defaultKeymap,
+      ...searchKeymap,
+      ...historyKeymap,
+      ...foldKeymap,
+      ...completionKeymap,
+    ]),
+  ]
 
   // djb2 hash – produces a stable short key from the original source code
   function hash(s: string): string {
@@ -63,7 +130,7 @@ const { code } = Astro.props
       state: EditorState.create({
         doc: ls.get(storageKey) ?? originalCode,
         extensions: [
-          basicSetup,
+          editorSetup,
           python(),
           oneDark,
           keymap.of([indentWithTab]),
