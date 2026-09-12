@@ -1,0 +1,61 @@
+---
+title: "12. Gradvis længere kant"
+sidebar:
+  order: 12
+---
+
+Lav [Opgave 12](https://studio.code.org/courses/coursef-2017/units/1/lessons/16/levels/12) i Kunstner: Variabler.
+
+:::tip[Opgave]
+Rebuild the triangle code from the last puzzle, 
+but this time use the set length to block to reset the 
+length variable to length+10 at the end of each loop iteration.
+:::
+
+```python
+length = length + 10
+```
+
+## Kunstner: Variabler Opgave 12
+
+Kopier koden fra forrige opgave og tilpas den, så længden af trekantens sider øges med 10 efter hver kant.
+
+<img src={import.meta.env.BASE_URL + "images/artist-variables/12-gradvis-langere-kant.png"} alt="12. Gradvis længere kant" class="solution-image" />
+
+```python.run
+from turtle import *
+
+penup()
+goto(-75, -55)
+pendown()
+
+# Skriv koden herunder til at øge længden af trekantens sider gradvist
+
+
+done()
+```
+
+
+<Solution>
+
+Her skal du ændre koden, så længden af trekantens sider øges med 10 efter hver kant.
+
+```python.run
+from turtle import *
+
+penup()
+goto(-75, -55)
+pendown()
+
+length = 150
+
+for side in range(3):
+  forward(length)
+  left(120)
+  length = length + 10
+
+done()
+```
+
+</Solution>
+

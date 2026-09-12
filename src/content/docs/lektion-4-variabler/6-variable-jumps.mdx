@@ -1,0 +1,71 @@
+---
+title: "6. Hop en variable længde"
+sidebar:
+  order: 6
+---
+
+Lav [Opgave 6](https://studio.code.org/courses/coursef-2017/units/1/lessons/16/levels/6) i Kunstner: Variabler.
+
+:::tip[Opgave]
+Now, use the `length` variable to have the artist jump forward and down by `length` pixels between triangles.
+:::
+
+## Kunstner: Variabler Opgave 6
+
+Tilpas koden så kunstneren hopper frem og ned mellem trekanterne.
+
+<img src={import.meta.env.BASE_URL + "images/artist-variables/6-variabel-langde.png"} alt="6. Hop en variable længde" class="solution-image" />
+
+
+```python.run
+from turtle import *
+
+def jump(l):
+  penup()
+  forward(l)
+  pendown()
+
+length = 50
+
+for triangles in range(3):
+  for sides in range(3):
+    forward(length)
+    left(120)
+  forward(length)
+
+done()
+```
+
+:::tip[Hint]
+Hvad skal den gøre i stedet for at gå frem med `forward(length)`? Brug `jump(length)` funktionen i stedet, og hvad mere?
+:::
+
+<Solution>
+
+Length skal være 50 og anvendes i `forward(length)` funktionerne. For at hoppe mellem trekanterne, skal du bruge `jump(length)` i stedet for den sidste `forward(length)`.
+
+```python.run
+from turtle import *
+
+def jump(l):
+  penup()
+  forward(l)
+  pendown()
+
+length = 50
+
+for triangles in range(3):
+  for sides in range(3):
+    forward(length)
+    left(120)
+  jump(length)
+  right(90)
+  jump(length)
+  left(90)
+
+
+done()
+```
+
+</Solution>
+

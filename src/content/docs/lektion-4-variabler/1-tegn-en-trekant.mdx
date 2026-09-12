@@ -15,19 +15,17 @@ It has to be exactly 100 pixels long on each side.
 
 Tegn en trekant
 
+<img src={import.meta.env.BASE_URL + "images/artist-variables/1-tegn-en-trekant.png"} alt="1-tegn-en-trekant.png" class="solution-image" />
+
 ```python.run
 from turtle import *
-import random
 
-for i in range(3):
-  forward(100)
-  left(90)
+# Indsæt din kode herunder for at tegne trekanten:
 
 done()
 ```
 
 :::tip[Hint]
-
 En trekant har 3 sider. Når du drejer hele vejen rundt, skal du dele 360 grader med 3.
 :::
 
@@ -38,7 +36,7 @@ En ligesidet trekant tegnes med 3 sider og 120 graders drejning.
 ```python.run
 from turtle import *
 
-for i in range(3):
+for side in range(3):
     forward(100)
     left(120)
 

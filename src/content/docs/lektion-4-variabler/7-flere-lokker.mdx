@@ -1,0 +1,87 @@
+---
+title: "7. Flere løkker"
+sidebar:
+  order: 7
+---
+
+Lav [Opgave 7](https://studio.code.org/courses/coursef-2017/units/1/lessons/16/levels/7) i Kunstner: Variabler.
+
+:::tip[Opgave]
+Add another set of loops at the end of your code to add three more triangles. This time, move forward and up!
+:::
+
+## Kunstner: Variabler Opgave 7
+
+Tiljøj en ny række trekanter ved at tilføje endnu et sæt løkker i slutningen af koden. Denne gang skal kunstneren bevæge sig frem og op!
+
+<img src={import.meta.env.BASE_URL + "images/artist-variables/7-flere-lokker.png"} alt="7. Flere løkker" class="solution-image" />
+
+
+```python.run
+from turtle import *
+
+penup()
+goto(-175, 100)
+pendown()
+
+def jump(l):
+  penup()
+  forward(l)
+  pendown()
+
+length = 50
+
+for triangles in range(3):
+  for sides in range(3):
+    forward(length)
+    left(120)
+  jump(length)
+  right(90)
+  jump(length)
+  left(90)
+
+
+done()
+```
+
+
+<Solution>
+
+Du skal tilføje endnu et sæt løkker i slutningen af koden for at tilføje tre nye trekanter. Men i stedet for at dreje til højre og ned, skal du dreje til venstre og op.
+
+```python.run
+from turtle import *
+
+penup()
+goto(-175, 100)
+pendown()
+
+def jump(l):
+  penup()
+  forward(l)
+  pendown()
+
+length = 50
+
+for triangles in range(3):
+  for sides in range(3):
+    forward(length)
+    left(120)
+  jump(length)
+  right(90)
+  jump(length)
+  left(90)
+for triangles in range(3):
+  for sides in range(3):
+    forward(length)
+    left(120)
+  jump(length)
+  left(90)
+  jump(length)
+  right(90)
+
+done()
+```
+
+</Solution>
+

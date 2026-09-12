@@ -1,10 +1,10 @@
 ---
-title: "3. Flere trekanter"
+title: "2. Flere trekanter"
 sidebar:
-  order: 3
+  order: 2
 ---
 
-Lav [Opgave 3](https://studio.code.org/s/course4/lessons/6/levels/3) i Kunstner: Variabler.
+Lav [Opgave 2](https://studio.code.org/courses/coursef-2017/units/1/lessons/16/levels/2) i Kunstner: Variabler.
 
 :::tip[Opgave]
 Drag a number block to the set length block and to the repeat _ times block to draw a set of 50 pixel triangles.
@@ -13,20 +13,13 @@ Drag a number block to the set length block and to the repeat _ times block to d
 ## Kunstner: Variabler Opgave 3
 
 Tegn en trekant
+<img src={import.meta.env.BASE_URL + "images/artist-variables/2-flere-trekanter.png"} alt="2. Flere trekanter" class="solution-image" />
 
 ```python.run
 from turtle import *
-import random
 
-goto(-150, 0)
+# Indsæt din kode herunder for at tegne tre trekanter:
 
-length = ???
-
-for j in range(??):
-  for i in range(3):
-    forward(length)
-    left(120)
-  forward(length)
 
 done()
 ```
@@ -43,15 +36,11 @@ Her er et sæt trekanter med længde 50.
 ```python.run
 from turtle import *
 
-goto(-150, 0)
-
-length = 50
-
-for j in range(3):
-    for i in range(3):
-        forward(length)
+for triangle in range(3):
+    for side in range(3):
+        forward(50)
         left(120)
-    forward(length)
+    forward(50)
 
 done()
 ```

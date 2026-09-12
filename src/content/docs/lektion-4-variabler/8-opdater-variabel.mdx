@@ -1,0 +1,98 @@
+---
+title: "8. Opdater din variabel"
+sidebar:
+  order: 8
+---
+
+Lav [Opgave 8](https://studio.code.org/courses/coursef-2017/units/1/lessons/16/levels/8) i Kunstner: Variabler.
+
+:::tip[Opgave]
+OOPS!
+
+We actually need the triangles to be 60 pixels wide, with 60 pixel jumps.
+
+Aren't you glad you're using a variable?
+:::
+
+## Kunstner: Variabler Opgave 8
+
+Nu skal du bare ændre variablen `length` for at ændre størrelsen på trekanterne.
+
+<img src={import.meta.env.BASE_URL + "images/artist-variables/8-opdater-variabel.png"} alt="8. Opdater din variabel" class="solution-image" />
+
+
+```python.run
+from turtle import *
+
+penup()
+goto(-175, 100)
+pendown()
+
+def jump(l):
+  penup()
+  forward(l)
+  pendown()
+
+length = 50
+
+for triangles in range(3):
+  for sides in range(3):
+    forward(length)
+    left(120)
+  jump(length)
+  right(90)
+  jump(length)
+  left(90)
+for triangles in range(3):
+  for sides in range(3):
+    forward(length)
+    left(120)
+  jump(length)
+  left(90)
+  jump(length)
+  right(90)
+
+done()
+```
+
+
+<Solution>
+
+Ændre værdien af variablen `length` til 60.
+
+```python.run
+from turtle import *
+
+penup()
+goto(-175, 100)
+pendown()
+
+def jump(l):
+  penup()
+  forward(l)
+  pendown()
+
+length = 60
+
+for triangles in range(3):
+  for sides in range(3):
+    forward(length)
+    left(120)
+  jump(length)
+  right(90)
+  jump(length)
+  left(90)
+for triangles in range(3):
+  for sides in range(3):
+    forward(length)
+    left(120)
+  jump(length)
+  left(90)
+  jump(length)
+  right(90)
+
+done()
+```
+
+</Solution>
+

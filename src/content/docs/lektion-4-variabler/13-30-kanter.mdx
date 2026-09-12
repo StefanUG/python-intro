@@ -1,0 +1,63 @@
+---
+title: "13. 30 kanter"
+sidebar:
+  order: 13
+---
+
+Lav [Opgave 13](https://studio.code.org/courses/coursef-2017/units/1/lessons/16/levels/13) i Kunstner: Variabler.
+
+:::tip[Opgave]
+Time to make some art!
+
+See what happens when you repeat the code from the last puzzle **30** times instead of only 3!
+
+Feel free to make your lines any color or pattern for some extra zest.
+:::
+
+## Kunstner: Variabler Opgave 13
+
+Kopier koden fra forrige opgave og tilpas den, så længden af trekantens sider øges med 10 efter hver kant.
+
+<img src={import.meta.env.BASE_URL + "images/artist-variables/12-gradvis-langere-kant.png"} alt="12. Gradvis længere kant" class="solution-image" />
+
+```python.run
+from turtle import *
+
+penup()
+goto(-75, -55)
+pendown()
+
+length = 150
+
+for side in range(3):
+  forward(length)
+  left(120)
+  length = length + 10
+
+done()
+```
+
+
+<Solution>
+
+Her skal du ændre koden, så længden af trekantens sider øges med 10 efter hver kant, og gentag trekanten 30 gange.
+
+```python.run
+from turtle import *
+
+penup()
+goto(-75, -55)
+pendown()
+
+length = 150
+
+for side in range(30):
+  forward(length)
+  left(120)
+  length = length + 10
+
+done()
+```
+
+</Solution>
+

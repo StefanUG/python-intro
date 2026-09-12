@@ -1,0 +1,76 @@
+---
+title: "15. Fri tegning"
+sidebar:
+  order: 15
+---
+
+Lav [Opgave 15](https://studio.code.org/courses/coursef-2017/units/1/lessons/16/levels/15) i Kunstner: Variabler.
+
+:::tip[Opgave]
+**Freeplay:** Take what you've learned and make your own drawing.
+
+How can you use variables with squares, pentagons, or hexagons?
+:::
+
+## Kunstner: Variabler Opgave 15
+
+```python.run
+from turtle import *
+
+penup()
+goto(-75, -55)
+pendown()
+
+length = 150
+
+for side in range(3):
+  forward(length)
+  left(120)
+  length = length + 10
+
+done()
+```
+
+:::tip[Tip]
+For at lave figurer med andre kanter kan du bruge en variabel til at bestemme antallet af sider og lade Pythong lave matematik for at regne vinklen ud:
+:::
+
+```python
+length = 100
+
+# Antal sider i figuren
+sides = 5
+
+# Beregn vinklen
+angle = 360 / sides
+
+for side in range(sides):
+  forward(length)
+  left(angle)
+```
+
+
+<Solution>
+
+Her skal du ændre koden, så længden af trekantens sider øges med 10 efter hver kant, og gentag trekanten 30 gange.
+
+```python.run
+from turtle import *
+speed(8)
+penup()
+goto(-75, -55)
+pendown()
+
+length = 50
+
+for triangle in range(30):
+  for side in range(3):
+    forward(length)
+    left(119)
+    length = length * 1.1
+
+done()
+```
+
+</Solution>
+

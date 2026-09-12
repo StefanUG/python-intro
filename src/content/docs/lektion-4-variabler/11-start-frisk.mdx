@@ -1,0 +1,61 @@
+---
+title: "11. Start frisk"
+sidebar:
+  order: 11
+---
+
+Lav [Opgave 11](https://studio.code.org/courses/coursef-2017/units/1/lessons/16/levels/11) i Kunstner: Variabler.
+
+:::tip[Opgave]
+Let's start this section by drawing a triangle with 150 pixel sides.
+
+Be sure to use the `length` variable and a repeat loop.
+:::
+
+## Kunstner: Variabler Opgave 11
+
+Kan du selv løse opgaven og lave koden som tegner trekanten som vist?
+
+<img src={import.meta.env.BASE_URL + "images/artist-variables/11-start-frisk.png"} alt="11. Start frisk" class="solution-image" />
+
+:::tip[Hint]
+Det er næsten samme kode som fra opgave 5, bortset fra du skal kun tegne en enkelt trekant, og bruge længden 150.
+:::
+
+```python.run
+from turtle import *
+
+penup()
+goto(-75, -55)
+pendown()
+
+# Skriv koden herunder til at lave en 150 pixel trekant
+
+
+done()
+```
+
+
+<Solution>
+
+Du skal ændre koden, så den tegner firkanter i stedet for trekanter. Sørg for, at firkanterne har 80 pixel sider, og at kunstneren hopper 80 pixel frem og ned mellem hver firkant.
+
+```python.run
+from turtle import *
+
+penup()
+goto(-75, -55)
+pendown()
+
+length = 150
+
+for triangle in range(1):
+  for side in range(3):
+    forward(length)
+    left(120)
+
+done()
+```
+
+</Solution>
+

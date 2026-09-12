@@ -1,0 +1,64 @@
+---
+title: "5. Variable længde"
+sidebar:
+  order: 5
+---
+
+Lav [Opgave 5](https://studio.code.org/courses/coursef-2017/units/1/lessons/16/levels/5) i Kunstner: Variabler.
+
+:::tip[Opgave]
+Before things get tricky, can you move the length of 50 into a variable so we can use it in the next few puzzles?
+:::
+
+## Variable
+
+I Python laver man en variabel ved at skrive et navn, efterfulgt af et lighedstegn og værdien. For eksempel:
+
+```python
+length = 50
+```
+
+## Kunstner: Variabler Opgave 5
+
+Lav din egen variabel for længden og brug den to steder i denne kode
+
+<img src={import.meta.env.BASE_URL + "images/artist-variables/2-flere-trekanter.png"} alt="2. Flere trekanter" class="solution-image" />
+
+```python.run
+from turtle import *
+
+length = ???
+
+for j in range(3):
+  for i in range(3):
+    forward()
+    left(120)
+  forward()
+
+done()
+```
+
+:::tip[Hint]
+Husk at bruge variablen `length` i stedet for tallet direkte. Eller i stedet for ingenting i den `forward()` funktion.
+:::
+
+<Solution>
+
+Length skal være 50 og anvendes i `forward(length)` funktionerne.
+
+```python.run
+from turtle import *
+
+length = 50
+
+for j in range(3):
+  for i in range(3):
+    forward(length)
+    left(120)
+  forward(length)
+
+done()
+```
+
+</Solution>
+

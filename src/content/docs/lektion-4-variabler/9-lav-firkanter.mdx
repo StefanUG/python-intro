@@ -1,0 +1,75 @@
+---
+title: "9. Lav firkanter"
+sidebar:
+  order: 9
+---
+
+Lav [Opgave 9](https://studio.code.org/courses/coursef-2017/units/1/lessons/16/levels/9) i Kunstner: Variabler.
+
+:::tip[Opgave]
+Use what you've learned to build this design where the squares have 80 pixel sides and the artist jumps 80 pixels over and down between each one.
+
+:::
+
+## Kunstner: Variabler Opgave 9
+
+Kan du selv løse opgaven og lave koden som tegner firkanterne som vist?
+
+<img src={import.meta.env.BASE_URL + "images/artist-variables/9-lav-firkanter.png"} alt="9. Lav firkanter" class="solution-image" />
+
+:::tip[Hint]
+Du kan evt. kopiere koden fra sidste opgave, og ændre den til at tegne firkanter i stedet for trekanter.
+:::
+
+```python.run
+from turtle import *
+
+penup()
+goto(-175, 100)
+pendown()
+
+def jump(l):
+  penup()
+  forward(l)
+  pendown()
+
+
+# Start din kode herunder:
+
+
+done()
+```
+
+
+<Solution>
+
+Du skal ændre koden, så den tegner firkanter i stedet for trekanter. Sørg for, at firkanterne har 80 pixel sider, og at kunstneren hopper 80 pixel frem og ned mellem hver firkant.
+
+```python.run
+from turtle import *
+
+penup()
+goto(-175, 100)
+pendown()
+
+def jump(l):
+  penup()
+  forward(l)
+  pendown()
+
+length = 80
+
+for squares in range(4):
+  for sides in range(4):
+    forward(length)
+    left(90)
+  jump(length)
+  right(90)
+  jump(length)
+  left(90)
+
+done()
+```
+
+</Solution>
+
