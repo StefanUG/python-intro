@@ -3,11 +3,13 @@
 // Skulpt is loaded globally via head config in astro.config.mjs.
 interface Props {
   code: string
+  /** e.g. "codingpirates-maze" (uses the pinned defaultVersion) or "codingpirates-maze:0.4.1" (explicit override) - fetches and registers the package's Skulpt-compatible sources before running. */
+  requires?: string
 }
-const { code } = Astro.props
+const { code, requires } = Astro.props
 ---
 
-<div class="python-run not-content" data-python-run data-original={code}>
+<div class="python-run not-content" data-python-run data-original={code} data-requires={requires}>
   <div class="python-run-header">
     <span class="python-run-label">▶ Python</span>
     <button class="python-run-btn" data-action="run">Kør kode</button>
@@ -102,6 +104,83 @@ const { code } = Astro.props
     return h.toString(36)
   }
 
+  // Skulpt ships no `enum` module at all (ModuleNotFoundError) - minimal polyfill covering
+  // what codingpirates-maze needs: members, .name/.value, equality, iteration, _missing_.
+  const ENUM_POLYFILL = `
+class EnumMeta(type):
+    def __new__(mcs, name, bases, namespace):
+        member_names = []
+        for key in list(namespace.keys()):
+            if key.startswith('_'):
+                continue
+            value = namespace[key]
+            if callable(value) or isinstance(value, (staticmethod, classmethod, property)):
+                continue
+            member_names.append(key)
+
+        cls = type.__new__(mcs, name, bases, namespace)
+        cls._member_map_ = {}
+        cls._member_list_ = []
+        for key in member_names:
+            member = object.__new__(cls)
+            member._name_ = key
+            member._value_ = namespace[key]
+            setattr(cls, key, member)
+            cls._member_map_[key] = member
+            cls._member_list_.append(member)
+        return cls
+
+    def __call__(cls, value):
+        for member in cls._member_list_:
+            if member._value_ == value:
+                return member
+        missing = getattr(cls, '_missing_', None)
+        if missing is not None:
+            result = missing(value)
+            if result is not None:
+                return result
+        raise ValueError(str(value) + ' is not a valid ' + cls.__name__)
+
+    def __iter__(cls):
+        return iter(cls._member_list_)
+
+    def __len__(cls):
+        return len(cls._member_list_)
+
+
+class Enum(metaclass=EnumMeta):
+    @property
+    def name(self):
+        return self._name_
+
+    @property
+    def value(self):
+        return self._value_
+
+    def __eq__(self, other):
+        return self is other
+
+    def __ne__(self, other):
+        return self is not other
+
+    def __hash__(self):
+        return id(self)
+
+    def __repr__(self):
+        return '<' + type(self).__name__ + '.' + self._name_ + ': ' + repr(self._value_) + '>'
+
+    def __str__(self):
+        return type(self).__name__ + '.' + self._name_
+`
+
+  // Registers stdlib gaps Skulpt has no module for at all - safe/cheap to do unconditionally.
+  function ensurePolyfills(Sk: any) {
+    Sk.builtinFiles = Sk.builtinFiles || { files: {} }
+    if (!Sk.builtinFiles.files['src/lib/enum.py']) {
+      Sk.builtinFiles.files['src/lib/enum.py'] = ENUM_POLYFILL
+    }
+  }
+
   function debounce(fn: () => void, ms: number) {
     let t: ReturnType<typeof setTimeout>
     return () => { clearTimeout(t); t = setTimeout(fn, ms) }
@@ -112,6 +191,54 @@ const { code } = Astro.props
     get: (k: string) => { try { return localStorage.getItem(k) } catch { return null } },
     set: (k: string, v: string) => { try { localStorage.setItem(k, v) } catch {} },
     del: (k: string) => { try { localStorage.removeItem(k) } catch {} },
+  }
+
+  // Maps a PyPI package name to its GitHub repo + the Skulpt-importable module files it ships.
+  // Only pure-Python packages with a Skulpt-compatible resources layer (see codingpirates-maze
+  // 0.4.0+) belong here - add new entries as more libraries get Skulpt support.
+  // `defaultVersion` is used whenever an MDX page's `requires=` attribute omits a version
+  // (e.g. `requires="codingpirates-maze"`) - bump it here to upgrade every lesson at once.
+  const PACKAGE_REGISTRY: Record<string, { importName: string; githubRepo: string; modules: string[]; defaultVersion: string }> = {
+    'codingpirates-maze': {
+      importName: 'maze',
+      githubRepo: 'StefanUG/codingpirates-maze',
+      defaultVersion: '0.4.3',
+      modules: [
+        '__init__.py', 'bee.py', 'beeshape.py', 'birds.py', 'collector.py',
+        'farmer.py', 'harvester.py', 'maze.py', 'puzzle.py', 'pvz.py',
+        'resources.py', 'screencapture.py', 'zombieshape.py',
+      ],
+    },
+  }
+
+  // Fetches + registers a `requires="pypiName"` or `requires="pypiName:version"` package's
+  // sources into Skulpt exactly once per page. An omitted version falls back to the
+  // package's `defaultVersion` above, so lessons don't need to hardcode/repeat it.
+  const loadedRequires = new Map<string, Promise<void>>()
+  function ensureRequires(Sk: any, requiresAttr: string | undefined) {
+    if (!requiresAttr) return Promise.resolve()
+    const [pypiName, explicitVersion] = requiresAttr.split(':')
+    const pkg = PACKAGE_REGISTRY[pypiName]
+    if (!pkg) return Promise.reject(new Error(`Ukendt pakke: ${pypiName}`))
+    const version = explicitVersion || pkg.defaultVersion
+
+    const cacheKey = `${pypiName}@${version}`
+    let promise = loadedRequires.get(cacheKey)
+    if (!promise) {
+      const baseUrl = `https://cdn.jsdelivr.net/gh/${pkg.githubRepo}@v${version}/src/${pkg.importName}`
+      promise = Promise.all(
+        pkg.modules.map(file =>
+          fetch(`${baseUrl}/${file}`).then(res => {
+            if (!res.ok) throw new Error(`Kunne ikke hente ${file} (${res.status})`)
+            return res.text()
+          }).then(source => {
+            Sk.builtinFiles.files[`src/lib/${pkg.importName}/${file}`] = source
+          })
+        )
+      ).then(() => {})
+      loadedRequires.set(cacheKey, promise)
+    }
+    return promise
   }
 
   document.querySelectorAll<HTMLElement>('[data-python-run]').forEach(block => {
@@ -198,7 +325,7 @@ const { code } = Astro.props
       view.requestMeasure()
     })
 
-    block.querySelector('[data-action="run"]')!.addEventListener('click', () => {
+    block.querySelector('[data-action="run"]')!.addEventListener('click', async () => {
       const Sk = (window as any).Sk
       if (!Sk) return alert('Skulpt er ikke indlæst endnu – prøv igen om et øjeblik.')
 
@@ -206,14 +333,38 @@ const { code } = Astro.props
       stdout.textContent = ''
       stdout.hidden = true
 
+      try {
+        ensurePolyfills(Sk)
+        await ensureRequires(Sk, block.dataset.requires)
+      } catch (err) {
+        const span = document.createElement('span')
+        span.className = 'python-run-error-text'
+        span.textContent = String(err)
+        stdout.appendChild(span)
+        stdout.hidden = false
+        return
+      }
+
       Sk.configure({
         output: (text: string) => { stdout.textContent += text; stdout.hidden = false },
         read: (x: string) => {
           if (Sk.builtinFiles?.files[x] == null) throw `File not found: '${x}'`
           return Sk.builtinFiles.files[x]
         },
+        // Sk.configure defaults this to a nonexistent "localhost:8080" dev proxy otherwise,
+        // silently breaking any cross-origin image (e.g. our CDN-hosted assets) - the CDNs we
+        // use already serve images with CORS, so a passthrough is all that's needed.
+        imageProxy: (url: string) => url,
       })
-      Sk.TurtleGraphics = { target: turtleDiv, width: 400, height: 400 }
+      Sk.TurtleGraphics = {
+        target: turtleDiv,
+        width: 400,
+        height: 400,
+        // register_shape()/bgpic() resolve a "name" through this before fetching an Image;
+        // Maze.shapefile() already returns a full CDN URL, so a passthrough is all we need
+        // (defaults to `{}`, which silently no-ops and leaves shapes/backgrounds unset).
+        assets: (name: string) => name,
+      }
 
       Sk.misceval.asyncToPromise(() =>
         Sk.importMainWithBody('<stdin>', false, view.state.doc.toString(), true)

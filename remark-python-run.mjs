@@ -18,6 +18,15 @@ function makeImport(name, path) {
   }
 }
 
+/** Parses a fence meta string like `requires="codingpirates-maze:0.4.0"` into key/value pairs. */
+function parseMeta(meta) {
+  const attrs = {}
+  for (const match of meta.matchAll(/(\w+)="([^"]*)"/g)) {
+    attrs[match[1]] = match[2]
+  }
+  return attrs
+}
+
 /** Transforms ```python.run fences into <PythonRun> and globally injects Solution. */
 export default function remarkPythonRun() {
   return (tree) => {
@@ -31,10 +40,16 @@ export default function remarkPythonRun() {
 
     // Replace bottom-up so indices stay valid
     for (const { node, index, parent } of toReplace.reverse()) {
+      const attributes = [{ type: 'mdxJsxAttribute', name: 'code', value: node.value }]
+      if (node.meta) {
+        for (const [name, value] of Object.entries(parseMeta(node.meta))) {
+          attributes.push({ type: 'mdxJsxAttribute', name, value })
+        }
+      }
       parent.children.splice(index, 1, {
         type: 'mdxJsxFlowElement',
         name: 'PythonRun',
-        attributes: [{ type: 'mdxJsxAttribute', name: 'code', value: node.value }],
+        attributes,
         children: [],
         data: { _mdxExplicitJsx: true },
       })
