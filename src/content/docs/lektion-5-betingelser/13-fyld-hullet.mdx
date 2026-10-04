@@ -1,0 +1,67 @@
+---
+title: "13. Fyld Hullet"
+sidebar:
+  order: 13
+---
+
+## En ny ting: at fylde et hul
+
+Bonden kan ikke kun fjerne jord fra en bunke - han kan også **fylde** et hul med jord fra sin trillebør:
+
+```python
+farmer.fill()
+```
+
+:::tip[Opgave]
+Brug `remove` og `fill` til at jævne marken - fjern jord fra bunker, og fyld hullerne op.
+
+Sidder du fast? Du kan prøve at løse opgaven med blokke på [code.org](https://studio.code.org/s/coursed-2025/lessons/17/levels/2).
+
+---
+Her er de byggeklodser, du kan bruge i din kode:
+```
+farmer.forward()
+farmer.right()
+farmer.left()
+farmer.remove()
+farmer.fill()
+for i in range(5):
+    # Gør dette
+```
+
+:::
+
+<img src={import.meta.env.BASE_URL + "images/lektion-5-betingelser/13-fyld-hullet.png"} alt="13-fyld-hullet.png" class="solution-image" />
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, Farmer
+
+maze = Puzzle.from_file("courseD_farmer_while2_2025")
+farmer: Farmer = maze.player
+
+# When run
+
+
+
+# Keep this
+Puzzle.done()
+```
+
+<Solution>
+
+Gå frem til bunken og fjern den, gå videre frem til hullet og fyld det.
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, Farmer
+
+maze = Puzzle.from_file("courseD_farmer_while2_2025")
+farmer: Farmer = maze.player
+
+farmer.forward()
+for i in range(6):
+    farmer.fill()
+
+Puzzle.done()
+```
+
+</Solution>

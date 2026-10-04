@@ -1,0 +1,79 @@
+---
+title: "5. Honningtavle Dukker Op"
+sidebar:
+  order: 5
+---
+
+## En ny ting: Honningtavlen 🍯
+
+Indtil nu har bien kun samlet nektar fra blomster. Men bier laver også **honning**! Det gør de ved en **honningtavle** (*honeycomb*), som er bikubens lille lager af honning.
+
+I Python kan vi tjekke, om bien står ved en honningtavle, med `bee.at_honeycomb()` - helt ligesom vi tjekkede for en blomst med `bee.at_flower()`:
+
+![Honningtavle](https://cdn.jsdelivr.net/gh/StefanUG/codingpirates-maze@v0.4.3/src/maze/images/bee/honeycomb.gif)
+
+```python
+if bee.at_honeycomb():
+    bee.make_honey()
+```
+
+:::tip[Opgave]
+*"Nu vil jeg bare gerne lave honning."*
+
+Nogle af skyerne gemmer måske på honningtavler. Husk at tjekke, om der er en honningtavle bag hver sky! Hvis der er en honningtavle, skal bien kun lave honning **én gang**.
+
+Sidder du fast? Du kan prøve at løse opgaven med blokke på [code.org](https://studio.code.org/s/coursed-2025/lessons/16/levels/7).
+
+---
+Her er de byggeklodser, du kan bruge i din kode:
+```
+bee.forward()
+bee.right()
+bee.left()
+bee.get_nectar()
+bee.make_honey()
+if bee.at_honeycomb():
+    # Gør dette
+for i in range(???):
+    # Gør dette
+```
+
+:::
+
+<img src={import.meta.env.BASE_URL + "images/lektion-5-betingelser/05-honningtavle-dukker-op.png"} alt="05-honningtavle-dukker-op.png" class="solution-image" />
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, BeePlayer
+
+maze = Puzzle.from_file("courseD_bee_conditionals6_2025")
+bee: BeePlayer = maze.player
+
+# When run
+
+
+
+# Keep this
+Puzzle.done()
+```
+
+<Solution>
+
+Vi tjekker for en honningtavle på samme måde, som vi tjekkede for en blomst.
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, BeePlayer
+
+maze = Puzzle.from_file("courseD_bee_conditionals6_2025")
+bee: BeePlayer = maze.player
+
+for i in range(2):
+    bee.forward()
+    bee.forward()
+    if bee.at_honeycomb():
+        bee.make_honey()
+    bee.left()
+
+Puzzle.done()
+```
+
+</Solution>

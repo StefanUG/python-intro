@@ -1,0 +1,66 @@
+---
+title: "8. Saml Det Hele"
+sidebar:
+  order: 8
+---
+
+:::tip[Opgave]
+Saml al nektaren, eller lav al honningen. Du kan kun tage nektar ved blomster og lave honning ved honningtavler. Tjek ethvert sted for at se, om der er en blomst eller en honningtavle. Der vil kun nogensinde være én blomst eller én honningtavle bag hver sky.
+
+Sidder du fast? Du kan prøve at løse opgaven med blokke på [code.org](https://studio.code.org/s/coursed-2025/lessons/16/levels/12).
+
+---
+Her er de byggeklodser, du kan bruge i din kode:
+```
+bee.forward()
+bee.right()
+bee.left()
+bee.get_nectar()
+bee.make_honey()
+if bee.at_flower():
+    # Gør dette
+else:
+    # Gør ellers dette
+for i in range(???):
+    # Gør dette
+```
+
+:::
+
+<img src={import.meta.env.BASE_URL + "images/lektion-5-betingelser/08-saml-det-hele.png"} alt="08-saml-det-hele.png" class="solution-image" />
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, BeePlayer
+
+maze = Puzzle.from_file("courseD_bee_conditionals9_2025")
+bee: BeePlayer = maze.player
+
+# When run
+
+
+
+# Keep this
+Puzzle.done()
+```
+
+<Solution>
+
+Vi fortsætter med samme if/else-mønster.
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, BeePlayer
+
+maze = Puzzle.from_file("courseD_bee_conditionals9_2025")
+bee: BeePlayer = maze.player
+
+for i in range(7):
+    bee.forward()
+    if bee.at_flower():
+        bee.get_nectar()
+    else:
+        bee.make_honey()
+
+Puzzle.done()
+```
+
+</Solution>

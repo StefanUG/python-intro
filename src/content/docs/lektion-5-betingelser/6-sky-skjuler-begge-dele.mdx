@@ -1,0 +1,79 @@
+---
+title: "6. Sky Skjuler Begge Dele"
+sidebar:
+  order: 6
+---
+
+Nogle gange gemmer en sky på en blomst, andre gange på en honningtavle! Her bliver `if/else` rigtig nyttig:
+
+```python
+if bee.at_flower():
+    bee.get_nectar()
+else:
+    bee.make_honey()
+```
+
+Det betyder: "Hvis der er en blomst, så tag nektar - **ellers** (altså hvis det i stedet er en honningtavle) så lav honning."
+
+:::tip[Opgave]
+Nogle gange gemmer en sky på en blomst, andre gange på en honningtavle!
+
+Brug if/else til at tage nektar ved blomster og lave honning ved honningtavler. Husk: Hvis der er en blomst, skal bien kun tage nektar **én gang**. Hvis der er en honningtavle, skal bien kun lave honning **én gang**.
+
+Sidder du fast? Du kan prøve at løse opgaven med blokke på [code.org](https://studio.code.org/s/coursed-2025/lessons/16/levels/9).
+
+---
+Her er de byggeklodser, du kan bruge i din kode:
+```
+bee.forward()
+bee.right()
+bee.left()
+bee.get_nectar()
+bee.make_honey()
+if bee.at_flower():
+    # Gør dette
+else:
+    # Gør ellers dette
+for i in range(???):
+    # Gør dette
+```
+
+:::
+
+<img src={import.meta.env.BASE_URL + "images/lektion-5-betingelser/06-sky-skjuler-begge-dele.png"} alt="06-sky-skjuler-begge-dele.png" class="solution-image" />
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, BeePlayer
+
+maze = Puzzle.from_file("courseD_bee_conditionals7_2025")
+bee: BeePlayer = maze.player
+
+# When run
+
+
+
+# Keep this
+Puzzle.done()
+```
+
+<Solution>
+
+Vi kombinerer de to tjek med `if/else`, så det automatisk bliver det rigtige valg hver gang.
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, BeePlayer
+
+maze = Puzzle.from_file("courseD_bee_conditionals7_2025")
+bee: BeePlayer = maze.player
+
+bee.forward()
+bee.forward()
+if bee.at_flower():
+    bee.get_nectar()
+else:
+    bee.make_honey()
+
+Puzzle.done()
+```
+
+</Solution>

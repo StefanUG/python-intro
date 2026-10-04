@@ -1,0 +1,78 @@
+---
+title: "17. Fyld Alle Huller"
+sidebar:
+  order: 17
+---
+
+## En ny ting: `while farmer.at_hole():`
+
+Ligesom `at_pile()` fortæller os, om der er en bunke, fortæller `farmer.at_hole()` os, om bonden står ved et hul, der mangler jord.
+
+```python
+while farmer.at_hole():
+    farmer.fill()
+```
+
+:::tip[Opgave]
+Se på alle de huller! Hver af dem skal bruge en forskellig mængde jord.
+
+Brug `while`-løkken til nemt at fylde dem alle!
+
+Sidder du fast? Du kan prøve at løse opgaven med blokke på [code.org](https://studio.code.org/s/coursed-2025/lessons/17/levels/8).
+
+---
+Her er de byggeklodser, du kan bruge i din kode:
+```
+farmer.forward()
+farmer.right()
+farmer.left()
+farmer.remove()
+farmer.fill()
+for i in range(5): # limit: 1
+    # Gør dette
+while farmer.at_hole():
+    # Gør dette
+```
+
+:::
+
+<img src={import.meta.env.BASE_URL + "images/lektion-5-betingelser/17-fyld-alle-huller.png"} alt="17-fyld-alle-huller.png" class="solution-image" />
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, Farmer
+
+maze = Puzzle.from_file("courseD_farmer_while6_2025")
+farmer: Farmer = maze.player
+
+# When run
+
+
+
+# Keep this
+Puzzle.done()
+```
+
+<Solution>
+
+Farmer går frem, fylder hullet, drejer, går frem igen og fylder endnu et hul - gentaget 3 gange.
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, Farmer
+
+maze = Puzzle.from_file("courseD_farmer_while6_2025")
+farmer: Farmer = maze.player
+
+for i in range(3):
+    farmer.forward()
+    while farmer.at_hole():
+        farmer.fill()
+    farmer.right()
+    farmer.forward()
+    while farmer.at_hole():
+        farmer.fill()
+    farmer.left()
+
+Puzzle.done()
+```
+
+</Solution>

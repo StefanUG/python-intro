@@ -1,0 +1,69 @@
+---
+title: "4. Øv Mere Nektar"
+sidebar:
+  order: 4
+---
+
+Endnu en bane med blomster gemt forskellige steder. Brug det, du har lært, til at løse den.
+
+:::tip[Opgave]
+Tag al nektaren fra blomsterne.
+
+Sidder du fast? Du kan prøve at løse opgaven med blokke på [code.org](https://studio.code.org/s/coursed-2025/lessons/16/levels/6).
+
+---
+Her er de byggeklodser, du kan bruge i din kode:
+```
+bee.forward()
+bee.right()
+bee.left()
+bee.get_nectar()
+bee.make_honey()
+if bee.at_flower():
+    # Gør dette
+for i in range(???):
+    # Gør dette
+```
+
+:::
+
+<img src={import.meta.env.BASE_URL + "images/lektion-5-betingelser/04-oev-mere-nektar.png"} alt="04-oev-mere-nektar.png" class="solution-image" />
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, BeePlayer
+
+maze = Puzzle.from_file("courseD_bee_conditionals5_2025")
+bee: BeePlayer = maze.player
+
+# When run
+
+
+
+# Keep this
+Puzzle.done()
+```
+
+<Solution>
+
+Bien går frem i to rækker af 6 felter og tjekker for en blomst hver gang, og drejer rundt mellem rækkerne.
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, BeePlayer
+
+maze = Puzzle.from_file("courseD_bee_conditionals5_2025")
+bee: BeePlayer = maze.player
+
+for i in range(2):
+    for i in range(6):
+        bee.forward()
+        if bee.at_flower():
+            bee.get_nectar()
+    bee.left()
+    bee.forward()
+    bee.forward()
+    bee.left()
+
+Puzzle.done()
+```
+
+</Solution>

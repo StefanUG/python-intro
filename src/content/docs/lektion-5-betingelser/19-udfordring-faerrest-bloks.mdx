@@ -1,0 +1,72 @@
+---
+title: "19. Udfordring: Færrest Bloks"
+sidebar:
+  order: 19
+---
+
+Nu kombinerer vi det hele: følg stien med `while farmer.path_ahead():`, og fyld huller undervejs med `while farmer.at_hole():`.
+
+:::tip[Udfordring]
+Fyld alle hullerne ved hjælp af så få byggeklodser som muligt.
+
+Sidder du fast? Du kan prøve at løse opgaven med blokke på [code.org](https://studio.code.org/s/coursed-2025/lessons/17/levels/10).
+
+---
+Her er de byggeklodser, du kan bruge i din kode:
+```
+farmer.forward()
+farmer.right()
+farmer.left()
+farmer.remove()
+farmer.fill()
+for i in range(5):
+    # Gør dette
+while farmer.path_ahead():
+    # Gør dette
+while farmer.at_hole():
+    # Gør dette
+```
+
+:::
+
+<img src={import.meta.env.BASE_URL + "images/lektion-5-betingelser/19-udfordring-faerrest-bloks.png"} alt="19-udfordring-faerrest-bloks.png" class="solution-image" />
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, Farmer
+
+maze = Puzzle.from_file("courseD_farmer_while8_2025")
+farmer: Farmer = maze.player
+
+# When run
+
+
+
+# Keep this
+Puzzle.done()
+```
+
+:::tip[Hint]
+Sæt `while farmer.at_hole(): farmer.fill()` inde i din `while farmer.path_ahead():`-løkke.
+:::
+
+<Solution>
+
+Vi sætter den ene `while`-løkke inde i den anden: den ydre går stien igennem, den indre fylder hvert hul helt op.
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, Farmer
+
+maze = Puzzle.from_file("courseD_farmer_while8_2025")
+farmer: Farmer = maze.player
+
+for i in range(6):
+    while farmer.path_ahead():
+        farmer.forward()
+    while farmer.at_hole():
+        farmer.fill()
+    farmer.right()
+
+Puzzle.done()
+```
+
+</Solution>

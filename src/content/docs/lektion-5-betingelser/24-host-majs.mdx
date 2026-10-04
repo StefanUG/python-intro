@@ -1,0 +1,74 @@
+---
+title: "24. Høst Majs"
+sidebar:
+  order: 24
+---
+
+## Mød høstmanden 🌽
+
+Endnu en ny karakter! Høstmanden går rundt på marken og høster majs i stedet for at fjerne jord:
+
+```python
+farmer.forward()
+farmer.right()
+farmer.left()
+farmer.pick_corn() # høster majs
+```
+
+:::tip[Opgave]
+*"Jeg har brug for hjælp på gården! Hjælp mig med at høste denne majs ved kun at bruge klodserne i din værktøjskasse."*
+
+Sidder du fast? Du kan prøve at løse opgaven med blokke på [code.org](https://studio.code.org/s/coursed-2025/lessons/16/levels/17).
+
+---
+Her er de byggeklodser, du kan bruge i din kode:
+```
+farmer.forward()
+farmer.right()
+farmer.left()
+farmer.pick_corn()
+for i in range(5):
+    # Gør dette
+```
+
+:::
+
+<img src={import.meta.env.BASE_URL + "images/lektion-5-betingelser/24-host-majs.png"} alt="24-host-majs.png" class="solution-image" />
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, Harvester
+
+maze = Puzzle.from_file("CourseD_2022_LessonExtra14b_2025")
+farmer: Harvester = maze.player
+
+# When run
+
+
+
+# Keep this
+Puzzle.done()
+```
+
+<Solution>
+
+Høstmanden går rundt om hver majsplante (frem, drej, frem, drej) og høster så 5 majs, gentaget 3 gange.
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, Harvester
+
+maze = Puzzle.from_file("CourseD_2022_LessonExtra14b_2025")
+farmer: Harvester = maze.player
+
+for i in range(3):
+    for i in range(2):
+        farmer.forward()
+        farmer.left()
+        farmer.forward()
+        farmer.right()
+    for i in range(5):
+        farmer.pick_corn()
+
+Puzzle.done()
+```
+
+</Solution>

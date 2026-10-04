@@ -1,0 +1,65 @@
+---
+title: "14. Færrest Mulige Bloks"
+sidebar:
+  order: 14
+---
+
+:::tip[Opgave]
+*"Gå hen til jordbunken, og fortæl mig, hvor mange skovlfulde jeg skal fjerne."*
+
+Brug så få byggeklodser som muligt til at løse denne opgave.
+
+Sidder du fast? Du kan prøve at løse opgaven med blokke på [code.org](https://studio.code.org/s/coursed-2025/lessons/17/levels/3).
+
+---
+Her er de byggeklodser, du kan bruge i din kode:
+```
+farmer.forward()
+farmer.right()
+farmer.left()
+farmer.remove()
+farmer.fill()
+for i in range(5):
+    # Gør dette
+```
+
+:::
+
+<img src={import.meta.env.BASE_URL + "images/lektion-5-betingelser/14-faerrest-mulige-bloks.png"} alt="14-faerrest-mulige-bloks.png" class="solution-image" />
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, Farmer
+
+maze = Puzzle.from_file("courseD_farmer_while3_2025")
+farmer: Farmer = maze.player
+
+# When run
+
+
+
+# Keep this
+Puzzle.done()
+```
+
+:::tip[Hint]
+Brug en `for`-løkke med `farmer.remove()` i stedet for at skrive linjen flere gange.
+:::
+
+<Solution>
+
+I stedet for at skrive `farmer.remove()` mange gange, bruger vi en `for`-løkke, der gentager det det rigtige antal gange.
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, Farmer
+
+maze = Puzzle.from_file("courseD_farmer_while3_2025")
+farmer: Farmer = maze.player
+
+farmer.forward()
+for i in range(10):
+    farmer.remove()
+
+Puzzle.done()
+```
+
+</Solution>

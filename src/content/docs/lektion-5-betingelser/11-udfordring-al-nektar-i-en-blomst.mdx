@@ -1,0 +1,86 @@
+---
+title: "11. Udfordring: Al Nektar i Én Blomst"
+sidebar:
+  order: 11
+---
+
+## En ny ting at tjekke: hvor meget nektar er der tilbage?
+
+Nogle blomster har mere end én nektar i sig! `bee.nectar()` fortæller os, **hvor mange** nektar der er tilbage i blomsten lige nu - det er ikke sandt/falsk, men et tal (f.eks. 0, 1, 2, 3...).
+
+Vi kan bruge det sammen med `while` til at blive ved med at tage nektar, **så længe** der er mere tilbage:
+
+```python
+while bee.nectar() > 0:
+    bee.get_nectar()
+```
+
+Det betyder: "Så længe der er mere end 0 nektar tilbage i blomsten, så tag nektar." Når blomsten er tom, stopper løkken helt af sig selv.
+
+:::tip[Udfordring]
+Saml al nektaren, og lav al honningen. Du kan tage al nektaren i én blomst ved at bruge `while nectar > 0`-løkken.
+
+Sidder du fast? Du kan prøve at løse opgaven med blokke på [code.org](https://studio.code.org/s/coursed-2025/lessons/16/levels/15).
+
+---
+Her er de byggeklodser, du kan bruge i din kode:
+```
+bee.forward()
+bee.right()
+bee.left()
+bee.get_nectar() # limit: 1
+bee.make_honey() # limit: 1
+while bee.nectar() > 0:
+    # Gør dette
+while bee.path_ahead():
+    # Gør dette
+for i in range(???):
+    # Gør dette
+```
+
+:::
+
+<img src={import.meta.env.BASE_URL + "images/lektion-5-betingelser/11-udfordring-al-nektar-i-en-blomst.png"} alt="11-udfordring-al-nektar-i-en-blomst.png" class="solution-image" />
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, BeePlayer
+
+maze = Puzzle.from_file("courseD_bee_conditionals_challenge2_2025")
+bee: BeePlayer = maze.player
+
+# When run
+
+
+
+# Keep this
+Puzzle.done()
+```
+
+:::tip[Hint]
+`get_nectar()` må kun stå én gang i koden. Sæt den inde i `while bee.nectar() > 0:`, og pak det hele ind i et `while bee.path_ahead():` for at komme hele vejen rundt.
+:::
+
+<Solution>
+
+Først tømmer bien al nektaren række for række med `while bee.nectar() > 0:`, og efter at have drejet, laver den al honningen med `while bee.honey() > 0:` (ligesom `nectar()`, fortæller `bee.honey()` hvor meget honning der stadig mangler at blive lavet).
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, BeePlayer
+
+maze = Puzzle.from_file("courseD_bee_conditionals_challenge2_2025")
+bee: BeePlayer = maze.player
+
+while bee.path_ahead():
+    bee.forward()
+    while bee.nectar() > 0:
+        bee.get_nectar()
+bee.right()
+while bee.path_ahead():
+    bee.forward()
+    while bee.honey() > 0:
+        bee.make_honey()
+
+Puzzle.done()
+```
+
+</Solution>

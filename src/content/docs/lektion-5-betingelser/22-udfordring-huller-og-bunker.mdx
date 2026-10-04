@@ -1,0 +1,76 @@
+---
+title: "22. Udfordring: Huller og Bunker"
+sidebar:
+  order: 22
+---
+
+Den sidste og sværeste bane! Her er der både bunker og huller spredt ud ad stien, og du har kun lov til at bruge få byggeklodser.
+
+:::tip[Udfordring]
+Fyld alle hullerne, og fjern alle bunkerne.
+
+Sidder du fast? Du kan prøve at løse opgaven med blokke på [code.org](https://studio.code.org/s/coursed-2025/lessons/17/levels/14).
+
+---
+Her er de byggeklodser, du kan bruge i din kode:
+```
+farmer.forward() # limit: 2
+farmer.backward() # limit: 2
+farmer.right()
+farmer.left()
+farmer.remove() # limit: 1
+farmer.fill() # limit: 1
+for i in range(5):
+    # Gør dette
+while farmer.path_ahead():
+    # Gør dette
+while farmer.at_hole():
+    # Gør dette
+```
+
+:::
+
+<img src={import.meta.env.BASE_URL + "images/lektion-5-betingelser/22-udfordring-huller-og-bunker.png"} alt="22-udfordring-huller-og-bunker.png" class="solution-image" />
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, Farmer
+
+maze = Puzzle.from_file("courseD_farmer_while_challenge1_2025")
+farmer: Farmer = maze.player
+
+# When run
+
+
+
+# Keep this
+Puzzle.done()
+```
+
+:::tip[Hint]
+Du kan også bruge `while farmer.at_pile():` ligesom `while farmer.at_hole():` - kombiner dem begge inde i din `while farmer.path_ahead():`-løkke.
+:::
+
+<Solution>
+
+Farmer følger stien så langt den kan, går ét skridt tilbage igen, fylder hullet og fjerner bunken der, og drejer, før den fortsætter.
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, Farmer
+
+maze = Puzzle.from_file("courseD_farmer_while_challenge1_2025")
+farmer: Farmer = maze.player
+
+while farmer.path_ahead():
+    while farmer.path_ahead():
+        farmer.forward()
+    farmer.backward()
+    while farmer.at_hole():
+        farmer.fill()
+    while farmer.at_pile():
+        farmer.remove()
+    farmer.right()
+
+Puzzle.done()
+```
+
+</Solution>

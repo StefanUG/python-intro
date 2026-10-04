@@ -24,6 +24,7 @@ export default defineConfig({
         { label: 'Lektion 2', items: [{ autogenerate: { directory: 'lektion-2' } }] },
         { label: 'Lektion 3', items: [{ autogenerate: { directory: 'lektion-3' } }] },
         { label: 'Lektion 4 – Variabler', items: [{ autogenerate: { directory: 'lektion-4-variabler' } }] },
+        { label: 'Lektion 5 – Betingelser', items: [{ autogenerate: { directory: 'lektion-5-betingelser' } }] },
       ],
       customCss: ['./src/styles/custom.css'],
     }),

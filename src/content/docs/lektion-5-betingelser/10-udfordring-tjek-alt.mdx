@@ -1,0 +1,89 @@
+---
+title: "10. Udfordring: Tjek Alt"
+sidebar:
+  order: 10
+---
+
+## En ny løkke: `while bee.path_ahead():`
+
+Indtil nu har vi brugt `for i in range(???):` når vi vidste, hvor mange gange vi skulle gentage noget. Men hvad hvis vi **ikke ved**, hvor lang banen er?
+
+Her kommer `while` ind i billedet. En `while`-løkke gentager, **så længe** noget er sandt:
+
+```python
+while bee.path_ahead():
+    # gør dette, så længe der er mere vej forude
+    bee.forward()
+```
+
+Det betyder: "Så længe der er mere sti foran bien, så bliv ved med at gå fremad." Så snart der ikke er mere sti, stopper løkken automatisk - uanset hvor lang banen er!
+
+:::tip[Udfordring]
+Saml al nektaren, og lav al honningen. Du kan kun tage nektar ved blomster og lave honning ved honningtavler. Tjek hvert felt for at se, om der er en blomst eller en honningtavle.
+
+Sidder du fast? Du kan prøve at løse opgaven med blokke på [code.org](https://studio.code.org/s/coursed-2025/lessons/16/levels/14).
+
+---
+Her er de byggeklodser, du kan bruge i din kode:
+```
+bee.forward()
+bee.right()
+bee.left()
+bee.get_nectar()
+bee.make_honey()
+if bee.at_flower():
+    # Gør dette
+else:
+    # Gør ellers dette
+while bee.path_ahead():
+    # Gør dette
+for i in range(???):
+    # Gør dette
+```
+
+:::
+
+<img src={import.meta.env.BASE_URL + "images/lektion-5-betingelser/10-udfordring-tjek-alt.png"} alt="10-udfordring-tjek-alt.png" class="solution-image" />
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, BeePlayer
+
+maze = Puzzle.from_file("courseD_bee_conditionals_challenge1_2025")
+bee: BeePlayer = maze.player
+
+# When run
+
+
+
+# Keep this
+Puzzle.done()
+```
+
+:::tip[Hint]
+Brug `while bee.path_ahead():` i stedet for en `for`-løkke, så du ikke behøver vide, hvor lang banen er.
+:::
+
+<Solution>
+
+For hver af de 7 rækker følger bien stien med `while path_ahead()`, tjekker if/else (blomst eller honningtavle) ved hvert felt, og drejer til sidst om til næste række.
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, BeePlayer
+
+maze = Puzzle.from_file("courseD_bee_conditionals_challenge1_2025")
+bee: BeePlayer = maze.player
+
+for i in range(7):
+    while bee.path_ahead():
+        if bee.at_flower():
+            bee.get_nectar()
+        else:
+            if bee.at_honeycomb():
+                bee.make_honey()
+        bee.forward()
+    bee.right()
+
+Puzzle.done()
+```
+
+</Solution>

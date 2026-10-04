@@ -1,0 +1,72 @@
+---
+title: "18. Følg Stien"
+sidebar:
+  order: 18
+---
+
+## En ny ting: `while farmer.path_ahead():`
+
+Vi kender allerede `path_ahead()` fra bien - den virker på samme måde for bonden. Den fortæller os, om der stadig er mere sti foran, så vi kan gå hele vejen uden at vide, hvor lang stien er:
+
+```python
+while farmer.path_ahead():
+    farmer.forward()
+```
+
+:::tip[Opgave]
+Følg stien hele vejen ved hjælp af en `while`-løkke.
+
+Sidder du fast? Du kan prøve at løse opgaven med blokke på [code.org](https://studio.code.org/s/coursed-2025/lessons/17/levels/9).
+
+---
+Her er de byggeklodser, du kan bruge i din kode:
+```
+farmer.forward() # limit: 1
+farmer.right()
+farmer.left()
+farmer.remove()
+farmer.fill()
+for i in range(5): # limit: 1
+    # Gør dette
+while farmer.path_ahead():
+    # Gør dette
+```
+
+:::
+
+<img src={import.meta.env.BASE_URL + "images/lektion-5-betingelser/18-foelg-stien.png"} alt="18-foelg-stien.png" class="solution-image" />
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, Farmer
+
+maze = Puzzle.from_file("courseD_farmer_while7_2025")
+farmer: Farmer = maze.player
+
+# When run
+
+
+
+# Keep this
+Puzzle.done()
+```
+
+<Solution>
+
+Følg stien til enden, fyld hullet, og drej - gentaget 4 gange.
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, Farmer
+
+maze = Puzzle.from_file("courseD_farmer_while7_2025")
+farmer: Farmer = maze.player
+
+for i in range(4):
+    while farmer.path_ahead():
+        farmer.forward()
+    farmer.fill()
+    farmer.left()
+
+Puzzle.done()
+```
+
+</Solution>

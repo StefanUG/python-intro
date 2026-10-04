@@ -1,0 +1,72 @@
+---
+title: "9. Uden Skyer"
+sidebar:
+  order: 9
+---
+
+Denne gang er der ingen skyer, så du kan se præcis, hvor blomsterne og honningtavlerne er. Men conditionals er stadig nyttige, selvom du kender svaret på forhånd!
+
+:::tip[Opgave]
+Conditionals kan være nyttige, selv når du kender præcis, hvad der er i hvert felt!
+
+Saml al nektaren, og lav al honningen.
+
+Sidder du fast? Du kan prøve at løse opgaven med blokke på [code.org](https://studio.code.org/s/coursed-2025/lessons/16/levels/13).
+
+---
+Her er de byggeklodser, du kan bruge i din kode:
+```
+bee.forward()
+bee.right()
+bee.left()
+bee.get_nectar() # limit: 1
+bee.make_honey() # limit: 1
+if bee.at_flower():
+    # Gør dette
+else:
+    # Gør ellers dette
+for i in range(???):
+    # Gør dette
+```
+
+:::
+
+<img src={import.meta.env.BASE_URL + "images/lektion-5-betingelser/09-uden-skyer.png"} alt="09-uden-skyer.png" class="solution-image" />
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, BeePlayer
+
+maze = Puzzle.from_file("courseD_bee_conditionals10_2025")
+bee: BeePlayer = maze.player
+
+# When run
+
+
+
+# Keep this
+Puzzle.done()
+```
+
+:::tip[Hint]
+`get_nectar()` og `make_honey()` må begge kun bruges én gang i koden - brug `if/else` inde i en `for`-løkke.
+:::
+
+<Solution>
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, BeePlayer
+
+maze = Puzzle.from_file("courseD_bee_conditionals10_2025")
+bee: BeePlayer = maze.player
+
+for i in range(7):
+    bee.forward()
+    if bee.at_flower():
+        bee.get_nectar()
+    else:
+        bee.make_honey()
+
+Puzzle.done()
+```
+
+</Solution>

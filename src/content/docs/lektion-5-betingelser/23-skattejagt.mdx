@@ -1,0 +1,78 @@
+---
+title: "23. Skattejagt"
+sidebar:
+  order: 23
+---
+
+## Mød skattejægeren 💰
+
+En ny karakter! Skattejægeren kan gå rundt ligesom bien og bonden, men i stedet for nektar eller jord, samler den **skatte**:
+
+```python
+collector.forward()
+collector.right()
+collector.left()
+collector.collect() # samler en skattekiste op
+```
+
+:::tip[Opgave]
+*"Lad os gå på skattejagt - ved hjælp af løkker!"*
+
+Hjælp skattejægeren med at nå mindst to bunker skatte ved kun at bruge klodserne i din værktøjskasse. Det er muligt at samle alle 4.
+
+Sidder du fast? Du kan prøve at løse opgaven med blokke på [code.org](https://studio.code.org/s/coursed-2025/lessons/16/levels/16).
+
+---
+Her er de byggeklodser, du kan bruge i din kode:
+```
+collector.forward() # limit: 3
+collector.right()
+collector.left()
+for i in range(???):
+    # Gør dette
+collector.collect() # limit: 2
+```
+
+:::
+
+<img src={import.meta.env.BASE_URL + "images/lektion-5-betingelser/23-skattejagt.png"} alt="23-skattejagt.png" class="solution-image" />
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, Collector
+
+maze = Puzzle.from_file("CourseD_2022LessonExtra14a_2025")
+collector: Collector = maze.player
+
+# When run
+
+
+
+# Keep this
+Puzzle.done()
+```
+
+<Solution>
+
+Skattejægeren går frem til første skat, drejer, og samler så 2 skatte mere ved at gå frem-drej-frem imellem hver.
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, Collector
+
+maze = Puzzle.from_file("CourseD_2022LessonExtra14a_2025")
+collector: Collector = maze.player
+
+for i in range(3):
+    collector.forward()
+collector.left()
+for i in range(3):
+    collector.collect()
+    for i in range(3):
+        collector.forward()
+    collector.left()
+    for i in range(3):
+        collector.forward()
+
+Puzzle.done()
+```
+
+</Solution>

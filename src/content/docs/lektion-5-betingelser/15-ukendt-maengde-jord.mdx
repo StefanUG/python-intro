@@ -1,0 +1,72 @@
+---
+title: "15. Ukendt Mængde Jord"
+sidebar:
+  order: 15
+---
+
+## En ny løkke: `while farmer.at_pile():`
+
+Denne gang ved vi ikke, hvor meget jord der er i bunken! Heldigvis kan bonden selv tjekke, om han stadig står ved en bunke, med `farmer.at_pile()`.
+
+Vi bruger det sammen med `while`, så bonden bliver ved med at fjerne jord, **så længe** der stadig er en bunke:
+
+```python
+while farmer.at_pile():
+    farmer.remove()
+```
+
+:::tip[Opgave]
+*"Jeg ved ikke, hvor meget jord der er i den her bunke!"*
+
+Hjælp bonden med at fjerne hele bunken ved hjælp af en `while`-løkke.
+
+Sidder du fast? Du kan prøve at løse opgaven med blokke på [code.org](https://studio.code.org/s/coursed-2025/lessons/17/levels/6).
+
+---
+Her er de byggeklodser, du kan bruge i din kode:
+```
+farmer.forward()
+farmer.right()
+farmer.left()
+farmer.remove()
+farmer.fill()
+for i in range(5):
+    # Gør dette
+while farmer.at_pile():
+    # Gør dette
+```
+
+:::
+
+<img src={import.meta.env.BASE_URL + "images/lektion-5-betingelser/15-ukendt-maengde-jord.png"} alt="15-ukendt-maengde-jord.png" class="solution-image" />
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, Farmer
+
+maze = Puzzle.from_file("courseD_farmer_while4_2025")
+farmer: Farmer = maze.player
+
+# When run
+
+
+
+# Keep this
+Puzzle.done()
+```
+
+<Solution>
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, Farmer
+
+maze = Puzzle.from_file("courseD_farmer_while4_2025")
+farmer: Farmer = maze.player
+
+farmer.forward()
+while farmer.at_pile():
+    farmer.remove()
+
+Puzzle.done()
+```
+
+</Solution>

@@ -1,0 +1,70 @@
+---
+title: "7. Udfordring: Blomst Eller Honning"
+sidebar:
+  order: 7
+---
+
+:::tip[Udfordring]
+Der vil være enten en blomst eller en honningtavle under hver af skyerne!
+
+Tag nektar **én gang**, hvis der er en blomst. Ellers skal du lave honning **én gang** (fordi der er en honningtavle).
+
+Sidder du fast? Du kan prøve at løse opgaven med blokke på [code.org](https://studio.code.org/s/coursed-2025/lessons/16/levels/11).
+
+---
+Her er de byggeklodser, du kan bruge i din kode:
+```
+bee.forward()
+bee.right()
+bee.left()
+bee.get_nectar()
+bee.make_honey()
+if bee.at_flower():
+    # Gør dette
+else:
+    # Gør ellers dette
+for i in range(???):
+    # Gør dette
+```
+
+:::
+
+<img src={import.meta.env.BASE_URL + "images/lektion-5-betingelser/07-udfordring-blomst-eller-honning.png"} alt="07-udfordring-blomst-eller-honning.png" class="solution-image" />
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, BeePlayer
+
+maze = Puzzle.from_file("courseD_bee_conditionals8_2025")
+bee: BeePlayer = maze.player
+
+# When run
+
+
+
+# Keep this
+Puzzle.done()
+```
+
+<Solution>
+
+Bien går 3 felter frem, tjekker if/else, og drejer - gentaget 4 gange.
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, BeePlayer
+
+maze = Puzzle.from_file("courseD_bee_conditionals8_2025")
+bee: BeePlayer = maze.player
+
+for i in range(4):
+    for i in range(3):
+        bee.forward()
+    if bee.at_flower():
+        bee.get_nectar()
+    else:
+        bee.make_honey()
+    bee.right()
+
+Puzzle.done()
+```
+
+</Solution>

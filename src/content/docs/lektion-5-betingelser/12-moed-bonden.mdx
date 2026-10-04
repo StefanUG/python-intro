@@ -1,0 +1,71 @@
+---
+title: "12. Mød Bonden"
+sidebar:
+  order: 12
+---
+
+## Mød bonden 👨‍🌾
+
+Nu skal vi hjælpe en bonde med at gøre marken klar til at så korn. I Python kan vi skrive:
+
+```python
+farmer.forward()
+farmer.right()
+farmer.left()
+farmer.remove() # fjerner en skovlfuld jord fra en bunke
+```
+
+:::tip[Opgave]
+*"Hej, jeg er bonden. Jeg har brug for din hjælp til at jævne marken, så den er klar til at så korn!"*
+
+Gå hen til bunken med jord, og brug `remove`-blokken til at fjerne den.
+
+Sidder du fast? Du kan prøve at løse opgaven med blokke på [code.org](https://studio.code.org/s/coursed-2025/lessons/17/levels/1).
+
+---
+Her er de byggeklodser, du kan bruge i din kode:
+```
+farmer.forward() # limit: 1
+farmer.right()
+farmer.left()
+farmer.remove()
+for i in range(5):
+    # Gør dette
+```
+
+:::
+
+<img src={import.meta.env.BASE_URL + "images/lektion-5-betingelser/12-moed-bonden.png"} alt="12-moed-bonden.png" class="solution-image" />
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, Farmer
+
+maze = Puzzle.from_file("courseD_farmer_while1_2025")
+farmer: Farmer = maze.player
+
+# When run
+
+
+
+# Keep this
+Puzzle.done()
+```
+
+<Solution>
+
+Gå 4 felter frem til bunken, og fjern den.
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, Farmer
+
+maze = Puzzle.from_file("courseD_farmer_while1_2025")
+farmer: Farmer = maze.player
+
+for i in range(4):
+    farmer.forward()
+farmer.remove()
+
+Puzzle.done()
+```
+
+</Solution>
