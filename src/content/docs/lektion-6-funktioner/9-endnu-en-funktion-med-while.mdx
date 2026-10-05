@@ -1,0 +1,69 @@
+---
+title: "9. Endnu en Funktion Med While"
+sidebar:
+  order: 9
+---
+
+:::tip[Opgave]
+Lav funktionen `get_all_nectar()`, der tager al nektaren fra én blomst, og brug den undervejs på stien.
+
+Sidder du fast? Du kan prøve at løse opgaven med blokke på [code.org](https://studio.code.org/s/coursee-2017/lessons/17/levels/11).
+
+---
+Her er de byggeklodser, du kan bruge i din kode:
+```
+bee.forward()
+bee.right()
+bee.left()
+bee.get_nectar()
+while bee.nectar() > 0:
+    # Gør dette
+get_all_nectar()
+```
+:::
+
+<img src={import.meta.env.BASE_URL + "images/lektion-6-funktioner/09-endnu-en-funktion-med-while.png"} alt="09-endnu-en-funktion-med-while.png" class="solution-image" />
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, BeePlayer
+
+maze = Puzzle.from_file("courseE_bee_functions9")
+bee: BeePlayer = maze.player
+
+def get_all_nectar():
+
+
+# When run
+
+
+
+# Keep this
+Puzzle.done()
+```
+
+<Solution>
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, BeePlayer
+
+maze = Puzzle.from_file("courseE_bee_functions9")
+bee: BeePlayer = maze.player
+
+def get_all_nectar():
+    while bee.nectar() > 0:
+        bee.get_nectar()
+
+bee.forward()
+get_all_nectar()
+bee.right()
+bee.forward()
+bee.forward()
+get_all_nectar()
+for i in range(3):
+    bee.forward()
+get_all_nectar()
+
+Puzzle.done()
+```
+
+</Solution>

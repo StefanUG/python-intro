@@ -1,0 +1,98 @@
+---
+title: "1. Intro til Funktioner"
+sidebar:
+  order: 1
+---
+
+Nu skal vi lære om **funktioner** - en af de vigtigste ting i programmering!
+
+## Hvad er en funktion?
+
+En funktion er en genbrugelig samling af kodelinjer, som du kan give et navn og bruge igen og igen. I stedet for at skrive de samme linjer mange gange, skriver du dem **én gang** inde i en funktion - og kalder så bare funktionen, når du har brug for den.
+
+I Python laver man en funktion med `def` (kort for "define"):
+
+```python
+def sig_hej():
+    print("Hej!")
+```
+
+Og man bruger (kalder) funktionen ved at skrive dens navn med parenteser:
+
+```python
+sig_hej()
+```
+
+**HUSK:** Ligesom med `if` og løkker skal der være kolon `:` efter funktionsnavnet, og alt det, funktionen skal gøre, skal rykkes ind.
+
+## Mød bien igen 🐝
+
+I denne lektion skal vi bruge bien igen, og give den sine egne funktioner. Du kender allerede:
+
+```python
+bee.forward()
+bee.right()
+bee.left()
+bee.get_nectar()
+bee.make_honey()
+```
+
+:::tip[Opgave]
+Saml al nektaren fra blomsterne.
+
+Sidder du fast? Du kan prøve at løse opgaven med blokke på [code.org](https://studio.code.org/s/coursee-2017/lessons/17/levels/1).
+
+---
+Her er de byggeklodser, du kan bruge i din kode:
+```
+bee.forward()
+bee.right()
+bee.left()
+bee.get_nectar()
+for i in range(???):
+    # Gør dette
+```
+:::
+
+<img src={import.meta.env.BASE_URL + "images/lektion-6-funktioner/01-intro-funktioner.png"} alt="01-intro-funktioner.png" class="solution-image" />
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, BeePlayer
+
+maze = Puzzle.from_file("courseE_bee_functions1")
+bee: BeePlayer = maze.player
+
+# When run
+
+
+
+# Keep this
+Puzzle.done()
+```
+
+<Solution>
+
+Her har vi endnu ikke brug for en funktion - vi samler bare nektar i to omgange med en tur ind imellem.
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, BeePlayer
+
+maze = Puzzle.from_file("courseE_bee_functions1")
+bee: BeePlayer = maze.player
+
+for i in range(3):
+    bee.forward()
+for i in range(3):
+    bee.get_nectar()
+bee.right()
+bee.forward()
+bee.right()
+for i in range(2):
+    bee.forward()
+for i in range(3):
+    bee.get_nectar()
+
+Puzzle.done()
+```
+
+</Solution>

@@ -1,0 +1,76 @@
+---
+title: "5. Udvid Funktionen"
+sidebar:
+  order: 5
+---
+
+Nu skal du selv skrive en funktion, der ligner den fra sidste opgave, men som samler **4** nektar i stedet for 1.
+
+:::tip[Opgave]
+Byg funktionen `move_and_get_4()`, og brug den til at samle al nektaren.
+
+Sidder du fast? Du kan prøve at løse opgaven med blokke på [code.org](https://studio.code.org/s/coursee-2017/lessons/17/levels/6).
+
+---
+Her er de byggeklodser, du kan bruge i din kode:
+```
+bee.forward()
+bee.left() # limit: 2
+bee.right() # limit: 2
+bee.get_nectar() # limit: 1
+for i in range(???):
+    # Gør dette
+move_and_get_4()
+```
+:::
+
+<img src={import.meta.env.BASE_URL + "images/lektion-6-funktioner/05-udvid-funktionen.png"} alt="05-udvid-funktionen.png" class="solution-image" />
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, BeePlayer
+
+maze = Puzzle.from_file("courseE_bee_functions5")
+bee: BeePlayer = maze.player
+
+def move_and_get_4():
+
+
+# When run
+
+
+
+# Keep this
+Puzzle.done()
+```
+
+:::tip[Hint]
+Ligesom `move_and_get_nectar()` skal `move_and_get_4()` dreje, flyve frem, samle nektar (denne gang 4 gange med en løkke), og flyve tilbage.
+:::
+
+<Solution>
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, BeePlayer
+
+maze = Puzzle.from_file("courseE_bee_functions5")
+bee: BeePlayer = maze.player
+
+def move_and_get_4():
+    bee.right()
+    bee.forward()
+    for i in range(4):
+        bee.get_nectar()
+    bee.backward()
+    bee.left()
+
+bee.forward()
+move_and_get_4()
+bee.forward()
+for i in range(2):
+    bee.forward()
+    move_and_get_4()
+
+Puzzle.done()
+```
+
+</Solution>

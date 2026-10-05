@@ -1,0 +1,68 @@
+---
+title: "20. Genbrug Firkant-funktionen"
+sidebar:
+  order: 20
+---
+
+:::tip[Opgave]
+Brug `garden_square()` to gange med en drejning imellem for at høste begge bede.
+
+Sidder du fast? Du kan prøve at løse opgaven med blokke på [code.org](https://studio.code.org/s/coursee-2024/lessons/17/levels/9).
+
+---
+Her er de byggeklodser, du kan bruge i din kode:
+```
+farmer.forward()
+farmer.right()
+garden_square()
+```
+:::
+
+<img src={import.meta.env.BASE_URL + "images/lektion-6-funktioner/20-genbrug-firkant-funktionen.png"} alt="20-genbrug-firkant-funktionen.png" class="solution-image" />
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, Harvester
+
+maze = Puzzle.from_file("courseE_farmer_functions8a1_2024")
+farmer: Harvester = maze.player
+
+def garden_square():
+    for i in range(4):
+        farmer.forward()
+        farmer.pick_lettuce()
+        farmer.forward()
+        farmer.right()
+
+# When run
+
+
+
+# Keep this
+Puzzle.done()
+```
+
+<Solution>
+
+Vi genbruger den samme `garden_square()`-funktion - det er hele pointen med funktioner!
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, Harvester
+
+maze = Puzzle.from_file("courseE_farmer_functions8a1_2024")
+farmer: Harvester = maze.player
+
+def garden_square():
+    for i in range(4):
+        farmer.forward()
+        farmer.pick_lettuce()
+        farmer.forward()
+        farmer.right()
+
+garden_square()
+farmer.right()
+garden_square()
+
+Puzzle.done()
+```
+
+</Solution>

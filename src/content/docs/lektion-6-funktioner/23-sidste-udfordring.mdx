@@ -1,0 +1,91 @@
+---
+title: "23. Sidste Udfordring"
+sidebar:
+  order: 23
+---
+
+Den helt store finale! Her skal du kombinere majs, salat og flere funktioner for at løse banen med **23 byggeklodser eller færre**.
+
+:::tip[Udfordring]
+Lav to funktioner: `lettuce_stairs()`, der høster salat i et "trappemønster", og `corn_rectangle()`, der følger stien og høster majs undervejs. Brug dem sammen til at løse hele banen.
+
+Sidder du fast? Du kan prøve at løse opgaven med blokke på [code.org](https://studio.code.org/s/coursee-2024/lessons/17/levels/12).
+
+---
+Her er de byggeklodser, du kan bruge i din kode:
+```
+farmer.forward()
+farmer.right()
+farmer.left()
+farmer.pick_corn()
+farmer.pick_lettuce()
+while farmer.has_lettuce():
+    # Gør dette
+while farmer.path_ahead():
+    # Gør dette
+if farmer.has_corn():
+    # Gør dette
+```
+:::
+
+<img src={import.meta.env.BASE_URL + "images/lektion-6-funktioner/23-sidste-udfordring.png"} alt="23-sidste-udfordring.png" class="solution-image" />
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, Harvester
+
+maze = Puzzle.from_file("courseE_farmer_functions13_2024")
+farmer: Harvester = maze.player
+
+def lettuce_stairs():
+
+
+def corn_rectangle():
+
+
+# When run
+
+
+
+# Keep this
+Puzzle.done()
+```
+
+:::tip[Hint]
+`lettuce_stairs()` kan gentage "frem, drej, frem, drej tilbage, høst al salaten" to gange. `corn_rectangle()` kan følge stien med `while farmer.path_ahead():` og tjekke for majs ved hvert skridt, fire gange med en drejning imellem.
+:::
+
+<Solution>
+
+To nye funktioner deler arbejdet: `lettuce_stairs()` tager sig af salaten i et trappemønster, og `corn_rectangle()` følger stien rundt i et rektangel og samler majs undervejs.
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, Harvester
+
+maze = Puzzle.from_file("courseE_farmer_functions13_2024")
+farmer: Harvester = maze.player
+
+def lettuce_stairs():
+    for i in range(2):
+        farmer.forward()
+        farmer.right()
+        farmer.forward()
+        farmer.left()
+        while farmer.has_lettuce():
+            farmer.pick_lettuce()
+
+def corn_rectangle():
+    for i in range(4):
+        while farmer.path_ahead():
+            farmer.forward()
+            if farmer.has_corn():
+                farmer.pick_corn()
+        farmer.left()
+
+lettuce_stairs()
+corn_rectangle()
+lettuce_stairs()
+
+Puzzle.done()
+```
+
+</Solution>

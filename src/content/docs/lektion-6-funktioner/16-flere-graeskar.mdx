@@ -1,0 +1,89 @@
+---
+title: "16. Flere Græskar"
+sidebar:
+  order: 16
+---
+
+*"Nu føler jeg mig rigtig funktionel!"*
+
+Nu er der flere græskar i hver plet! Vi får brug for endnu en funktion: `get_all_pumpkins()`, der bliver ved med at høste, så længe der er flere græskar.
+
+:::tip[Opgave]
+Brug begge funktioner til at høste al majsen og alle græskarrene i pletten.
+
+Sidder du fast? Du kan prøve at løse opgaven med blokke på [code.org](https://studio.code.org/s/coursee-2024/lessons/17/levels/5).
+
+---
+Her er de byggeklodser, du kan bruge i din kode:
+```
+farmer.forward()
+farmer.right()
+farmer.left()
+while not farmer.has_pumpkin():
+    # Gør dette
+check_square_for_corn()
+get_all_pumpkins()
+```
+:::
+
+<img src={import.meta.env.BASE_URL + "images/lektion-6-funktioner/16-flere-graeskar.png"} alt="16-flere-graeskar.png" class="solution-image" />
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, Harvester
+
+maze = Puzzle.from_file("courseE_farmer_functions2ba_2024")
+farmer: Harvester = maze.player
+
+def get_all_pumpkins():
+    while farmer.has_pumpkin():
+        farmer.pick_pumpkin()
+
+def check_square_for_corn():
+    if farmer.has_corn():
+        farmer.pick_corn()
+
+# When run
+
+
+
+# Keep this
+Puzzle.done()
+```
+
+:::tip[Hint]
+Brug `check_square_for_corn()`, mens du går frem mod pletten, og kald så `get_all_pumpkins()`, når du står ved den.
+:::
+
+<Solution>
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, Harvester
+
+maze = Puzzle.from_file("courseE_farmer_functions2ba_2024")
+farmer: Harvester = maze.player
+
+def get_all_pumpkins():
+    while farmer.has_pumpkin():
+        farmer.pick_pumpkin()
+
+def check_square_for_corn():
+    if farmer.has_corn():
+        farmer.pick_corn()
+
+while not farmer.has_pumpkin():
+    check_square_for_corn()
+    farmer.forward()
+get_all_pumpkins()
+farmer.left()
+farmer.forward()
+farmer.forward()
+farmer.left()
+while not farmer.has_pumpkin():
+    check_square_for_corn()
+    farmer.forward()
+get_all_pumpkins()
+
+Puzzle.done()
+```
+
+</Solution>

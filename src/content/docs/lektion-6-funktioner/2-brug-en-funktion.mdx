@@ -1,0 +1,71 @@
+---
+title: "2. Brug en Funktion"
+sidebar:
+  order: 2
+---
+
+Nu skal du prøve at bruge en rigtig funktion! Funktioner er bidder af kode, der udfører en opgave.
+
+:::tip[Opgave]
+Brug funktionen `get_2_nectar()` til at samle nektaren fra hver blomst.
+
+Sidder du fast? Du kan prøve at løse opgaven med blokke på [code.org](https://studio.code.org/s/coursee-2017/lessons/17/levels/3).
+
+---
+Her er de byggeklodser, du kan bruge i din kode:
+```
+bee.forward()
+bee.right()
+bee.left()
+for i in range(???):
+    # Gør dette
+get_2_nectar()
+```
+:::
+
+<img src={import.meta.env.BASE_URL + "images/lektion-6-funktioner/02-brug-en-funktion.png"} alt="02-brug-en-funktion.png" class="solution-image" />
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, BeePlayer
+
+maze = Puzzle.from_file("courseE_bee_functions2")
+bee: BeePlayer = maze.player
+
+def get_2_nectar():
+    bee.get_nectar()
+    bee.get_nectar()
+
+# When run
+
+
+
+# Keep this
+Puzzle.done()
+```
+
+:::tip[Hint]
+Du skal bare kalde `get_2_nectar()` ved hver blomst - du behøver ikke skrive `bee.get_nectar()` to gange selv, det gør funktionen for dig!
+:::
+
+<Solution>
+
+Funktionen `get_2_nectar()` er allerede skrevet for os. Vi skal bare flyve hen til hver blomst og kalde den.
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, BeePlayer
+
+maze = Puzzle.from_file("courseE_bee_functions2")
+bee: BeePlayer = maze.player
+
+def get_2_nectar():
+    bee.get_nectar()
+    bee.get_nectar()
+
+for i in range(2):
+    bee.forward()
+    get_2_nectar()
+
+Puzzle.done()
+```
+
+</Solution>

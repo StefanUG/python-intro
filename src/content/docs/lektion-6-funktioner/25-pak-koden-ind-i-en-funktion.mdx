@@ -1,0 +1,77 @@
+---
+title: "25. Pak Koden Ind i en Funktion"
+sidebar:
+  order: 25
+---
+
+Her er koden, der løste sidste opgave. Lad os samle den i en funktion, og kalde funktionen i stedet.
+
+:::tip[Opgave]
+Pak koden ind i funktionen `rowOfNectar()`, og kald den for at tjekke rækken for nektar.
+
+Sidder du fast? Du kan prøve at løse opgaven med blokke på [code.org](https://studio.code.org/s/coursef-2017/lessons/24/levels/2).
+
+---
+Her er de byggeklodser, du kan bruge i din kode:
+```
+bee.forward() # limit: 1
+bee.right()
+bee.left()
+bee.get_nectar() # limit: 1
+if bee.at_flower():
+    # Gør dette
+for i in range(???):
+    # Gør dette
+rowOfNectar()
+def rowOfNectar():
+
+```
+:::
+
+<img src={import.meta.env.BASE_URL + "images/lektion-6-funktioner/25-pak-koden-ind-i-en-funktion.png"} alt="25-pak-koden-ind-i-en-funktion.png" class="solution-image" />
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, BeePlayer
+
+maze = Puzzle.from_file("courseF_bee_fwp2")
+bee: BeePlayer = maze.player
+
+def rowOfNectar():
+
+
+# When run
+for i in range(7):
+    bee.forward()
+    if bee.at_flower():
+        bee.get_nectar()
+
+# Keep this
+Puzzle.done()
+```
+
+:::tip[Hint]
+Det er den samme kode som i sidste opgave - den skal bare stå inde i funktionen `rowOfNectar()` i stedet for direkte i "# Start".
+:::
+
+<Solution>
+
+Det virker måske som et underligt skridt lige nu, men det bliver snart rigtig nyttigt!
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, BeePlayer
+
+maze = Puzzle.from_file("courseF_bee_fwp2")
+bee: BeePlayer = maze.player
+
+def rowOfNectar():
+    for i in range(7):
+        bee.forward()
+        if bee.at_flower():
+            bee.get_nectar()
+
+rowOfNectar()
+
+Puzzle.done()
+```
+
+</Solution>

@@ -1,0 +1,75 @@
+---
+title: "14. Tjek for Majs - Funktion"
+sidebar:
+  order: 14
+---
+
+*"Ih, der popper grøntsager op alle vegne!"*
+
+En funktion kan bundte et tjek (`if`) og en handling sammen i én samlet pakke, du kan kalde igen og igen.
+
+:::tip[Opgave]
+Hjælp høstmanden med at høste al majsen på vejen hen til græskarret for enden.
+
+Hvert felt på vejen har enten **1** majs eller slet ingen. Brug funktionen `check_square_for_corn()` til at sikre dig, at du får det hele.
+
+Sidder du fast? Du kan prøve at løse opgaven med blokke på [code.org](https://studio.code.org/s/coursee-2024/lessons/17/levels/3).
+
+---
+Her er de byggeklodser, du kan bruge i din kode:
+```
+farmer.forward()
+farmer.pick_pumpkin()
+while not farmer.at_pumpkin():
+    # Gør dette
+check_square_for_corn()
+```
+:::
+
+<img src={import.meta.env.BASE_URL + "images/lektion-6-funktioner/14-tjek-for-majs-funktion.png"} alt="14-tjek-for-majs-funktion.png" class="solution-image" />
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, Harvester
+
+maze = Puzzle.from_file("courseE_farmer_functions1a_2024")
+farmer: Harvester = maze.player
+
+def check_square_for_corn():
+    if farmer.has_corn():
+        farmer.pick_corn()
+
+# When run
+
+
+
+# Keep this
+Puzzle.done()
+```
+
+:::tip[Hint]
+`check_square_for_corn()` tjekker selv, om der er majs, og høster det, hvis der er. Du skal bare kalde den ved hvert felt, mens du går mod græskarret.
+:::
+
+<Solution>
+
+`check_square_for_corn()` er allerede skrevet for os - den bundter `if farmer.has_corn(): farmer.pick_corn()` sammen i én funktion, vi kan kalde hele vejen hen til græskarret.
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, Harvester
+
+maze = Puzzle.from_file("courseE_farmer_functions1a_2024")
+farmer: Harvester = maze.player
+
+def check_square_for_corn():
+    if farmer.has_corn():
+        farmer.pick_corn()
+
+while not farmer.at_pumpkin():
+    check_square_for_corn()
+    farmer.forward()
+farmer.pick_pumpkin()
+
+Puzzle.done()
+```
+
+</Solution>

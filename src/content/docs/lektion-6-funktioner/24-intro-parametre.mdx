@@ -1,0 +1,80 @@
+---
+title: "24. Intro til Parametre"
+sidebar:
+  order: 24
+---
+
+Vi har allerede lavet vores egne funktioner. Nu skal vi lære, hvordan en funktion kan få **information** med, når den bliver kaldt - det kaldes en **parameter**.
+
+## Hvad er en parameter?
+
+Kan du huske `hopfrem(trin)` fra Lektion 2? Der sendte vi et tal (`trin`) med ind i funktionen, så den vidste, hvor langt den skulle hoppe:
+
+```python
+def hopfrem(trin):
+    penup()
+    forward(trin)
+    pendown()
+
+hopfrem(50)
+hopfrem(100)
+```
+
+Det tal, vi sender med, er en **parameter**. Det gør, at vi kan bruge den **samme** funktion til lidt forskellige ting, afhængigt af hvad vi sender med.
+
+I denne lektion skal vi give bien (og senere høstmanden) funktioner med parametre.
+
+:::tip[Opgave]
+Tjek under skyerne for at se, om blomsterne har nektar. Hver blomst har præcis **én** nektar, og hver honningtavle skal bruge præcis **én** honning.
+
+Sidder du fast? Du kan prøve at løse opgaven med blokke på [code.org](https://studio.code.org/s/coursef-2017/lessons/24/levels/1).
+
+---
+Her er de byggeklodser, du kan bruge i din kode:
+```
+bee.forward() # limit: 1
+bee.right()
+bee.left()
+bee.get_nectar() # limit: 1
+if bee.at_flower():
+    # Gør dette
+for i in range(???):
+    # Gør dette
+```
+:::
+
+<img src={import.meta.env.BASE_URL + "images/lektion-6-funktioner/24-intro-parametre.png"} alt="24-intro-parametre.png" class="solution-image" />
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, BeePlayer
+
+maze = Puzzle.from_file("courseF_bee_fwp1")
+bee: BeePlayer = maze.player
+
+# When run
+
+
+
+# Keep this
+Puzzle.done()
+```
+
+<Solution>
+
+Vi har endnu ikke brug for en funktion her - vi flyver langs rækken og tjekker for en blomst hver gang.
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, BeePlayer
+
+maze = Puzzle.from_file("courseF_bee_fwp1")
+bee: BeePlayer = maze.player
+
+for i in range(7):
+    bee.forward()
+    if bee.at_flower():
+        bee.get_nectar()
+
+Puzzle.done()
+```
+
+</Solution>

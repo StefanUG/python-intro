@@ -1,0 +1,75 @@
+---
+title: "3. Byg Din Egen Funktion"
+sidebar:
+  order: 3
+---
+
+Nu er det din tur til at skrive, hvad en funktion skal gøre!
+
+:::tip[Opgave]
+Byg funktionen `get_5()`, så den samler 5 nektar, og brug den til at løse banen.
+
+Sidder du fast? Du kan prøve at løse opgaven med blokke på [code.org](https://studio.code.org/s/coursee-2017/lessons/17/levels/4).
+
+---
+Her er de byggeklodser, du kan bruge i din kode:
+```
+bee.forward()
+bee.right()
+bee.left()
+bee.get_nectar()
+for i in range(???): # limit: 2
+    # Gør dette
+get_5()
+```
+:::
+
+<img src={import.meta.env.BASE_URL + "images/lektion-6-funktioner/03-byg-din-egen-funktion.png"} alt="03-byg-din-egen-funktion.png" class="solution-image" />
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, BeePlayer
+
+maze = Puzzle.from_file("courseE_bee_functions3")
+bee: BeePlayer = maze.player
+
+def get_5():
+
+
+# When run
+
+
+
+# Keep this
+Puzzle.done()
+```
+
+:::tip[Hint]
+Inde i `get_5()` skal du bruge en `for`-løkke, der gentager `bee.get_nectar()` 5 gange.
+:::
+
+<Solution>
+
+Vi skriver selv, hvad `get_5()` skal gøre - en løkke, der tager 5 nektar - og kalder den, hver gang vi når en blomst.
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, BeePlayer
+
+maze = Puzzle.from_file("courseE_bee_functions3")
+bee: BeePlayer = maze.player
+
+def get_5():
+    for i in range(5):
+        bee.get_nectar()
+
+bee.forward()
+bee.right()
+for i in range(2):
+    get_5()
+    bee.forward()
+bee.left()
+get_5()
+
+Puzzle.done()
+```
+
+</Solution>

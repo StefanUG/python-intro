@@ -1,0 +1,87 @@
+---
+title: "8. Ukendt Mængde Nektar"
+sidebar:
+  order: 8
+---
+
+Denne gang kan hver blomst have et andet antal nektar hver gang, du kører koden! En funktion kan godt indeholde en `while`-løkke.
+
+## Hvor meget nektar er der tilbage?
+
+`bee.nectar()` fortæller os, **hvor mange** nektar der er tilbage i blomsten lige nu - det er ikke sandt/falsk, men et tal (f.eks. 0, 1, 2, 3...).
+
+Vi kan bruge det sammen med `while` til at blive ved med at tage nektar, **så længe** der er mere tilbage:
+
+```python
+while bee.nectar() > 0:
+    bee.get_nectar()
+```
+
+Det betyder: "Så længe der er mere end 0 nektar tilbage i blomsten, så tag nektar." Når blomsten er tom, stopper løkken helt af sig selv.
+
+:::tip[Udfordring]
+Lav en funktion `collect_all_nectar()`, der samler **al** nektaren fra en blomst, uanset hvor meget der er.
+
+Sidder du fast? Du kan prøve at løse opgaven med blokke på [code.org](https://studio.code.org/s/coursee-2017/lessons/17/levels/10).
+
+---
+Her er de byggeklodser, du kan bruge i din kode:
+```
+bee.forward()
+bee.right()
+bee.left()
+bee.get_nectar()
+while bee.nectar() > 0:
+    # Gør dette
+collect_all_nectar()
+```
+:::
+
+<img src={import.meta.env.BASE_URL + "images/lektion-6-funktioner/08-ukendt-maengde-nektar.png"} alt="08-ukendt-maengde-nektar.png" class="solution-image" />
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, BeePlayer
+
+maze = Puzzle.from_file("courseE_bee_functions8")
+bee: BeePlayer = maze.player
+
+def collect_all_nectar():
+
+
+# When run
+
+
+
+# Keep this
+Puzzle.done()
+```
+
+:::tip[Hint]
+Inde i `collect_all_nectar()` skal du bruge `while bee.nectar() > 0:` til at blive ved med at tage nektar, så længe der er mere tilbage.
+:::
+
+<Solution>
+
+Fordi vi ikke ved, hvor meget nektar der er i hver blomst, bruger vi en `while`-løkke inde i funktionen i stedet for et fast tal.
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, BeePlayer
+
+maze = Puzzle.from_file("courseE_bee_functions8")
+bee: BeePlayer = maze.player
+
+def collect_all_nectar():
+    while bee.nectar() > 0:
+        bee.get_nectar()
+
+for i in range(5):
+    bee.forward()
+    bee.right()
+    bee.forward()
+    collect_all_nectar()
+    bee.left()
+
+Puzzle.done()
+```
+
+</Solution>

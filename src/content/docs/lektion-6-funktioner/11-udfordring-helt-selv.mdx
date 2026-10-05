@@ -1,0 +1,80 @@
+---
+title: "11. Udfordring: Helt Selv"
+sidebar:
+  order: 11
+---
+
+Du er på egen hånd i denne udfordring. Det kunne godt "bee" sværere, end det ser ud til!
+
+:::tip[Udfordring]
+Lav en funktion, der håndterer både blomster og honningtavler ved hjælp af `if/else`, og brug den flere gange.
+
+Sidder du fast? Du kan prøve at løse opgaven med blokke på [code.org](https://studio.code.org/s/coursee-2017/lessons/17/levels/14).
+
+---
+Her er de byggeklodser, du kan bruge i din kode:
+```
+bee.forward()
+bee.right()
+bee.left()
+bee.get_nectar()
+bee.make_honey()
+for i in range(???):
+    # Gør dette
+if bee.at_flower():
+    # Gør dette
+else:
+    # Gør ellers dette
+```
+:::
+
+<img src={import.meta.env.BASE_URL + "images/lektion-6-funktioner/11-udfordring-helt-selv.png"} alt="11-udfordring-helt-selv.png" class="solution-image" />
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, BeePlayer
+
+maze = Puzzle.from_file("courseE_bee_functions_challenge1")
+bee: BeePlayer = maze.player
+
+# When run
+
+
+
+# Keep this
+Puzzle.done()
+```
+
+<Solution>
+
+Vi kombinerer det, vi har lært om `if/else` fra forrige lektion med funktioner: funktionen besøger 3 blomster/honningtavler ad gangen, tjekker hvad der er, og gør det rigtige.
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, BeePlayer
+
+maze = Puzzle.from_file("courseE_bee_functions_challenge1")
+bee: BeePlayer = maze.player
+
+def get_3_nectar_or_honey():
+    for i in range(3):
+        bee.forward()
+        bee.forward()
+        bee.left()
+        bee.forward()
+        if bee.at_flower():
+            bee.get_nectar()
+        else:
+            bee.make_honey()
+        bee.backward()
+        bee.right()
+
+get_3_nectar_or_honey()
+for i in range(2):
+    bee.forward()
+    bee.right()
+    bee.forward()
+get_3_nectar_or_honey()
+
+Puzzle.done()
+```
+
+</Solution>

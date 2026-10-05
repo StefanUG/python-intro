@@ -1,0 +1,72 @@
+---
+title: "30. Nektar Eller Honning med Parameter"
+sidebar:
+  order: 30
+---
+
+:::tip[Udfordring]
+Noget ser lidt anderledes ud denne gang. Tilpas din funktion, så den også laver honning.
+
+Sidder du fast? Du kan prøve at løse opgaven med blokke på [code.org](https://studio.code.org/s/coursef-2017/lessons/24/levels/7).
+
+---
+Her er de byggeklodser, du kan bruge i din kode:
+```
+bee.left()
+for counter in range(1, 11):
+    # Gør dette
+rowOfNectarOrHoney()
+```
+:::
+
+<img src={import.meta.env.BASE_URL + "images/lektion-6-funktioner/30-nektar-eller-honning-med-parameter.png"} alt="30-nektar-eller-honning-med-parameter.png" class="solution-image" />
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, BeePlayer
+
+maze = Puzzle.from_file("courseF_bee_fwp7")
+bee: BeePlayer = maze.player
+
+def rowOfNectarOrHoney(length):
+    for i in range(length):
+        bee.forward()
+        if bee.at_flower():
+            bee.get_nectar()
+
+# When run
+rowOfNectarOrHoney(?)
+
+# Keep this
+Puzzle.done()
+```
+
+:::tip[Hint]
+Tilføj et ekstra tjek i funktionen: `if bee.at_honeycomb(): bee.make_honey()`, ved siden af tjekket for blomster. Erstat så placeholderen med en `for`-løkke, der kalder funktionen med stigende længder.
+:::
+
+<Solution>
+
+Vi udvider funktionen med endnu et tjek, så den håndterer både blomster og honningtavler, og drejer bien til venstre før hver række.
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, BeePlayer
+
+maze = Puzzle.from_file("courseF_bee_fwp7")
+bee: BeePlayer = maze.player
+
+def rowOfNectarOrHoney(length):
+    for i in range(length):
+        bee.forward()
+        if bee.at_flower():
+            bee.get_nectar()
+        if bee.at_honeycomb():
+            bee.make_honey()
+
+for counter in range(1, 7):
+    bee.left()
+    rowOfNectarOrHoney(counter)
+
+Puzzle.done()
+```
+
+</Solution>

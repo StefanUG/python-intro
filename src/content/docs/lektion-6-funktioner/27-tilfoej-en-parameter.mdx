@@ -1,0 +1,117 @@
+---
+title: "27. Tilføj en Parameter"
+sidebar:
+  order: 27
+---
+
+## Nu bliver det nyttigt!
+
+Problemet med `rowOfNectar()` er, at den altid tæller til 7 - men rækkerne her har forskellig længde. Løsningen er at give funktionen en **parameter**, så vi selv kan bestemme længden, hver gang vi kalder den:
+
+```python
+def rowOfNectar(length):
+    for i in range(length):
+        bee.forward()
+        if bee.at_flower():
+            bee.get_nectar()
+```
+
+Nu kan vi kalde den med forskellige tal:
+
+```python
+rowOfNectar(7)
+rowOfNectar(4)
+```
+
+:::tip[Opgave]
+Tilføj en `length`-parameter til `rowOfNectar()`, så den virker, uanset hvor lang rækken er.
+
+Sidder du fast? Du kan prøve at løse opgaven med blokke på [code.org](https://studio.code.org/s/coursef-2017/lessons/24/levels/4).
+
+---
+Her er de byggeklodser, du kan bruge i din kode:
+```
+if bee.at_flower():
+    # Do this
+
+if bee.path_ahead():
+    # Do this
+
+if bee.path_ahead():
+    # Do this
+else:
+    # Otherwise this
+
+def rowOfNectar():
+
+rowOfNectar()
+```
+:::
+
+<img src={import.meta.env.BASE_URL + "images/lektion-6-funktioner/27-tilfoej-en-parameter.png"} alt="27-tilfoej-en-parameter.png" class="solution-image" />
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, BeePlayer
+
+maze = Puzzle.from_file("courseF_bee_fwp4")
+bee: BeePlayer = maze.player
+
+def rowOfNectar():
+    for i in range(7):
+        bee.forward()
+        if bee.at_flower():
+            bee.get_nectar()
+
+# When run
+rowOfNectar()
+bee.right()
+bee.forward()
+bee.forward()
+bee.right()
+rowOfNectar()
+bee.left()
+bee.forward()
+bee.forward()
+bee.left()
+rowOfNectar()
+
+# Keep this
+Puzzle.done()
+```
+
+:::tip[Hint]
+Erstat det faste tal `7` i `for i in range(...)` med parameteren `length`, og husk at opdatere alle tre kald til funktionen, så de sender den rigtige længde med: `rowOfNectar(7)`, `rowOfNectar(6)` og `rowOfNectar(4)`.
+:::
+
+<Solution>
+
+Med en `length`-parameter kan vi genbruge den samme funktion til rækker af forskellig længde.
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, BeePlayer
+
+maze = Puzzle.from_file("courseF_bee_fwp4")
+bee: BeePlayer = maze.player
+
+def rowOfNectar(length):
+    for i in range(length):
+        bee.forward()
+        if bee.at_flower():
+            bee.get_nectar()
+
+rowOfNectar(7)
+bee.right()
+bee.forward()
+bee.forward()
+bee.right()
+rowOfNectar(6)
+bee.left()
+bee.forward()
+bee.forward()
+bee.left()
+rowOfNectar(4)
+
+Puzzle.done()
+```
+
+</Solution>

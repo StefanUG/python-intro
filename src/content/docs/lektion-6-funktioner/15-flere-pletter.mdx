@@ -1,0 +1,79 @@
+---
+title: "15. Flere Pletter"
+sidebar:
+  order: 15
+---
+
+:::tip[Opgave]
+Brug funktionen til at hjælpe høstmanden med at høste majs og græskar - denne gang er der to pletter med afgrøder efter hinanden.
+
+Sidder du fast? Du kan prøve at løse opgaven med blokke på [code.org](https://studio.code.org/s/coursee-2024/lessons/17/levels/4).
+
+---
+Her er de byggeklodser, du kan bruge i din kode:
+```
+farmer.forward()
+farmer.right()
+farmer.left()
+farmer.pick_pumpkin()
+while not farmer.has_pumpkin():
+    # Gør dette
+check_square_for_corn()
+```
+:::
+
+<img src={import.meta.env.BASE_URL + "images/lektion-6-funktioner/15-flere-pletter.png"} alt="15-flere-pletter.png" class="solution-image" />
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, Harvester
+
+maze = Puzzle.from_file("courseE_farmer_functions2b_2024")
+farmer: Harvester = maze.player
+
+def check_square_for_corn():
+    if farmer.has_corn():
+        farmer.pick_corn()
+
+# When run
+
+
+
+# Keep this
+Puzzle.done()
+```
+
+:::tip[Hint]
+Du kan kalde `check_square_for_corn()` to gange i din kode - én gang for hver plet med afgrøder.
+:::
+
+<Solution>
+
+Vi genbruger den samme funktion to gange - én gang for hver plet med afgrøder.
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, Harvester
+
+maze = Puzzle.from_file("courseE_farmer_functions2b_2024")
+farmer: Harvester = maze.player
+
+def check_square_for_corn():
+    if farmer.has_corn():
+        farmer.pick_corn()
+
+while not farmer.has_pumpkin():
+    check_square_for_corn()
+    farmer.forward()
+farmer.pick_pumpkin()
+farmer.left()
+farmer.forward()
+farmer.forward()
+farmer.left()
+while not farmer.has_pumpkin():
+    check_square_for_corn()
+    farmer.forward()
+farmer.pick_pumpkin()
+
+Puzzle.done()
+```
+
+</Solution>

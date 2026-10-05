@@ -1,0 +1,89 @@
+---
+title: "29. Parameter fra Løkken"
+sidebar:
+  order: 29
+---
+
+## En ny side af `range()`
+
+Indtil nu har vi kun brugt `range(x)` til at gentage noget `x` gange, hvor tælleren bare talte op fra 0. Men `range()` kan få besked på, hvor den skal **starte**, og hvor meget den skal **springe** for hver gang:
+
+- `range(4)` giver tallene **0, 1, 2, 3** (computere plejer at tælle fra 0, ikke 1!)
+- `range(1, 4)` giver tallene **1, 2, 3** - her fortæller vi den at starte ved 1 i stedet for 0
+- `range(1, 4, 2)` giver tallene **1, 3** - her springer den 2 ad gangen, fra 1 og op til (men ikke med) 4
+
+Så `range(start, stop)` tæller fra `start` op til (men ikke med) `stop`. Det tredje tal (skridtet) har vi sjældent brug for - som regel er `range(start, stop)` nok.
+
+## Send løkkens tæller med som parameter
+
+Her kommer et smart trick: Du kan sende selve løkkens tæller (`counter`) med direkte som parameter til funktionen! Så slipper du for at kalde funktionen med et nyt tal manuelt hver gang.
+
+```python
+for counter in range(1, 7):
+    rowOfNectar(counter)
+    bee.right()
+```
+
+Det betyder: "Kald `rowOfNectar` med bredden 1, så 2, så 3... op til 6 - og drej mellem hver."
+
+:::tip[Opgave]
+Du kan gøre koden kortere og mere effektiv ved at kombinere funktionen med en løkke. Løs opgaven ved at sende løkkens tæller med som parameter.
+
+Sidder du fast? Du kan prøve at løse opgaven med blokke på [code.org](https://studio.code.org/s/coursef-2017/lessons/24/levels/6).
+
+---
+Her er de byggeklodser, du kan bruge i din kode:
+```
+bee.right()
+for counter in range(1, 11):
+    # Gør dette
+rowOfNectar()
+```
+:::
+
+<img src={import.meta.env.BASE_URL + "images/lektion-6-funktioner/29-parameter-fra-loekken.png"} alt="29-parameter-fra-loekken.png" class="solution-image" />
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, BeePlayer
+
+maze = Puzzle.from_file("courseF_bee_fwp6")
+bee: BeePlayer = maze.player
+
+def rowOfNectar(length):
+    for i in range(length):
+        bee.forward()
+        if bee.at_flower():
+            bee.get_nectar()
+
+# When run
+rowOfNectar(?)
+
+# Keep this
+Puzzle.done()
+```
+
+<Solution>
+
+I stedet for at skrive seks separate kald, bruger vi `counter` fra løkken direkte som parameter.
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, BeePlayer
+
+maze = Puzzle.from_file("courseF_bee_fwp6")
+bee: BeePlayer = maze.player
+
+def rowOfNectar(length):
+    for i in range(length):
+        bee.forward()
+        if bee.at_flower():
+            bee.get_nectar()
+
+
+for counter in range(1, 7):
+    rowOfNectar(counter)
+    bee.right()
+
+Puzzle.done()
+```
+
+</Solution>

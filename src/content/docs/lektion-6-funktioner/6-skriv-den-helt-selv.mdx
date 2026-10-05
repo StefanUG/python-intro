@@ -1,0 +1,72 @@
+---
+title: "6. Skriv Den Helt Selv"
+sidebar:
+  order: 6
+---
+
+Denne gang får du ikke noget at starte med - du skal selv finde på navnet og indholdet af din funktion!
+
+:::tip[Opgave]
+Lav en funktion, der samler al nektaren fra én blomst og laver al honningen ved én honningtavle, og brug den to gange.
+
+Sidder du fast? Du kan prøve at løse opgaven med blokke på [code.org](https://studio.code.org/s/coursee-2017/lessons/17/levels/8).
+
+---
+Her er de byggeklodser, du kan bruge i din kode:
+```
+bee.forward()
+bee.right()
+bee.left()
+bee.get_nectar() # limit: 1
+bee.make_honey() # limit: 1
+for i in range(???):
+    # Gør dette
+```
+:::
+
+<img src={import.meta.env.BASE_URL + "images/lektion-6-funktioner/06-skriv-den-helt-selv.png"} alt="06-skriv-den-helt-selv.png" class="solution-image" />
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, BeePlayer
+
+maze = Puzzle.from_file("courseE_bee_functions6")
+bee: BeePlayer = maze.player
+
+# When run
+
+
+
+# Keep this
+Puzzle.done()
+```
+
+:::tip[Hint]
+Lav en funktion, der flyver frem, tager 7 nektar med en løkke, flyver frem igen, og laver 7 honning med en løkke.
+:::
+
+<Solution>
+
+Vi skriver vores egen funktion `get_7_nectar_make_7_honey()` og kalder den to gange.
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, BeePlayer
+
+maze = Puzzle.from_file("courseE_bee_functions6")
+bee: BeePlayer = maze.player
+
+def get_7_nectar_make_7_honey():
+    bee.forward()
+    for i in range(7):
+        bee.get_nectar()
+    bee.forward()
+    for i in range(7):
+        bee.make_honey()
+
+get_7_nectar_make_7_honey()
+bee.forward()
+get_7_nectar_make_7_honey()
+
+Puzzle.done()
+```
+
+</Solution>

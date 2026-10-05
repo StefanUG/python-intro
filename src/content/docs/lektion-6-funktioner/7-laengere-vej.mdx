@@ -1,0 +1,72 @@
+---
+title: "7. Længere Vej"
+sidebar:
+  order: 7
+---
+
+Samme opgavetype som sidst, men nu er vejen længere, så funktionen skal gøre lidt mere.
+
+:::tip[Opgave]
+Lav en funktion, der drejer, samler nektar og honning, og kommer tilbage på stien. Brug den to gange.
+
+Sidder du fast? Du kan prøve at løse opgaven med blokke på [code.org](https://studio.code.org/s/coursee-2017/lessons/17/levels/9).
+
+---
+Her er de byggeklodser, du kan bruge i din kode:
+```
+bee.forward() # limit: 6
+bee.right()
+bee.left()
+bee.get_nectar() # limit: 1
+bee.make_honey() # limit: 1
+for i in range(???):
+    # Gør dette
+```
+:::
+
+<img src={import.meta.env.BASE_URL + "images/lektion-6-funktioner/07-laengere-vej.png"} alt="07-laengere-vej.png" class="solution-image" />
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, BeePlayer
+
+maze = Puzzle.from_file("courseE_bee_functions7")
+bee: BeePlayer = maze.player
+
+# When run
+
+
+
+# Keep this
+Puzzle.done()
+```
+
+<Solution>
+
+```python.run requires="codingpirates-maze"
+from maze import Puzzle, BeePlayer
+
+maze = Puzzle.from_file("courseE_bee_functions7")
+bee: BeePlayer = maze.player
+
+def get_7_make_7():
+    bee.right()
+    bee.forward()
+    for i in range(7):
+        bee.get_nectar()
+    bee.forward()
+    for i in range(7):
+        bee.make_honey()
+    bee.backward()
+    bee.backward()
+    bee.left()
+
+bee.forward()
+get_7_make_7()
+for i in range(3):
+    bee.forward()
+get_7_make_7()
+
+Puzzle.done()
+```
+
+</Solution>
