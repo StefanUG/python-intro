@@ -165,6 +165,11 @@ body.solutions-visible .solution-block {
   border: 1px solid var(--sl-color-gray-4, #45475a);
 }
 
+/* Maze puzzles draw their own grid border - our border clashes with it */
+.python-run[data-requires*="codingpirates-maze"] .python-run-turtle canvas {
+  border: none;
+}
+
 .python-run-stdout {
   background: var(--sl-color-gray-6, #1e1e2e);
   color: var(--sl-color-gray-1, #cdd6f4);
