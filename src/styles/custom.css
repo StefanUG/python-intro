@@ -180,3 +180,55 @@ body.solutions-visible .solution-block {
   border-top: 1px solid var(--sl-color-gray-5, #313244);
   white-space: pre-wrap;
 }
+
+.python-run-input-row {
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--sl-color-gray-6, #1e1e2e);
+  padding: 0.5rem 1.25rem 0.75rem;
+  margin: 0;
+  border-top: 1px dashed var(--sl-color-gray-5, #313244);
+}
+
+/* Same specificity as the UA stylesheet's `[hidden] { display: none }` - must exclude it explicitly */
+.python-run-input-row:not([hidden]) {
+  display: flex;
+}
+
+.python-run-input-prompt {
+  color: var(--sl-color-gray-1, #cdd6f4);
+  font-family: var(--sl-font-mono, ui-monospace, monospace);
+  font-size: 0.875em;
+  white-space: pre-wrap;
+}
+
+.python-run-input-field {
+  flex: 1;
+  background: var(--sl-color-gray-5, #313244);
+  color: var(--sl-color-white);
+  font-family: var(--sl-font-mono, ui-monospace, monospace);
+  font-size: 0.875em;
+  border: 1px solid var(--sl-color-gray-4, #45475a);
+  border-radius: 0.25rem;
+  padding: 0.3rem 0.6rem;
+}
+
+.python-run-input-field:focus {
+  outline: 2px solid var(--sl-color-accent);
+  outline-offset: 1px;
+}
+
+.python-run-input-submit {
+  background: var(--sl-color-accent);
+  color: var(--sl-color-white);
+  border: none;
+  border-radius: 0.25rem;
+  padding: 0.3rem 0.65rem;
+  font-size: 1em;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.python-run-input-submit:hover {
+  background: var(--sl-color-accent-high, var(--sl-color-accent));
+}

@@ -20,6 +20,11 @@ const { code, requires } = Astro.props
   <div class="python-run-resize-handle" aria-hidden="true"></div>
   <div class="python-run-turtle" data-role="turtle"></div>
   <pre class="python-run-stdout" data-role="stdout" hidden></pre>
+  <form class="python-run-input-row" data-role="input-row" hidden>
+    <span class="python-run-input-prompt" data-role="input-prompt"></span>
+    <input type="text" class="python-run-input-field" data-role="input-field" autocomplete="off" />
+    <button type="submit" class="python-run-input-submit" data-role="input-submit" title="Send (Enter)" aria-label="Send">⏎</button>
+  </form>
 </div>
 
 <script>
@@ -250,6 +255,31 @@ class Enum(metaclass=EnumMeta):
     const editorDiv = block.querySelector<HTMLElement>('[data-role="editor"]')!
     const turtleDiv = block.querySelector<HTMLElement>('[data-role="turtle"]')!
     const stdout = block.querySelector<HTMLElement>('[data-role="stdout"]')!
+    const inputRow = block.querySelector<HTMLFormElement>('[data-role="input-row"]')!
+    const inputPrompt = block.querySelector<HTMLElement>('[data-role="input-prompt"]')!
+    const inputField = block.querySelector<HTMLInputElement>('[data-role="input-field"]')!
+
+    // Resolves input() inline (below the output) instead of Skulpt's default window.prompt().
+    const inputfun = (promptText: string) => {
+      return new Promise<string>(resolve => {
+        inputPrompt.textContent = promptText ?? ''
+        inputField.value = ''
+        inputRow.hidden = false
+        stdout.hidden = false
+        inputField.focus()
+
+        const onSubmit = (e: Event) => {
+          e.preventDefault()
+          const value = inputField.value
+          inputRow.hidden = true
+          inputRow.removeEventListener('submit', onSubmit)
+          // Echo the prompt + what the user typed, like a real terminal would.
+          stdout.textContent += `${promptText ?? ''}${value}\n`
+          resolve(value)
+        }
+        inputRow.addEventListener('submit', onSubmit)
+      })
+    }
 
     const save = debounce(() => ls.set(storageKey, view.state.doc.toString()), 500)
 
@@ -332,6 +362,7 @@ class Enum(metaclass=EnumMeta):
       turtleDiv.innerHTML = ''
       stdout.textContent = ''
       stdout.hidden = true
+      inputRow.hidden = true
 
       try {
         ensurePolyfills(Sk)
@@ -347,6 +378,8 @@ class Enum(metaclass=EnumMeta):
 
       Sk.configure({
         output: (text: string) => { stdout.textContent += text; stdout.hidden = false },
+        inputfun,
+        inputfunTakesPrompt: true,
         read: (x: string) => {
           if (Sk.builtinFiles?.files[x] == null) throw `File not found: '${x}'`
           return Sk.builtinFiles.files[x]
@@ -384,6 +417,7 @@ class Enum(metaclass=EnumMeta):
       turtleDiv.innerHTML = ''
       stdout.textContent = ''
       stdout.hidden = true
+      inputRow.hidden = true
     })
   })
 </script>
