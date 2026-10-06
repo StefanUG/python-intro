@@ -378,6 +378,7 @@ class Enum(metaclass=EnumMeta):
     })
 
     block.querySelector('[data-action="reset"]')!.addEventListener('click', () => {
+      if (!confirm('Nulstil koden til udgangspunktet? Dine ændringer går tabt.')) return
       ls.del(storageKey)
       view.dispatch({ changes: { from: 0, to: view.state.doc.length, insert: originalCode } })
       turtleDiv.innerHTML = ''
