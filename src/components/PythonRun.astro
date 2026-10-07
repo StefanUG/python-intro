@@ -136,6 +136,8 @@ class EnumMeta(type):
         return cls
 
     def __call__(cls, value):
+        if isinstance(value, cls):
+            return value
         for member in cls._member_list_:
             if member._value_ == value:
                 return member
