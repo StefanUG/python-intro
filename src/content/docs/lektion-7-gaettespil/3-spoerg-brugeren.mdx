@@ -1,0 +1,107 @@
+---
+title: "3. Spørg brugeren"
+sidebar:
+  order: 3
+---
+
+Et spil, hvor man ikke selv kan gøre noget, er ikke særlig sjovt. Nu skal spilleren svare på noget.
+
+## Input
+
+Med `input` kan programmet stille et spørgsmål og vente på et svar. Svaret gemmer vi i en variabel:
+
+```python
+player_name = input("Hvad hedder du? ")
+print(f"Hej {player_name}!")
+```
+
+Når programmet kører, stopper det ved `input` og venter, til du har skrevet noget og trykket Enter.
+
+## Et ekko
+
+Lad os lave et lille program, der bare gentager det, du skriver. Det kaldes et *ekko*:
+
+```python
+guess = input("Hvad gætter du på? ")
+print(f"Du gættede {guess}! Cool")
+```
+
+:::tip[Opgave 1]
+Ret din kode i kodeboksen nederst:
+
+1. Lad spilleren skrive sit eget navn med `input`, i stedet for at du skriver navnet i koden.
+2. Spørg spilleren om et gæt, og skriv et ekko: `Du gættede 7! Cool`
+:::
+
+## Stol aldrig på brugerens input
+
+Prøv at skrive `banan` som gæt. Python tager imod det uden problemer - for `input` giver altid **tekst** tilbage, også selvom du skriver et tal.
+
+I et gættespil vil vi gerne have et rigtigt tal. Hvis spilleren skriver noget andet, skal vi ikke bare stole på det. Brugere skriver alt muligt: bogstaver, ingenting, eller bare noget for sjov. En god programmør **tjekker altid**, om det, brugeren skriver, giver mening.
+
+Teksten har en funktion, `isnumeric()`, som svarer `True`, hvis teksten kun består af cifre:
+
+```python
+print("42".isnumeric())     # True
+print("banan".isnumeric())  # False
+print("4 2".isnumeric())    # False
+```
+
+Du kender allerede `if` og `else` fra lektion 5. Vi kan bruge dem til at tjekke, om gættet er et tal:
+
+```python
+guess = input("Hvad gætter du på? ")
+if guess.isnumeric():
+    print("Det er et tal!")
+else:
+    print("Det er ikke et tal.")
+```
+
+## Lav teksten om til et tal
+
+Når `isnumeric()` har sagt god for teksten, kan vi lave den om til et rigtigt tal med `int()`. Det skal vi bruge senere, når vi skal sammenligne gættet med det hemmelige tal.
+
+```python
+guess = input("Hvad gætter du på? ")
+if guess.isnumeric():
+    guess = int(guess)
+    print(f"Du gættede {guess}! Cool")
+else:
+    print("Det er ikke et tal.")
+```
+
+:::tip[Opgave 2]
+Ret dit ekko, så spillerens gæt bliver tjekket med `isnumeric()`:
+
+1. Hvis gættet er et tal, skal du lave det om til et tal med `int()` og skrive ekkoet.
+2. Hvis ikke, skal du skrive, at det ikke er et tal.
+
+Test dit program. Prøv både et rigtigt tal og noget som `banan`.
+:::
+
+```python.run
+# Byg et 'Gæt et tal'-spil med det, du har lært ovenfor.
+# Skriv din egen kode her
+```
+
+Nu siger programmet i det mindste fra, når det ikke er et tal - men det stopper bare. På [næste side](/python-intro/lektion-7-gaettespil/4-spoerg-indtil-tal/) lærer du at **spørge igen**, indtil spilleren skriver et rigtigt tal.
+
+:::note[Hvorfor ikke også minus og kommatal?]
+`isnumeric()` accepterer kun hele tal uden minus og komma. `-3` og `2.5` bliver altså sendt tilbage med "Det er ikke et tal". Det passer fint til vores spil.
+:::
+
+<Solution>
+
+```python.run
+player_name = input("Hvad hedder du? ")
+print(f"Velkommen til Gæt et tal, {player_name}!")
+
+guess = input("Hvad gætter du på? ")
+if guess.isnumeric():
+    guess = int(guess)
+    print(f"Du gættede {guess}! Cool")
+else:
+    print("Det er ikke et tal.")
+```
+
+</Solution>

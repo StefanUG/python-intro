@@ -1,0 +1,113 @@
+---
+title: "11. Tilfældige beskeder"
+sidebar:
+  order: 11
+  badge:
+    text: Valgfri
+    variant: note
+---
+
+Hvis spillet siger det samme hver eneste gang, bliver det hurtigt kedeligt. Lad os få det til at vælge en tilfældig besked.
+
+## En liste med beskeder
+
+Husker du farvelisten fra lektion 2? En liste kan indeholde tekst - for eksempel beskeder, spillet kan sige, når spilleren skriver noget, der ikke er et tal:
+
+```python
+not_a_number_messages = [
+    "Det ved du bedre!",
+    "Kom nu, jeg er ikke født i går.",
+    "Du kan ikke narre mig. Det er slet ikke et tal!",
+]
+```
+
+## Vælg en tilfældig
+
+Du kender allerede `random.choice`. Den vælger noget tilfældigt fra en liste:
+
+```python
+print(random.choice(not_a_number_messages))
+```
+
+Nu siger spillet noget nyt, hver gang spilleren skriver noget forkert. Brug det inde i `get_numeric_guess()` i stedet for den faste besked.
+
+## Dine egne beskeder
+
+Du kan lave en liste til hver slags besked:
+
+```python
+too_high_messages = ["Det er for højt!", "Hov, lidt lavere!"]
+too_low_messages = ["Det er for lavt!", "Prøv med noget større!"]
+correct_messages = ["Fantastisk!", "Du er en mester!"]
+```
+
+Du kan også bruge f-strenge til at sætte gættet eller antal forsøg ind i beskederne:
+
+```python
+print(random.choice(correct_messages))
+print(f"{guess} var det rigtige tal!")
+```
+
+:::tip[Opgave]
+Ret din kode i kodeboksen nederst:
+
+1. Lav en liste `not_a_number_messages` med mindst tre beskeder, og brug `random.choice` inde i `get_numeric_guess()`.
+2. Lav lister til de andre beskeder: gættet er for højt, for lavt og rigtigt.
+3. Find på dine **egne** sjove beskeder - jo flere, jo bedre!
+4. Brug mindst én f-streng, hvor du bruger `guess` i en besked.
+
+Tilføj gerne flere beskeder til listerne, når du har fået det til at virke.
+:::
+
+```python.run
+# Byg et 'Gæt et tal'-spil med det, du har lært ovenfor.
+# Skriv din egen kode her
+```
+
+:::tip[Hint]
+Listerne skal oprettes **før** løkken (ellers bliver de lavet om og om igen). Husk `import random` øverst.
+:::
+
+<Solution>
+
+```python.run
+import random
+
+not_a_number_messages = [
+    "Det ved du bedre!",
+    "Kom nu, jeg er ikke født i går.",
+    "Du kan ikke narre mig. Det er slet ikke et tal!",
+]
+too_high_messages = ["Det er for højt!", "Hov, lidt lavere!", "Av, det var for stort!"]
+too_low_messages = ["Det er for lavt!", "Prøv med noget større!", "Du skal højere op!"]
+correct_messages = ["Fantastisk!", "Du er en mester!", "Hurra, du fandt det!"]
+
+def get_numeric_guess():
+    guess = ""
+    while not guess.isnumeric():
+        guess = input("Hvad gætter du på? ")
+        if not guess.isnumeric():
+            print(random.choice(not_a_number_messages))
+    return int(guess)
+
+player_name = input("Hvad hedder du? ")
+print(f"Velkommen til Gæt et tal, {player_name}!")
+print("Jeg tænker på et tal mellem 1 og 100.")
+
+secret = random.randint(1, 100)
+
+has_guessed_correctly = False
+while not has_guessed_correctly:
+    guess = get_numeric_guess()
+
+    if guess == secret:
+        print(random.choice(correct_messages))
+        print(f"{guess} var det rigtige tal!")
+        has_guessed_correctly = True
+    elif guess < secret:
+        print(random.choice(too_low_messages))
+    else:
+        print(random.choice(too_high_messages))
+```
+
+</Solution>

@@ -1,0 +1,113 @@
+---
+title: "12. Tid"
+sidebar:
+  order: 12
+  badge:
+    text: Valgfri
+    variant: note
+---
+
+Hvor hurtigt kan du gætte tallet? Lad os få spillet til at tage tid.
+
+## Modulet time
+
+Ligesom `random` er der et modul til at arbejde med tid. Det hedder `time`:
+
+```python
+import time
+```
+
+Funktionen `time.time()` giver os det aktuelle tidspunkt som et tal - antal sekunder siden en bestemt dato i 1970. Tallet i sig selv er ikke så spændende, men **forskellen** mellem to tidspunkter fortæller, hvor lang tid der er gået:
+
+```python
+start = time.time()
+# ... spillet kører ...
+end = time.time()
+
+elapsed = end - start
+```
+
+## Pænere tal
+
+`elapsed` bliver et tal med mange decimaler. Med `round` kan vi runde det af til hele sekunder:
+
+```python
+seconds = round(elapsed)
+print(f"Du brugte {seconds} sekunder!")
+```
+
+## Feedback på tempoet
+
+Du kan bruge `if`/`elif`/`else` til at kommentere på, hvor hurtig spilleren var:
+
+```python
+if seconds < 20:
+    print("Lynhurtigt!")
+elif seconds < 60:
+    print("Flot tempo!")
+else:
+    print("Du tog dig god tid.")
+```
+
+:::tip[Opgave]
+Ret din kode i kodeboksen nederst:
+
+1. Skriv `import time` øverst.
+2. Gem starttidspunktet i `start = time.time()`, lige før spilløkken starter.
+3. Når gættet er rigtigt, skal du regne ud, hvor lang tid det tog, og runde det til hele sekunder.
+4. Fortæl spilleren, hvor lang tid det tog, og giv en kommentar til tempoet.
+
+Tænk over: Hvor skal `start` stå? Skal tiden for at skrive sit navn tælle med?
+:::
+
+```python.run
+# Byg et 'Gæt et tal'-spil med det, du har lært ovenfor.
+# Skriv din egen kode her
+```
+
+:::tip[Hint]
+Sæt `start = time.time()` lige før `while`-løkken. Så tæller kun selve gætteriet.
+:::
+
+<Solution>
+
+```python.run
+import random
+import time
+
+def get_numeric_guess():
+    guess = ""
+    while not guess.isnumeric():
+        guess = input("Hvad gætter du på? ")
+        if not guess.isnumeric():
+            print("Det er ikke et tal, prøv igen.")
+    return int(guess)
+
+player_name = input("Hvad hedder du? ")
+print(f"Velkommen til Gæt et tal, {player_name}!")
+print("Jeg tænker på et tal mellem 1 og 100.")
+
+secret = random.randint(1, 100)
+start = time.time()
+
+has_guessed_correctly = False
+while not has_guessed_correctly:
+    guess = get_numeric_guess()
+
+    if guess == secret:
+        seconds = round(time.time() - start)
+        print(f"Rigtigt! Det tog dig {seconds} sekunder.")
+        if seconds < 20:
+            print("Lynhurtigt!")
+        elif seconds < 60:
+            print("Flot tempo!")
+        else:
+            print("Du tog dig god tid.")
+        has_guessed_correctly = True
+    elif guess < secret:
+        print("Tallet er højere.")
+    else:
+        print("Tallet er lavere.")
+```
+
+</Solution>

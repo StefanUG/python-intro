@@ -1,10 +1,15 @@
 ---
 // Hidden until the user types the cheat code "iddqd" anywhere on the page.
+interface Props {
+  /** Overrides the default "Løsning" label, e.g. title="The game". */
+  title?: string
+}
+const { title } = Astro.props
 ---
 
 <div class="solution-block not-content">
   <div class="solution-header">
-    <span class="solution-label">🔓 Løsning</span>
+    <span class="solution-label">🔓 {title ?? 'Løsning'}</span>
   </div>
   <div class="solution-body">
     <slot />

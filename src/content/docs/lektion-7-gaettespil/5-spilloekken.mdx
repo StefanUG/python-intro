@@ -1,0 +1,89 @@
+---
+title: "5. Spilløkken"
+sidebar:
+  order: 5
+---
+
+Dit program stopper, så snart du har gættet én gang. Sandsynligheden for at ramme rigtigt første gang er ret lille, så vi skal bruge en løkke, der spørger igen og igen. Den kaldes **spilløkken** (på engelsk *game loop*).
+
+## Mere om while
+
+På forrige side brugte du `while` til at spørge, indtil svaret var et tal. En `while`-løkke gentager koden indeni, **så længe** dens betingelse er sand.
+
+Betingelsen kan også tjekke en variabel, som ændrer sig, hver gang løkken kører. Her er en tæller:
+
+```python
+count = 1
+while count <= 3:
+    print(f"Runde {count}")
+    count = count + 1
+```
+
+Det skriver `Runde 1`, `Runde 2` og `Runde 3`. Hver gang lægger vi 1 til `count`, og når `count` bliver 4, er betingelsen `count <= 3` ikke længere sand, så løkken stopper.
+
+:::caution[Husk at ændre variablen]
+Hvis du glemmer `count = count + 1`, bliver betingelsen aldrig falsk, og løkken kører for evigt. Det kan få siden til at hænge!
+:::
+
+En variabel kan også være `True` eller `False`. Så kan den fortælle, om vi er færdige, og vi kan sætte den til `True`, når vi vil stoppe løkken.
+
+## Spilløkken
+
+Vi laver en variabel, der husker, om spilleren har gættet rigtigt, og bruger den i løkken:
+
+```python
+has_guessed_correctly = False
+while not has_guessed_correctly:
+    guess = get_numeric_guess()
+    print(f"Du gættede {guess}! Cool")
+```
+
+Alt det, der skal gentages for hvert gæt, står indrykket under `while`.
+
+:::caution[Endnu uden slutning]
+Lige nu er der ikke noget, der sætter `has_guessed_correctly` til `True`. Spillet spørger derfor for evigt. Det er helt i orden, for `input` venter på dig hver gang. Når du vil starte forfra, trykker du bare på **Kør kode** igen.
+
+Husk dog: en `while`-løkke uden `input` indeni, som aldrig stopper, kan få siden til at hænge!
+:::
+
+:::tip[Opgave]
+Ret din kode i kodeboksen nederst:
+
+1. Lav variablen `has_guessed_correctly` og sæt den til `False`.
+2. Lav en `while not has_guessed_correctly:`-løkke.
+3. Flyt koden, der henter gættet med `get_numeric_guess()`, ind i løkken (ryk den ind).
+4. Behold ekkoet, så du kan se, at spillet spørger igen og igen.
+
+Funktionen `get_numeric_guess` skal blive **uden for** løkken, og det samme gælder spørgsmålet om spillerens navn og velkomstbeskeden, så de kun kommer én gang.
+:::
+
+```python.run
+# Byg et 'Gæt et tal'-spil med det, du har lært ovenfor.
+# Skriv din egen kode her
+```
+
+:::tip[Hint]
+Indrykning er vigtig! Alt, der skal gentages, skal rykkes ind med fire mellemrum under `while`.
+:::
+
+<Solution>
+
+```python.run
+def get_numeric_guess():
+    guess = ""
+    while not guess.isnumeric():
+        guess = input("Hvad gætter du på? ")
+        if not guess.isnumeric():
+            print("Det er ikke et tal, prøv igen.")
+    return int(guess)
+
+player_name = input("Hvad hedder du? ")
+print(f"Velkommen til Gæt et tal, {player_name}!")
+
+has_guessed_correctly = False
+while not has_guessed_correctly:
+    guess = get_numeric_guess()
+    print(f"Du gættede {guess}! Cool")
+```
+
+</Solution>

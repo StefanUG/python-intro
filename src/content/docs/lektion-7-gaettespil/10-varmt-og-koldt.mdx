@@ -1,0 +1,104 @@
+---
+title: "10. Varmt og koldt"
+sidebar:
+  order: 10
+  badge:
+    text: Valgfri
+    variant: note
+---
+
+"Højere" og "lavere" hjælper, men det ville være sjovere, hvis spillet også kunne sige, om du er tæt på: *"Du brænder!"* eller *"Hold da op, du er langt væk!"*
+
+## Afstand mellem to tal
+
+Vi skal bruge **afstanden** mellem gættet og det hemmelige tal. Hvis det hemmelige tal er 50, er både gæt 45 og gæt 55 fem fra tallet.
+
+Men `guess - secret` giver `-5` i det ene tilfælde og `5` i det andet. Vi vil have et tal uden minus. Det gør `abs` (kort for *absolute value* - absolut værdi):
+
+```python
+print(abs(-5))  # 5
+print(abs(5))   # 5
+
+distance = abs(guess - secret)
+```
+
+## Mange muligheder
+
+Med `distance` kan du bruge `elif` til at lave flere trin:
+
+```python
+if distance <= 5:
+    print("Du brænder!")
+elif distance <= 15:
+    print("Det bliver varmere!")
+elif distance <= 40:
+    print("Lunkent...")
+else:
+    print("Hold da op, du er helt ude i skoven!")
+```
+
+Rækkefølgen er vigtig. Python vælger den **første** betingelse, der er sand. Hvis du satte `distance <= 40` først, ville alle afstande under 40 få den besked, og de andre ville aldrig blive brugt.
+
+:::tip[Opgave]
+Ret din kode i kodeboksen nederst:
+
+1. Når gættet er forkert, skal du udregne `distance = abs(guess - secret)`.
+2. Giv spilleren en besked, der passer til afstanden. Opfind selv både grænser og beskeder.
+3. Behold "højere" og "lavere"-hintet, så spilleren får begge dele.
+
+Hint: Nu kan du have en `if` inde i en `else`. Husk indrykningen!
+:::
+
+```python.run
+# Byg et 'Gæt et tal'-spil med det, du har lært ovenfor.
+# Skriv din egen kode her
+```
+
+:::tip[Hint]
+Lav først hintet om højere/lavere. Udregn derefter afstanden og skriv varm/kold-beskeden. Begge dele skal stå inde i `else`-blokken, der kun kører, når gættet er forkert.
+:::
+
+<Solution>
+
+```python.run
+import random
+
+def get_numeric_guess():
+    guess = ""
+    while not guess.isnumeric():
+        guess = input("Hvad gætter du på? ")
+        if not guess.isnumeric():
+            print("Det er ikke et tal, prøv igen.")
+    return int(guess)
+
+player_name = input("Hvad hedder du? ")
+print(f"Velkommen til Gæt et tal, {player_name}!")
+print("Jeg tænker på et tal mellem 1 og 100.")
+
+secret = random.randint(1, 100)
+
+has_guessed_correctly = False
+while not has_guessed_correctly:
+    guess = get_numeric_guess()
+
+    if guess == secret:
+        print("Rigtigt! Du fandt tallet!")
+        has_guessed_correctly = True
+    else:
+        if guess < secret:
+            print("Tallet er højere.")
+        else:
+            print("Tallet er lavere.")
+
+        distance = abs(guess - secret)
+        if distance <= 5:
+            print("Du brænder!")
+        elif distance <= 15:
+            print("Det bliver varmere!")
+        elif distance <= 40:
+            print("Lunkent...")
+        else:
+            print("Hold da op, du er helt ude i skoven!")
+```
+
+</Solution>

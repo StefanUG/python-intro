@@ -26,6 +26,7 @@ export default defineConfig({
         { label: 'Lektion 4 – Variabler', items: [{ autogenerate: { directory: 'lektion-4-variabler' } }] },
         { label: 'Lektion 5 – Betingelser', items: [{ autogenerate: { directory: 'lektion-5-betingelser' } }] },
         { label: 'Lektion 6 – Funktioner', items: [{ autogenerate: { directory: 'lektion-6-funktioner' } }] },
+        { label: 'Lektion 7 – Gættespil', items: [{ autogenerate: { directory: 'lektion-7-gaettespil' } }] },
       ],
       customCss: ['./src/styles/custom.css'],
     }),

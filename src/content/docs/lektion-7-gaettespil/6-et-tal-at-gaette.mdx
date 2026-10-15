@@ -1,0 +1,95 @@
+---
+title: "6. Et tal at gætte"
+sidebar:
+  order: 6
+---
+
+Nu skal spillet have et hemmeligt tal og vide, om du har ramt rigtigt. Det kræver en **betingelse** - ligesom `if` og `else` i lektion 5.
+
+## Et hemmeligt tal
+
+Til at begynde med vælger **du** selv det hemmelige tal og skriver det direkte i koden. Det er rigtig godt, når du skal teste: du ved selv, hvad svaret er, og kan tjekke, at spillet svarer rigtigt, både når du gætter rigtigt og forkert.
+
+```python
+secret = 17
+```
+
+Vælg dit eget tal.
+
+## Sammenlign med ==
+
+Du kan sammenligne to værdier med `==` (to lighedstegn). Det spørger: "er de ens?"
+
+```python
+if guess == secret:
+    print("Rigtigt!")
+else:
+    print("Forkert, prøv igen.")
+```
+
+:::caution[Ét eller to lighedstegn?]
+- `=` **gemmer** en værdi i en variabel: `secret = 17`
+- `==` **sammenligner** to værdier: `guess == secret`
+:::
+
+Husk, at gættet skal være et tal for at kunne sammenlignes med et tal. Det er det allerede, fordi `get_numeric_guess()` giver et rigtigt tal tilbage. Teksten `"17"` er ikke det samme som tallet `17`.
+
+## Afslut spillet
+
+Når gættet er rigtigt, skal spillet stoppe. Det er nu, variablen `has_guessed_correctly` kommer i brug. Den sætter vi til `True`, så `while not has_guessed_correctly:` ikke længere er sand:
+
+```python
+if guess == secret:
+    print("Rigtigt! Du fandt tallet!")
+    has_guessed_correctly = True
+else:
+    print("Forkert, prøv igen.")
+```
+
+:::tip[Opgave]
+Ret din kode i kodeboksen nederst:
+
+1. Lav en variabel `secret` med et tal, du selv vælger, før løkken.
+2. Erstat ekkoet i løkken med en `if`/`else`, der sammenligner `guess` med `secret`.
+3. Hvis gættet er rigtigt, skal du skrive en glad besked og sætte `has_guessed_correctly = True`.
+
+Test spillet: gæt forkert et par gange, og gæt til sidst rigtigt. Stopper spillet?
+:::
+
+```python.run
+# Byg et 'Gæt et tal'-spil med det, du har lært ovenfor.
+# Skriv din egen kode her
+```
+
+:::tip[Hint]
+`has_guessed_correctly = True` skal stå **inde i** `if`-blokken, så den kun bliver sat, når gættet er rigtigt.
+:::
+
+<Solution>
+
+```python.run
+def get_numeric_guess():
+    guess = ""
+    while not guess.isnumeric():
+        guess = input("Hvad gætter du på? ")
+        if not guess.isnumeric():
+            print("Det er ikke et tal, prøv igen.")
+    return int(guess)
+
+player_name = input("Hvad hedder du? ")
+print(f"Velkommen til Gæt et tal, {player_name}!")
+
+secret = 17
+
+has_guessed_correctly = False
+while not has_guessed_correctly:
+    guess = get_numeric_guess()
+
+    if guess == secret:
+        print("Rigtigt! Du fandt tallet!")
+        has_guessed_correctly = True
+    else:
+        print("Forkert, prøv igen.")
+```
+
+</Solution>

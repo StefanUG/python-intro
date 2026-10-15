@@ -1,0 +1,83 @@
+---
+title: "7. Højere eller lavere"
+sidebar:
+  order: 7
+---
+
+Det er svært at gætte et tal, hvis spillet bare siger "forkert". Lad os give spilleren et hint: skal man gætte **højere** eller **lavere**?
+
+## Større end og mindre end
+
+Du kan sammenligne tal på flere måder:
+
+| Skriv | Betyder |
+|---|---|
+| `guess == secret` | er ens |
+| `guess < secret` | gættet er mindre end det hemmelige tal |
+| `guess > secret` | gættet er større end det hemmelige tal |
+
+## Flere muligheder med elif
+
+Indtil nu havde vi kun to muligheder: rigtigt eller forkert. Nu har vi tre: rigtigt, for lavt eller for højt. Til det bruger vi `elif` (kort for *else if* - "ellers hvis"):
+
+```python
+if guess == secret:
+    print("Rigtigt! Du fandt tallet!")
+    has_guessed_correctly = True
+elif guess < secret:
+    print("Tallet er højere.")
+else:
+    print("Tallet er lavere.")
+```
+
+Python tjekker betingelserne oppefra og ned og vælger den **første**, der er sand. Hvis ingen af dem er sande, bruges `else`.
+
+:::tip[Opgave]
+Ret din kode i kodeboksen nederst, så spilleren får et hint efter hvert forkert gæt:
+
+1. Ændr `if`/`else` til `if`/`elif`/`else`.
+2. Hvis gættet er for lavt, skal spillet sige, at tallet er højere.
+3. Hvis gættet er for højt, skal spillet sige, at tallet er lavere.
+
+Behold dit eget hemmelige tal og test begge retninger: gæt et tal, der er **for lavt**, og et, der er **for højt**. Passer hintene?
+:::
+
+```python.run
+# Byg et 'Gæt et tal'-spil med det, du har lært ovenfor.
+# Skriv din egen kode her
+```
+
+:::tip[Hint]
+Er spillet forkert, når du gætter for lavt? Tjek, at du bruger `<` og `>` den rigtige vej. Prøv at læse det højt: "hvis gættet er mindre end det hemmelige tal, så er tallet højere".
+:::
+
+<Solution>
+
+```python.run
+def get_numeric_guess():
+    guess = ""
+    while not guess.isnumeric():
+        guess = input("Hvad gætter du på? ")
+        if not guess.isnumeric():
+            print("Det er ikke et tal, prøv igen.")
+    return int(guess)
+
+player_name = input("Hvad hedder du? ")
+print(f"Velkommen til Gæt et tal, {player_name}!")
+
+secret = 17
+
+has_guessed_correctly = False
+while not has_guessed_correctly:
+    guess = get_numeric_guess()
+
+    if guess == secret:
+        print("Rigtigt! Du fandt tallet!")
+        has_guessed_correctly = True
+    elif guess < secret:
+        print("Tallet er højere.")
+    else:
+        print("Tallet er lavere.")
+```
+
+</Solution>

@@ -1,0 +1,423 @@
+---
+title: "0. Oversigt"
+sidebar:
+  order: 0
+---
+
+Her er et overblik over hele lektionen: et afsnit for hver side, med et link til siden.
+
+## 1. Gæt et tal
+
+[Gå til siden](/python-intro/lektion-7-gaettespil/1-intro-gaettespil/) - hvad bygger vi, og hvordan arbejder vi?
+
+<Solution title="The game">
+
+### The game
+
+```python.run hidecode="true"
+import random
+
+def get_numeric_guess():
+    guess = ""
+    while not guess.isnumeric():
+        guess = input("Dit gæt: ")
+        if not guess.isnumeric():
+            print("Det er ikke et tal, prøv igen.")
+    return int(guess)
+
+secret = random.randint(1, 100)
+print("Jeg tænker på et tal mellem 1 og 100.")
+
+found = False
+while not found:
+    guess = get_numeric_guess()
+
+    if guess == secret:
+        print("Rigtigt! Du fandt tallet!")
+        found = True
+    elif guess < secret:
+        print("Tallet er højere.")
+    else:
+        print("Tallet er lavere.")
+```
+
+</Solution>
+
+## 2. Print og tekst
+
+[Gå til siden](/python-intro/lektion-7-gaettespil/2-print-og-tekst/) - vis beskeder med `print`, og sæt tekst og variabler sammen.
+
+<Solution title="The printing">
+
+### The printing
+
+Sådan skriver man noget ud på skærmen (Printer man) i Python:
+
+```python.run
+print("Hello world!")
+```
+
+Man kan også printe variabler ud:
+
+```python.run
+player_name = "Kaptajn"
+age = 10
+
+# Ved at plusse tekst og variabler sammen
+print("Hej " + player_name + "!")
+
+# Eller ved at bruge f-strenge
+print(f"Hej {player_name}, du er {age} år!")
+```
+
+</Solution>
+
+## 3. Spørg brugeren
+
+[Gå til siden](/python-intro/lektion-7-gaettespil/3-spoerg-brugeren/) - `input`, et ekko og at tjekke, om svaret er et tal.
+
+<Solution title="The asking">
+
+### The asking
+
+```python.run
+player_name = input("Hvad hedder du? ")
+print(f"Hej {player_name}!")
+```
+
+</Solution>
+
+## 4. Spørg indtil det er et tal
+
+[Gå til siden](/python-intro/lektion-7-gaettespil/4-spoerg-indtil-tal/) - en `while`-løkke og en funktion, der bliver ved med at spørge.
+
+<Solution title="The insisting">
+
+### The insisting
+
+Insister på noget med en `while` løkke:
+
+```python.run
+answer = ""
+print("Må jeg godt få is, mor?")
+while not answer == "ja":
+    answer = input("Sig nu ja: ")
+
+print("Tak for is!")
+```
+
+Sikr at det er et tal:
+
+```python.run
+guess = ""
+while not guess.isnumeric():
+    guess = input("Skriv et tal: ")
+    if not guess.isnumeric():
+        print("Det er ikke et tal, prøv igen.")
+
+guess = int(guess)
+print(f"Tak! {guess} plus 1 er {guess + 1}")
+```
+
+Så pakket ind i en funktion:
+
+```python.run
+def get_numeric_guess():
+    guess = ""
+    while not guess.isnumeric():
+        guess = input("Skriv et tal: ")
+        if not guess.isnumeric():
+            print("Det er ikke et tal, prøv igen.")
+    return int(guess)
+
+first = get_numeric_guess()
+second = get_numeric_guess()
+print(f"{first} plus {second} er {first + second}")
+```
+
+</Solution>
+
+## 5. Spilløkken
+
+[Gå til siden](/python-intro/lektion-7-gaettespil/5-spilloekken/) - en løkke, der kører, indtil spilleren har gættet rigtigt.
+
+<Solution title="The game loop">
+    
+### The game loop
+
+Med en tæller:
+
+```python.run
+count = 1
+game_running = True
+while game_running:
+    print(f"Runde {count}")
+    count = count + 1
+    game_running = count <= 3
+```
+
+Med en variabel, der er `True` eller `False`:
+
+```python.run
+done = False
+while not done:
+    answer = input("Skriv 'stop' for at stoppe: ")
+    print(f"Du skrev {answer}")
+    if answer == "stop":
+        done = True
+
+print("Færdig!")
+```
+
+</Solution>
+
+## 6. Et tal at gætte
+
+[Gå til siden](/python-intro/lektion-7-gaettespil/6-et-tal-at-gaette/) - gem et hemmeligt tal i en variabel, og sammenlign med `==`.
+
+<Solution title="The secret">
+
+### The secret
+
+```python.run
+secret = 42
+guess = 7
+
+if guess == secret:
+    print("Rigtigt! Du fandt tallet!")
+else:
+    print("Forkert, prøv igen.")
+```
+
+</Solution>
+
+## 7. Højere eller lavere
+
+[Gå til siden](/python-intro/lektion-7-gaettespil/7-hoejere-eller-lavere/) - giv spilleren et hint med `if`, `elif` og `else`.
+
+<Solution title="The feedback">
+
+### The feedback
+
+```python.run
+guess = 7
+secret = 42
+
+if guess == secret:
+    print("Rigtigt! Du fandt tallet!")
+elif guess < secret:
+    print("Tallet er højere.")
+else:
+    print("Tallet er lavere.")
+```
+
+</Solution>
+
+## 8. Tilfældigt tal (og et spilbart spil)
+
+[Gå til siden](/python-intro/lektion-7-gaettespil/8-tilfaeldigt-tal/) - lad computeren vælge tallet med `random`.
+
+<Solution title="The random number">
+
+### The random number
+
+```python.run
+import random
+
+# Kør flere gange og se, at tallet skifter
+secret = random.randint(1, 100)
+print(f"Det hemmelige tal er {secret}")
+```
+
+</Solution>
+
+## 9. Tæl forsøg (valgfri)
+
+[Gå til siden](/python-intro/lektion-7-gaettespil/9-tael-forsoeg/) - en tæller, der husker, hvor mange gæt der skulle til.
+
+<Solution title="The counting">
+
+### The counting
+
+```python.run
+attempts = 0
+answer = ""
+print("Må jeg godt få is, mor?")
+while not answer == "ja":
+    answer = input("Sig nu ja: ")
+    attempts += 1
+
+print(f"Tak for is! Jeg var kun nødt til at spørge {attempts} gange")
+```
+
+</Solution>
+
+## 10. Varmt og koldt (valgfri)
+
+[Gå til siden](/python-intro/lektion-7-gaettespil/10-varmt-og-koldt/) - `abs` giver afstanden mellem gættet og det hemmelige tal.
+
+<Solution title="The distance">
+
+### The distance
+
+
+```python.run
+guess = 30
+secret = 42
+
+distance = abs(guess - secret)
+print(f"Afstanden er {distance}")
+
+if distance <= 5:
+    print("Du brænder!")
+elif distance <= 15:
+    print("Det bliver varmere!")
+else:
+    print("Det er koldt...")
+```
+
+</Solution>
+
+## 11. Tilfældige beskeder (valgfri)
+
+[Gå til siden](/python-intro/lektion-7-gaettespil/11-tilfaeldige-beskeder/) - vælg en tilfældig besked fra en liste.
+
+<Solution title="The unpredictable">
+
+### The unpredictable
+
+```python.run
+import random
+
+messages = [
+    "Det ved du bedre!",
+    "Kom nu, jeg er ikke født i går.",
+    "Du kan ikke narre mig. Det er slet ikke et tal!",
+]
+
+# Kør flere gange og se, at beskeden skifter
+print(random.choice(messages))
+```
+
+</Solution>
+
+## 12. Tid (valgfri)
+
+[Gå til siden](/python-intro/lektion-7-gaettespil/12-tid/) - mål, hvor lang tid spilleren er om at svare.
+
+<Solution title="The timer">
+
+### The timer
+
+```python.run
+import time
+
+start = time.time()
+input("Tryk Enter, når du er klar... ")
+seconds = round(time.time() - start)
+
+print(f"Det tog dig {seconds} sekunder.")
+```
+
+</Solution>
+
+## 13. Spil igen (valgfri)
+
+[Gå til siden](/python-intro/lektion-7-gaettespil/13-spil-igen/) - en ydre løkke, der spørger, om spilleren vil spille igen.
+
+<Solution title="The continuation">
+
+### The continuation
+
+```python.run
+play_again = True
+while play_again:
+    print("Her spiller vi et spil!")
+
+    answer = input("Vil du spille igen? (j/n) ")
+    if answer != "j":
+        play_again = False
+
+print("Tak for spillet!")
+```
+
+</Solution>
+
+## Det færdige spil
+
+Alt det, der er lært i lektionen, samlet i ét program.
+
+<Solution title="The full game">
+
+```python.run
+# Det færdige spil med alle ekstra-opgaver
+import random
+import time
+
+not_a_number_messages = [
+    "Det ved du bedre!",
+    "Kom nu, jeg er ikke født i går.",
+    "Du kan ikke narre mig. Det er slet ikke et tal!",
+]
+too_high_messages = ["Det er for højt!", "Hov, lidt lavere!", "Av, det var for stort!"]
+too_low_messages = ["Det er for lavt!", "Prøv med noget større!", "Du skal højere op!"]
+correct_messages = ["Fantastisk!", "Du er en mester!", "Hurra, du fandt det!"]
+
+def get_numeric_guess():
+    guess = ""
+    while not guess.isnumeric():
+        guess = input("Hvad gætter du på? ")
+        if not guess.isnumeric():
+            print(random.choice(not_a_number_messages))
+    return int(guess)
+
+player_name = input("Hvad hedder du? ")
+print(f"Velkommen til Gæt et tal, {player_name}!")
+
+play_again = True
+while play_again:
+    print("Jeg tænker på et tal mellem 1 og 100.")
+    secret = random.randint(1, 100)
+    attempts = 0
+    start = time.time()
+
+    has_guessed_correctly = False
+    while not has_guessed_correctly:
+        guess = get_numeric_guess()
+        attempts += 1
+
+        if guess == secret:
+            seconds = round(time.time() - start)
+            print(random.choice(correct_messages))
+            print(f"{guess} var det rigtige tal! Du brugte {attempts} forsøg og {seconds} sekunder.")
+            if seconds < 20:
+                print("Lynhurtigt!")
+            elif seconds < 60:
+                print("Flot tempo!")
+            else:
+                print("Du tog dig god tid.")
+            has_guessed_correctly = True
+        else:
+            if guess < secret:
+                print(random.choice(too_low_messages))
+            else:
+                print(random.choice(too_high_messages))
+
+            distance = abs(guess - secret)
+            if distance <= 5:
+                print("Du brænder!")
+            elif distance <= 15:
+                print("Det bliver varmere!")
+            elif distance <= 40:
+                print("Lunkent...")
+            else:
+                print("Hold da op, du er helt ude i skoven!")
+
+    answer = input("Vil du spille igen? (j/n) ")
+    if answer != "j":
+        play_again = False
+
+print(f"Tak for spillet, {player_name}!")
+```
+
+</Solution>

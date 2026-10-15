@@ -1,0 +1,111 @@
+---
+title: "4. Spørg indtil det er et tal"
+sidebar:
+  order: 4
+---
+
+På forrige side tjekkede vi, om spilleren skrev et tal. Men hvis det ikke var et tal, stoppede programmet bare. Det er ikke særlig rart i et spil. Bedre er det, hvis spillet **bliver ved med at spørge**, indtil spilleren skriver et rigtigt tal.
+
+Til det skal vi bruge to ting, du allerede kender: en `while`-løkke og en funktion.
+
+## Husk: while
+
+En `while`-løkke gentager koden indeni, **så længe** dens betingelse er sand. Det har du brugt før, for eksempel `while bee.nectar() > 0:` i lektion 5 og 6.
+
+Betingelsen behøver ikke handle om en bi. Den kan for eksempel være, at gættet **ikke** er et tal:
+
+```python
+guess = ""  # Et tomt gæt, som ikke er et tal
+while not guess.isnumeric():
+    guess = input("Hvad gætter du på? ")
+    if not guess.isnumeric():
+        print("Det er ikke et tal, prøv igen.")
+```
+
+Læs det som: "Så længe gættet **ikke** er et tal, så spørg brugeren om et gæt. Hvis det stadig ikke er et tal, så sig det til brugeren. Derefter starter løkken forfra og tjekker igen."
+
+Bemærk linjen `guess = ""` før løkken. Den giver `guess` en startværdi, som ikke er et tal (en tom tekst), så løkken går i gang og stiller spørgsmålet første gang. På den måde behøver vi kun at skrive spørgsmålet ét sted.
+
+Når løkken er færdig, ved vi, at `guess` er et tal skrevet som tekst. Så kan vi lave det om til et rigtigt tal med `int()`.
+
+Koden vil se nogenlunde sådan her ud i scratch:
+
+<img src={import.meta.env.BASE_URL + "images/sporg-indtil-tal-i-scratch.png"} alt="sporg-indtil-tal-i-scratch.png" />
+
+
+## Husk: funktioner
+
+Kan du huske, at en funktion er en samling kodelinjer, du giver et navn? Du lavede dine egne funktioner i lektion 2, 4 og 6.
+
+Funktioner kan også **give et svar tilbage**. Det gør de med `return`. Du brugte det i lektion 4:
+
+```python
+def random_color():
+    return random.choice(color_names)
+```
+
+Når vi kalder `random_color()`, får vi en farve tilbage, som vi kan gemme eller bruge direkte.
+
+## Lav din egen funktion til gæt
+
+Spørgsmålet "giv mig et gyldigt tal" er noget, vi skal bruge igen og igen, hver gang spilleren skal gætte. Det er perfekt til en funktion! Lad os kalde den `get_numeric_guess`:
+
+```python
+def get_numeric_guess():
+    guess = ""
+    while not guess.isnumeric():
+        guess = input("Hvad gætter du på? ")
+        if not guess.isnumeric():
+            print("Det er ikke et tal, prøv igen.")
+    return int(guess)
+```
+
+Funktionen spørger, indtil spilleren skriver et rigtigt tal, og giver så tallet tilbage som et rigtigt tal (med `int()`). Resten af programmet behøver aldrig tænke på, om svaret er gyldigt. Vi bruger den sådan her:
+
+```python
+guess = get_numeric_guess()
+print(f"Du gættede {guess}! Cool")
+```
+
+:::note[Funktionen skal laves før den bruges]
+Python læser koden oppefra og ned. Derfor skal `def get_numeric_guess():` stå **før** den linje, hvor du kalder funktionen. En god plads er øverst i programmet, lige under eventuelle `import`.
+:::
+
+:::tip[Opgave]
+Ret din kode i kodeboksen nederst:
+
+1. Lav funktionen `get_numeric_guess()` øverst i programmet. Den skal spørge, indtil svaret er et tal, og give tallet tilbage med `return`.
+2. Brug funktionen til at hente spillerens gæt: `guess = get_numeric_guess()`.
+3. Skriv ekkoet bagefter, som før.
+
+Test dit program. Prøv først noget som `banan` eller et tomt svar, og skriv så et rigtigt tal.
+:::
+
+```python.run
+# Byg et 'Gæt et tal'-spil med det, du har lært ovenfor.
+# Skriv din egen kode her
+```
+
+:::tip[Hint]
+Alt inde i funktionen skal rykkes ind. `return int(guess)` skal stå **efter** løkken, ikke inde i den - ellers giver funktionen svar allerede første gang, også selvom det ikke var et tal.
+:::
+
+<Solution>
+
+```python.run
+def get_numeric_guess():
+    guess = ""
+    while not guess.isnumeric():
+        guess = input("Hvad gætter du på? ")
+        if not guess.isnumeric():
+            print("Det er ikke et tal, prøv igen.")
+    return int(guess)
+
+player_name = input("Hvad hedder du? ")
+print(f"Velkommen til Gæt et tal, {player_name}!")
+
+guess = get_numeric_guess()
+print(f"Du gættede {guess}! Cool")
+```
+
+</Solution>

@@ -5,11 +5,13 @@ interface Props {
   code: string
   /** e.g. "codingpirates-maze" (uses the pinned defaultVersion) or "codingpirates-maze:0.4.1" (explicit override) - fetches and registers the package's Skulpt-compatible sources before running. */
   requires?: string
+  /** e.g. hidecode="true" - runs the code but hides the editor so the source isn't shown. */
+  hidecode?: string
 }
-const { code, requires } = Astro.props
+const { code, requires, hidecode } = Astro.props
 ---
 
-<div class="python-run not-content" data-python-run data-original={code} data-requires={requires}>
+<div class="python-run not-content" data-python-run data-original={code} data-requires={requires} data-hidecode={hidecode === 'true' ? '' : undefined}>
   <div class="python-run-header">
     <span class="python-run-label">▶ Python</span>
     <button class="python-run-btn" data-action="run">Kør kode</button>

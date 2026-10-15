@@ -1,0 +1,85 @@
+---
+title: "2. Print og tekst"
+sidebar:
+  order: 2
+---
+
+Et spil skal kunne tale med spilleren. I Python bruger vi `print` til at vise beskeder.
+
+## Print
+
+Du har allerede brugt `print` i lektion 6. Teksten skal stå mellem citationstegn:
+
+```python
+print("Velkommen til Gæt et tal!")
+```
+
+Tekst i Python kaldes en **streng** (på engelsk *string*).
+
+## Tekst og variabler
+
+Du kan gemme tekst i en variabel, ligesom du gemte tal i lektion 4:
+
+```python
+player_name = "Kaptajn"
+```
+
+Du kan sætte tekst og variabler sammen med `+`:
+
+```python
+print("Hej " + player_name + "!")
+```
+
+Pas på mellemrummene. Computeren sætter tekstbidderne sammen præcis, som de står. Derfor står der et mellemrum efter `Hej` inde i citationstegnene.
+
+Tal skal laves om til tekst, før de kan sættes sammen med `+`. Det gør `str()`:
+
+```python
+age = 10
+print("Jeg er " + str(age) + " år")
+```
+
+## Nemmere: f-strenge
+
+Der er en nemmere måde. Skriv et `f` lige foran det første citationstegn, og sæt variablen ind mellem tuborgparenteser:
+
+```python
+age = 10
+print(f"Jeg er {age} år")
+print(f"Hej {player_name}, du er {age} år!")
+```
+
+Python sætter selv værdierne ind og laver tal om til tekst. Du kan bruge den metode, du bedst kan lide - begge dele virker.
+
+:::tip[Opgave]
+Brug kodeboksen nederst og lav starten på dit spil:
+
+1. Lav en variabel `player_name` med dit eget gamer-navn.
+2. Print en velkomstbesked, for eksempel `Velkommen til Gæt et tal!`
+3. Print endnu en besked, hvor du bruger `player_name` i teksten, for eksempel `Hej Kaptajn, jeg tænker på et tal!`
+
+Prøv både `+` og f-strenge.
+:::
+
+```python.run
+# Byg et 'Gæt et tal'-spil med det, du har lært ovenfor.
+# Skriv din egen kode her
+```
+
+:::tip[Hint]
+Husk `f` foran citationstegnet, når du bruger tuborgparenteser: `f"Hej {player_name}"`.
+:::
+
+<Solution>
+
+Her er et eksempel på, hvordan din kode kan se ud:
+
+```python.run
+player_name = "Kaptajn"
+
+print("Velkommen til Gæt et tal!")
+print("Hej " + player_name + ", jeg tænker på et tal!")
+print(f"Held og lykke, {player_name}!")
+```
+
+</Solution>

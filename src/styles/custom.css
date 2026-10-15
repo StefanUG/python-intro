@@ -144,6 +144,14 @@ body.solutions-visible .solution-block {
   display: none;
 }
 
+/* hidecode="true": run-only block - no editor, resize handle, reset or fullscreen */
+.python-run[data-hidecode] .python-run-editor,
+.python-run[data-hidecode] .python-run-resize-handle,
+.python-run[data-hidecode] [data-action="reset"],
+.python-run[data-hidecode] [data-action="fullscreen"] {
+  display: none;
+}
+
 .python-run-error-text {
   color: #f38ba8;
   display: block;
